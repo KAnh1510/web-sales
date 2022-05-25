@@ -1,0 +1,38 @@
+.wrapper {
+  position: fixed;
+  left: 0;
+  top: 100px;
+  width: 220px;
+  padding-left: 20px;
+  z-index: 999;
+
+  ul {
+    padding-left: 20px;
+    margin-top: 20px;
+
+    li {
+      margin-bottom: 7px;
+      cursor: pointer;
+
+      a {
+        font-family: "Helvetica", sans-serif !important;
+        font-size: 1.4rem;
+        font-weight: 600;
+        text-transform: uppercase;
+
+        &.active {
+          color: var(--secondary);
+        }
+      }
+
+      &:hover a {
+        color: #d0021b;
+      }
+    }
+  }
+}
+
+.logo {
+  width: 100%;
+  cursor: pointer;
+}

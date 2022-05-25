@@ -1,0 +1,42 @@
+.wrapper {
+  width: 100%;
+  margin: 20px 0;
+}
+
+.hot_line {
+  height: 70px;
+  background-color: #ccc;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  p {
+    padding: 0 10px;
+    span {
+      padding: 0 4px;
+      color: red;
+    }
+  }
+}
+
+.contact {
+  padding: 0 20px;
+  margin-top: 30px;
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+  p {
+    line-height: 28px;
+    a:hover {
+      color: var(--primary);
+    }
+  }
+}
+
+.infomation {
+  svg {
+    padding-right: 10px;
+    font-size: 1.6rem;
+  }
+}

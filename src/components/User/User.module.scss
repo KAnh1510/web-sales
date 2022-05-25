@@ -1,0 +1,11 @@
+.choose-item {
+  svg {
+    font-size: 2rem;
+    margin: 0 12px;
+    padding: 10px 0 15px;
+    &:hover {
+      cursor: pointer;
+      opacity: 0.8;
+    }
+  }
+}

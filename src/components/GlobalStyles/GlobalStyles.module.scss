@@ -1,0 +1,55 @@
+@import "normalize.css";
+@import url("https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700&subset=vietnamese");
+
+:root {
+  --primary: #002079;
+  --secondary: #d0021b;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Helvetica", sans-serif;
+  font-size: 1.4rem;
+  text-rendering: optimizeSpeed;
+  overflow-x: hidden;
+  background: #fff;
+  line-height: 1.4;
+  color: #000000;
+}
+
+button,
+input,
+[tabindex] {
+  font-family: "Helvetica", sans-serif;
+  border: none;
+  outline: none;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+a[href] {
+  text-decoration: none;
+  color: var(--black);
+}
+
+ul {
+  list-style: none;
+}
+
+.col {
+  text-align: center;
+  background-color: #ccc;
+  background-clip: content-box;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}

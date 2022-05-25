@@ -1,0 +1,14 @@
+.cover {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("https://file.hstatic.net/200000436739/file/banner-01_59e3f8b27f6d4f69969fc0c30ea6c2f9.jpg");
+  background-size: cover;
+  background-position-y: -25px;
+  position: fixed;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    width: 0 !important;
+    display: none;
+  }
+}
