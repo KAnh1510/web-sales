@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Link, NavLink, useParams } from "react-router-dom";
-// import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-// import { Carousel } from "react-responsive-carousel";
+import { Link, NavLink, useParams, useNavigate } from "react-router-dom";
 import styles from "./Products.module.scss";
 import classnames from "classnames/bind";
+
 import User from "~/components/User";
 import Images from "~/components/Images";
 import { PRODUCTS } from "~/data";
 import ShowListProduct from "../ShowListProduct";
+import ZoomIn from "../ZoomIn";
 
 const cx = classnames.bind(styles);
 
@@ -17,6 +17,7 @@ export default function Products() {
   const [size, setSize] = useState();
   const [color, setColor] = useState();
   const [counter, setCounter] = useState(1);
+  const navigate = useNavigate();
 
   const getCurrentProduct = (product) => {
     const currentProduct = PRODUCTS.filter((item) => item.name === product);
@@ -39,7 +40,15 @@ export default function Products() {
               <Link to="/">Trang chủ</Link>
               <span>&nbsp;&nbsp;/&nbsp;&nbsp;</span>
             </span>
-            <span> {product.type} &nbsp;&nbsp;/&nbsp;&nbsp;</span>
+            <span
+              className={cx("header_type")}
+              onClick={() => {
+                navigate(`/collections/${product.type}`);
+              }}
+            >
+              {" "}
+              {product.type} &nbsp;&nbsp;/&nbsp;&nbsp;
+            </span>
             <span> {productName}</span>
           </div>
           <div className={cx("content", "row")}>
@@ -51,23 +60,18 @@ export default function Products() {
                       className={({ isActive }) =>
                         isActive ? cx("active") : " "
                       }
-                      to=""
+                      to={``}
                     >
-                      <Images src={item.img} />
+                      <Images src={item.src} />
                     </NavLink>
                   </div>
                 ))}
               </div>
             </div>
             <div className={cx("main-img", "col", "l-7")}>
-              <ul>
-                {product.gallery.map((item, index) => (
-                  <li key={index}>
-                    <Images src={item.mainImg} />
-                  </li>
-                ))}
-              </ul>
+              <ZoomIn props={product.gallery} />
             </div>
+
             <div className={cx("col", "l-4")}>
               <div className={cx("product_info")}>
                 <div className={cx("product_title")}>
@@ -76,7 +80,12 @@ export default function Products() {
                 </div>
 
                 <div className={cx("product_prices")}>
-                  <p>{product.prices}</p>
+                  <p>
+                    {product.prices.toLocaleString("vi", {
+                      style: "currency",
+                      currency: "VND",
+                    })}
+                  </p>
                 </div>
 
                 <form method="post" action="/">
@@ -84,7 +93,6 @@ export default function Products() {
                     {product.color &&
                       product.color.map((item, index) => (
                         <div className={cx("color_element")} key={index}>
-                          <div className={cx("color_header")}>{item.name}</div>
                           <input
                             type="radio"
                             id={`swatch-${item.name}`}
@@ -94,7 +102,9 @@ export default function Products() {
                             checked={color === item.name}
                           />
                           <label htmlFor={`swatch-${item.name}`}>
-                            <span className=""></span>
+                            <span
+                              style={{ background: `${item.idColor}` }}
+                            ></span>
                           </label>
                         </div>
                       ))}
@@ -177,7 +187,6 @@ export default function Products() {
               )}
             </div>
           </div>
-          <div className={cx("zoom")}></div>
         </div>
       ))}
     </div>

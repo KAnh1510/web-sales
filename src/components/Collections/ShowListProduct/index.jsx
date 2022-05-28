@@ -10,9 +10,13 @@ function ShowListProduct({ item }) {
     <>
       <div className={cx("prd_img")}>
         <Link to={`/products/${item.name}`} className={cx("img_link")}>
-          <Images src={item.img1} alt={item.name} className={cx("img_show")} />
           <Images
-            src={item.img2}
+            src={item.imgFront}
+            alt={item.name}
+            className={cx("img_show")}
+          />
+          <Images
+            src={item.imgBack}
             alt={item.name}
             className={cx("img_hidden")}
           />
