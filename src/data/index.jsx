@@ -26,9 +26,9 @@ export const PRODUCTS = [
     id: 1,
     type: "Tee",
     imgFront:
-      "https://product.hstsdfatic.net/200000436739/product/f9c3ccab-018d-4874-8f04-1d9ba2237e64_c9ba21ce0b44428fa9227b5bbb48d980_grande.jpeg",
+      "https://product.hstatic.net/200000436739/product/0db50047-70f4-4bc3-8e1e-9a48be0e49b0_a207335ee455425d9ebca682512e962b_grande.jpeg",
     imgBack:
-      "https://product.hstdsatic.net/200000436739/product/877e4d1e-8afd-4732-a05d-3b22e12a8f11_1704ba353e2944be8f5548b4e4aeeb33_grande.jpeg",
+      "https://product.hstatic.net/200000436739/product/c59c8964-bc3e-43bd-b34a-666e85267f30_73a56cbd9b724ce79e0ca1ab1babde53_grande.jpeg",
 
     name: "INFINITY TURBAN",
     prices: 100000,
@@ -38,9 +38,9 @@ export const PRODUCTS = [
     id: 2,
     type: "Tee",
     imgFront:
-      "https://product.hstatic.net/20000043xc6739/product/f9c3ccab-018d-4874-8f04-1d9ba2237e64_c9ba21ce0b44428fa9227b5bbb48d980_grande.jpeg",
+      "https://product.hstatic.net/200000436739/product/c27caa8f-51a2-441f-915d-24b128c95632_de77faa2eb084c96833e0452c6125259_grande.jpeg",
     imgBack:
-      "https://product.hstatic.net/200as000436739/product/877e4d1e-8afd-4732-a05d-3b22e12a8f11_1704ba353e2944be8f5548b4e4aeeb33_grande.jpeg",
+      "https://product.hstatic.net/200000436739/product/73a9ce7e-99e9-4ff5-9b47-fd7f16adc765_af3a6bf3d7cd49769f95184b79308b79_grande.jpeg",
     name: "INFINITY DRESS ",
     prices: 490000,
   },

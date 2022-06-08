@@ -2,19 +2,14 @@ import React from "react";
 import styles from "./Pages.module.scss";
 import classnames from "classnames/bind";
 import { Link } from "react-router-dom";
+import HeaderPage from "../HeaderPage";
 
 const cx = classnames.bind(styles);
 
 function Pages({ children, title }) {
   return (
     <div className={cx("wrapper")}>
-      <div className={cx("header")}>
-        <span>
-          <Link to="/">Trang chủ</Link>
-          <span>&nbsp;&nbsp;/&nbsp;&nbsp;</span>
-        </span>
-        <span>{title}</span>
-      </div>
+      <HeaderPage title={title} />
       <div className={cx("container")}>
         <div className={cx("sideBar")}>
           <h3>Danh mục trang</h3>

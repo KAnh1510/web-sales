@@ -248,33 +248,10 @@ input {
 }
 
 // ADD to card
-button {
-  position: relative;
-  padding: 10px 28px;
-  border: 1px solid #ffffff;
-  font-size: 12px;
-  letter-spacing: 1px;
-  -webkit-transition: all 0.35s cubic-bezier(0.785, 0.135, 0.15, 0.86);
-  transition: all 0.35s cubic-bezier(0.785, 0.135, 0.15, 0.86);
-  z-index: 1;
-  overflow: hidden;
-}
-
-.btn-addtocard {
-  color: #fff;
-  background-color: var(--primary);
-  font-size: 12px;
-  font-weight: bold;
-  text-transform: uppercase;
-  box-shadow: none;
-  padding: 14px 35px;
-  line-height: 22px;
+.add-card {
   width: 100%;
-
-  &:hover {
-    color: #000000;
-    border: 1px solid var(--primary);
-    background-color: transparent;
+  button {
+    width: 100%;
   }
 }
 

@@ -15,12 +15,12 @@ const listSidebar = [
     to: "/collections",
   },
   {
-    title: "Managine",
-    to: "/managine",
+    title: "Magazine",
+    to: "/blog/news",
   },
   {
     title: "Contact us",
-    to: "/contact",
+    to: "/pages/contact",
   },
   {
     title: "Login",

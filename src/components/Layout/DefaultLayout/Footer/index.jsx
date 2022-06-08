@@ -22,7 +22,9 @@ function Footer() {
               <FontAwesomeIcon icon={faPhoneFlip} className={cx("icon")} />
               <p>Hotline</p>
               <p>
-                <span>093 &nbsp;359&nbsp;81&nbsp;91&nbsp;</span>
+                <a href="tel:+84-093-359-8191">
+                  093 &nbsp;359&nbsp;81&nbsp;91&nbsp;
+                </a>
               </p>
             </div>
           </div>

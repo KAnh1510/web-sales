@@ -8,7 +8,7 @@ import Service from "~/pages/Service";
 const publicRoutes = [
   { path: "/payment", component: Payment },
   { path: "/about", component: About },
-  { path: "/contact", component: Contact },
+  { path: "/contact", component: Contact, pages: null },
   { path: "/private", component: PrivatePolicy },
   { path: "/return", component: ReturnPolicy },
   { path: "/service", component: Service },

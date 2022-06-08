@@ -1,8 +1,36 @@
+.showing,
+.search-wrapper {
+  position: fixed;
+  top: 0;
+  width: 400px;
+  height: 100vh;
+  overflow: hidden;
+  background-color: white;
+  padding: 20px 15px;
+  background-color: #fff;
+  z-index: 999;
+  border: 1px solid #ededed;
+  transition: all 0.35s;
+  -webkit-transition: all 0.25s;
+
+  --search-border-radius: 92px;
+  --search-height: 46px;
+  --search-top-spacer: 9px;
+  --search-button-width: 52px;
+}
+
+.search-wrapper {
+  right: -400px;
+  opacity: 0;
+}
+.showing {
+  right: 0px;
+  opacity: 1;
+}
+
 .choose-item {
   svg {
-    font-size: 2rem;
     margin: 0 12px;
-    padding: 10px 0 15px;
     &:hover {
       cursor: pointer;
       opacity: 0.8;

@@ -1,10 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
+import Magazine from "./pages/Magazine";
 import Collections from "./components/Collections";
 import Products from "./components/Collections/Products";
 import { publicRoutes } from "./routes";
 import { DefaultLayout } from "./components/Layout";
+import { Fragment } from "react";
 
 function App() {
   return (
@@ -15,6 +17,7 @@ function App() {
           <Route path="collections" element={<Shop />}>
             <Route path=":type" element={<Collections />} />
           </Route>
+          <Route path="blog/news" element={<Magazine />} />
           <Route
             path="products/:productName"
             element={
@@ -24,15 +27,17 @@ function App() {
             }
           />
           {publicRoutes.map((route, index) => {
-            const Page = route.component;
+            let Page = route.component;
+            let Layout = DefaultLayout;
+
             return (
               <Route
                 key={index}
                 path={`pages${route.path}`}
                 element={
-                  <DefaultLayout>
+                  <Layout>
                     <Page />
-                  </DefaultLayout>
+                  </Layout>
                 }
               />
             );

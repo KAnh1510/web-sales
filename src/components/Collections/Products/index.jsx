@@ -8,6 +8,7 @@ import Images from "~/components/Images";
 import { PRODUCTS } from "~/data";
 import ShowListProduct from "../ShowListProduct";
 import ZoomIn from "../ZoomIn";
+import Button from "~/components/Button";
 
 const cx = classnames.bind(styles);
 
@@ -157,10 +158,8 @@ export default function Products() {
                       +
                     </div>
                   </form>
-                  <div className={cx("add_cart")}>
-                    <button className={cx("btn-addtocard")}>
-                      Thêm vào giỏ
-                    </button>
+                  <div className={cx("add-card")}>
+                    <Button>Thêm vào giỏ hàng</Button>
                   </div>
                 </div>
 
