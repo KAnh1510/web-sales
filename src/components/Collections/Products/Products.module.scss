@@ -12,11 +12,11 @@
 
     color: #777777;
     a {
-      color: #000000;
+      color: var(--black);
     }
   }
   .header_type {
-    color: #000000;
+    color: var(--black);
     &:hover {
       cursor: pointer;
       opacity: 0.8;
@@ -167,8 +167,8 @@
     }
 
     input:checked + label {
-      border: 1px solid #000;
-      background: #000;
+      border: 1px solid var(--black);
+      background: var(--black);
       color: #fff;
     }
   }

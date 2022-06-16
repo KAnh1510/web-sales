@@ -5,6 +5,7 @@
   --primary: #002079;
   --secondary: #d0021b;
   --text-title: #252a2b;
+  --black: #000000;
 }
 
 * {
@@ -24,7 +25,7 @@ body {
   overflow-x: hidden;
   background: #fff;
   line-height: 1.4;
-  color: #000000;
+  color: var(--black);
 }
 
 button,
@@ -36,6 +37,13 @@ input,
   &:hover {
     cursor: pointer;
   }
+}
+
+label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: 700;
 }
 
 textarea {
@@ -57,9 +65,17 @@ textarea {
   -webkit-rlt-ordering: logical;
 }
 
+strong {
+  font-weight: 700;
+}
+
 a[href] {
   text-decoration: none;
   color: var(--black);
+  transition: all 150ms linear;
+  &:hover {
+    color: var(--primary);
+  }
 }
 
 ul {
@@ -72,4 +88,8 @@ ul {
   background-clip: content-box;
   margin-top: 8px;
   margin-bottom: 8px;
+}
+
+.fa {
+  font-family: "FontAwesome";
 }

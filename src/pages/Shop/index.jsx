@@ -1,11 +1,9 @@
 import styles from "./Shop.module.scss";
 import classnames from "classnames/bind";
 import { NavLink, Outlet } from "react-router-dom";
-import { useLocation } from "react-router";
 import User from "~/components/User";
 import { DefaultLayout } from "~/components/Layout";
 import { COLLECTION } from "~/data";
-import AllProduct from "~/components/Collections/AllProducts";
 
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
@@ -13,8 +11,6 @@ import AllProduct from "~/components/Collections/AllProducts";
 const cx = classnames.bind(styles);
 
 function Shop() {
-  const location = useLocation().pathname.split("/")[2];
-
   return (
     <DefaultLayout>
       <div className={cx("wrapper")}>
@@ -45,7 +41,6 @@ function Shop() {
             <User />
           </div>
         </div>
-        {location === undefined && <AllProduct />}
         <Outlet />
       </div>
     </DefaultLayout>

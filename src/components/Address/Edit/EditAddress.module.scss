@@ -1,0 +1,52 @@
+.edit-address {
+  margin: 10px 0;
+
+  .action_bottom {
+    input {
+      height: 35px;
+      line-height: 35px;
+      outline: 0;
+      margin-right: 5px;
+      font-size: 14px;
+      text-transform: uppercase;
+      padding: 0 30px;
+      border: 0;
+      background: #002079;
+      color: #fff;
+      display: inline-block;
+      border-radius: 0;
+    }
+  }
+}
+
+.input-group {
+  display: flex;
+  margin: 15px 0;
+  border-color: #ebebeb;
+  width: 100%;
+
+  .input-group-addon {
+    padding: 6px 10px;
+    color: #dad9d9;
+    background-color: #ebebeb;
+    width: 33px;
+    text-align: center;
+  }
+
+  .form-control {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    border: 1px solid #ebebeb;
+  }
+}
+
+input[type="checkbox"] {
+  margin-right: 6px;
+  margin-top: 3px;
+}

@@ -1,0 +1,19 @@
+.fa {
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+.view-address {
+  p {
+    margin: 5px 0;
+    line-height: 15px;
+    font-size: 1.4rem;
+
+    b {
+      font-weight: 500;
+      font-size: 1.4rem;
+    }
+  }
+}

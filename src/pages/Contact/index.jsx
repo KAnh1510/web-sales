@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Contact.module.scss";
 import classnames from "classnames/bind";
 import Button from "~/components/Button";
+import Capcha from "~/components/Capcha";
 
 const cx = classnames.bind(styles);
 
@@ -99,17 +100,7 @@ function Contact() {
                     placeholder="Nội dung"
                     className={cx("form-control")}
                   />
-                  <div className={cx("capcha")}>
-                    This site is protected by reCAPTCHA and the Google&nbsp;
-                    <a href="https://policies.google.com/privacy">
-                      Privacy Policy
-                    </a>
-                    &nbsp;and&nbsp;
-                    <a href="https://policies.google.com/terms">
-                      Terms of Service
-                    </a>
-                    &nbsp;apply.
-                  </div>
+                  <Capcha />
                 </div>
               </div>
               <div className={cx("col l-12")}>

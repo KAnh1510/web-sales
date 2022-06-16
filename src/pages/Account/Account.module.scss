@@ -1,0 +1,42 @@
+.infor-account {
+  p {
+    margin-bottom: 0;
+    font-size: 1.4rem;
+  }
+  .title-detail {
+    text-transform: uppercase;
+    font-size: 1.5re;
+    font-weight: 700;
+    letter-spacing: 1px;
+    position: relative;
+    border-bottom: 1px solid #ededed;
+    padding-bottom: 8px;
+  }
+
+  .name-account {
+    font-weight: 500;
+    font-size: 1.6rem;
+    line-height: 21px;
+    margin: 10px 0 5px;
+    color: var(--text-title);
+  }
+}
+
+.view-address {
+  font-weight: 500;
+  opacity: 0.8;
+
+  &:hover {
+    color: var(--primary);
+  }
+}
+
+.customer-order-wrap {
+  margin: 30px 0;
+  background: #f7f7f7;
+  padding: 10px;
+}
+.customer-order {
+  background: #fff;
+  padding: 10px;
+}

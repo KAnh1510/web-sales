@@ -1,0 +1,103 @@
+.input-form {
+  margin-bottom: 30px;
+}
+
+.user-box input[type="text"],
+.user-box input[type="lastName"],
+.user-box input[type="firstName"],
+.user-box input[type="birthday"],
+.user-box input[type="password"],
+.user-box input[type="email"] {
+  display: block;
+  width: 100%;
+  height: 55px;
+  border: 1px solid transparent;
+  background: #ededed;
+  color: var(--black);
+  padding: 0 20px;
+  font-weight: 500;
+  -webkit-appearance: none;
+}
+
+.form-gender input[type="radio"] {
+  margin: 4px 0 0;
+  line-height: normal;
+  display: none;
+}
+
+.form-gender input[type="radio"] + label {
+  position: relative;
+  cursor: pointer;
+  padding-left: 28px;
+  margin: 0 20px 0 0;
+}
+
+.form-gender input[type="radio"]:checked + label::before {
+  content: "";
+  -moz-box-shadow: inset 0 0 0 4px #efefef;
+  -webkit-box-shadow: inset 0 0 0 4px #efefef;
+  box-shadow: inset 0 0 0 4px #efefef;
+}
+
+.form-gender input[type="radio"]:checked + label::after {
+  content: "";
+  transform: translate(-50%, -50%) scale(1);
+  animation: ripple 1s none;
+}
+
+.form-gender input[type="radio"] + label::after {
+  top: 49%;
+  left: 9px;
+  width: 54px;
+  height: 54px;
+  opacity: 0;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.form-gender input[type="radio"] + label::before {
+  top: 0;
+  left: 0;
+  width: 18px;
+  height: 18px;
+  background: #002079;
+  box-shadow: inset 0 0 0 18px #efefef;
+}
+
+.form-gender input[type="radio"] + label::before,
+input[type="radio"] + label::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.btn-submit {
+  button:hover input[type="submit"] {
+    color: var(--black);
+  }
+  input[type="submit"] {
+    color: #fff;
+    display: inline-block;
+    line-height: 1;
+    border-radius: 0;
+    padding: 0 6px;
+    height: 33px;
+    text-transform: uppercase;
+    font-weight: 600;
+    background: transparent;
+  }
+}
+
+.return-login {
+  margin-top: 35px;
+  display: block;
+  font-weight: 500;
+
+  span {
+    margin-left: 20px;
+  }
+
+  a:hover {
+    color: var(--primary);
+  }
+}

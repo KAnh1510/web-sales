@@ -6,7 +6,10 @@ import Collections from "./components/Collections";
 import Products from "./components/Collections/Products";
 import { publicRoutes } from "./routes";
 import { DefaultLayout } from "./components/Layout";
-import { Fragment } from "react";
+import Account from "./pages/Account";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Address from "./components/Address";
 
 function App() {
   return (
@@ -17,7 +20,8 @@ function App() {
           <Route path="collections" element={<Shop />}>
             <Route path=":type" element={<Collections />} />
           </Route>
-          <Route path="blog/news" element={<Magazine />} />
+          <Route path="magazine" element={<Magazine />} />
+          <Route path="recuitment" element={<Magazine />} />
           <Route
             path="products/:productName"
             element={
@@ -26,6 +30,39 @@ function App() {
               </DefaultLayout>
             }
           />
+          <Route
+            path="account"
+            element={
+              <DefaultLayout>
+                <Account />
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path="account/login"
+            element={
+              <DefaultLayout>
+                <Login />
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path="account/register"
+            element={
+              <DefaultLayout>
+                <Register />
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path="account/address"
+            element={
+              <DefaultLayout>
+                <Address />
+              </DefaultLayout>
+            }
+          />
+
           {publicRoutes.map((route, index) => {
             let Page = route.component;
             let Layout = DefaultLayout;

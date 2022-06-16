@@ -5,7 +5,6 @@ import styles from "./Collection.module.scss";
 import classnames from "classnames/bind";
 import { PRODUCTS } from "~/data";
 import ShowListProduct from "./ShowListProduct";
-import AllProduct from "./AllProducts";
 
 const cx = classnames.bind(styles);
 
@@ -26,17 +25,21 @@ export default function Collections() {
   return (
     <div className={cx("grid")}>
       <div className={cx("row")}>
-        {location === "all" ? (
-          <AllProduct />
-        ) : (
-          collection.map((product) => {
-            return (
-              <div key={product.id} className={cx("col", "l-3")}>
-                <ShowListProduct item={product} />
-              </div>
-            );
-          })
-        )}
+        {location === "all"
+          ? PRODUCTS.map((product) => {
+              return (
+                <div key={product.id} className={cx("col", "l-3")}>
+                  <ShowListProduct item={product} />
+                </div>
+              );
+            })
+          : collection.map((product) => {
+              return (
+                <div key={product.id} className={cx("col", "l-3")}>
+                  <ShowListProduct item={product} />
+                </div>
+              );
+            })}
       </div>
     </div>
   );

@@ -1,3 +1,26 @@
+export const LISTSIDEBAR = [
+  {
+    title: "ColdKid's story",
+    to: "/",
+  },
+  {
+    title: "Shop",
+    to: "/collections/all",
+  },
+  {
+    title: "Magazine",
+    to: "/magazine",
+  },
+  {
+    title: "Contact us",
+    to: "/pages/contact",
+  },
+  {
+    title: "Login",
+    to: "/account/login",
+  },
+];
+
 export const COLLECTION = [
   {
     id: 1,
@@ -103,7 +126,7 @@ export const PRODUCTS = [
         name: "Brown",
       },
       {
-        idColor: "#000000",
+        idColor: "var(--black)",
         name: "Black",
       },
     ],
