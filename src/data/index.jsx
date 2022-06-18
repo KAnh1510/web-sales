@@ -19,6 +19,10 @@ export const LISTSIDEBAR = [
     title: "Login",
     to: "/account/login",
   },
+  {
+    title: "Recruitment",
+    to: "/recruitment",
+  },
 ];
 
 export const COLLECTION = [
@@ -126,7 +130,7 @@ export const PRODUCTS = [
         name: "Brown",
       },
       {
-        idColor: "var(--black)",
+        idColor: "#000000",
         name: "Black",
       },
     ],

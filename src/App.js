@@ -5,11 +5,14 @@ import Magazine from "./pages/Magazine";
 import Collections from "./components/Collections";
 import Products from "./components/Collections/Products";
 import { publicRoutes } from "./routes";
-import { DefaultLayout } from "./components/Layout";
+
 import Account from "./pages/Account";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Address from "./components/Address";
+import News from "./pages/News";
+import Recruitment from "./pages/Recruitment";
+import DefaultLayout from "./layout/DefaultLayout";
 
 function App() {
   return (
@@ -21,7 +24,8 @@ function App() {
             <Route path=":type" element={<Collections />} />
           </Route>
           <Route path="magazine" element={<Magazine />} />
-          <Route path="recuitment" element={<Magazine />} />
+          <Route path="magazine/news" element={<News />} />
+          <Route path="recruitment" element={<Recruitment />} />
           <Route
             path="products/:productName"
             element={
