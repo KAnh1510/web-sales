@@ -1,4 +1,4 @@
-import React from "react";
+import PropTypes from "prop-types";
 import styles from "./PageLoginRegister.module.scss";
 import classnames from "classnames/bind";
 
@@ -22,5 +22,10 @@ function PageLoginRegister({ title, children }) {
     </div>
   );
 }
+
+PageLoginRegister.propTypes = {
+  title: PropTypes.string,
+  children: PropTypes.node.isRequired,
+};
 
 export default PageLoginRegister;

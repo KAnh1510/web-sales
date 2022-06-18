@@ -6,9 +6,6 @@ import User from "~/components/User";
 import { COLLECTION } from "~/data";
 import DefaultLayout from "~/layout/DefaultLayout";
 
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
-
 const cx = classnames.bind(styles);
 
 function Shop() {

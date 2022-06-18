@@ -1,4 +1,4 @@
-import React from "react";
+import PropTypes from "prop-types";
 import styles from "./PageAccountAddress.module.scss";
 import classnames from "classnames/bind";
 import { Link } from "react-router-dom";
@@ -43,5 +43,10 @@ function PageAccountAddress({ title, children }) {
     </div>
   );
 }
+
+PageAccountAddress.propTypes = {
+  title: PropTypes.string,
+  children: PropTypes.node.isRequired,
+};
 
 export default PageAccountAddress;

@@ -1,4 +1,4 @@
-import React from "react";
+import PropTypes from "prop-types";
 import Button from "~/components/Button";
 import classnames from "classnames/bind";
 import styles from "./Menu.module.scss";
@@ -20,4 +20,10 @@ function MenuItem({ data, onClick }) {
     </Button>
   );
 }
+
+MenuItem.propTypes = {
+  data: PropTypes.node.isRequired,
+  onClick: PropTypes.func,
+};
+
 export default MenuItem;

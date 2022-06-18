@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import Footer from "../components/Footer";
 import SideBar from "../components/SideBar";
 import styles from "./DefaultLayout.module.scss";
@@ -21,5 +22,10 @@ function DefaultLayout({ children, cover }) {
     </div>
   );
 }
+
+DefaultLayout.propTypes = {
+  children: PropTypes.node.isRequired,
+  cover: PropTypes.string,
+};
 
 export default DefaultLayout;

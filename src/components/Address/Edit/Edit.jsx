@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import PropTypes from "prop-types";
 import React from "react";
 
 import styles from "./EditAddress.module.scss";
@@ -147,5 +148,11 @@ function EditAddress(props) {
     </div>
   );
 }
+
+EditAddress.propTypes = {
+  className: PropTypes.string,
+  setEdit: PropTypes.bool,
+  setAddAddress: PropTypes.bool,
+};
 
 export default EditAddress;

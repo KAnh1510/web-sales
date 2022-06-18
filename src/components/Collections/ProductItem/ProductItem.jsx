@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import classnames from "classnames/bind";
 import styles from "./ProductItem.module.scss";
@@ -15,4 +16,9 @@ function ProductItem({ data }) {
     </Link>
   );
 }
+
+ProductItem.propTypes = {
+  data: PropTypes.object.isRequired,
+};
+
 export default ProductItem;

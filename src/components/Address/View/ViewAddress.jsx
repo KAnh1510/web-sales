@@ -1,5 +1,5 @@
 import React from "react";
-
+import PropTypes from "prop-types";
 import styles from "./ViewAddress.module.scss";
 import classnames from "classnames/bind";
 
@@ -52,5 +52,9 @@ function ViewAddress({ className }) {
     </div>
   );
 }
+
+ViewAddress.propTypes = {
+  className: PropTypes.string,
+};
 
 export default ViewAddress;

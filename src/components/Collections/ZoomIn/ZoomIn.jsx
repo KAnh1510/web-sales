@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import Viewer from "react-viewer";
 
 import "./ZoomIn.scss";
@@ -36,5 +37,9 @@ function ZoomIn({ props }) {
     </>
   );
 }
+
+ZoomIn.propTypes = {
+  props: PropTypes.node.isRequired,
+};
 
 export default ZoomIn;

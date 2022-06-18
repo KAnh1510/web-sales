@@ -1,4 +1,4 @@
-import React from "react";
+import PropTypes from "prop-types";
 import classnames from "classnames/bind";
 
 import styles from "./Button.module.scss";
@@ -12,5 +12,10 @@ function Button({ children, className }) {
     </>
   );
 }
+
+Button.prototype = {
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+};
 
 export default Button;

@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import PropTypes from "prop-types";
 import React from "react";
 
 import styles from "./HeaderAddress.module.scss";
@@ -46,5 +47,10 @@ function HeaderAddress(props) {
     </div>
   );
 }
+
+HeaderAddress.propTypes = {
+  edit: PropTypes.bool,
+  setEdit: PropTypes.bool,
+};
 
 export default HeaderAddress;

@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import PropTypes from "prop-types";
 import HeadlessTippy from "@tippyjs/react/headless";
 import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,10 +15,9 @@ import { searchProductsSelector } from "~/redux/selector";
 
 const cx = classnames.bind(styles);
 
-function Search(props) {
+function Search({ setShowSearch }) {
   const [showResults, setShowResults] = useState(true);
   const [searchText, setSearchText] = useState("");
-  const { setShowSearch } = props;
 
   const inputRef = useRef();
   const dispatch = useDispatch();
@@ -77,5 +77,9 @@ function Search(props) {
     </>
   );
 }
+
+Search.propTypes = {
+  setShowSearch: PropTypes.func,
+};
 
 export default Search;

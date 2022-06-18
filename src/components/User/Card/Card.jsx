@@ -1,4 +1,4 @@
-import React from "react";
+import PropTypes from "prop-types";
 import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classnames from "classnames/bind";
@@ -10,9 +10,7 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const cx = classnames.bind(styles);
 
-function Card(props) {
-  const { setShowCard } = props;
-
+function Card({ setShowCard }) {
   const handelClose = () => {
     setShowCard(false);
   };
@@ -67,5 +65,9 @@ function Card(props) {
     </div>
   );
 }
+
+Card.propTypes = {
+  setShowCard: PropTypes.func,
+};
 
 export default Card;

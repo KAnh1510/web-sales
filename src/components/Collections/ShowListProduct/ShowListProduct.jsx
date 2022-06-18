@@ -1,4 +1,4 @@
-import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Images from "~/components/Images";
 import styles from "./ShowListProduct.module.scss";
@@ -29,5 +29,9 @@ function ShowListProduct({ item }) {
     </>
   );
 }
+
+ShowListProduct.propTypes = {
+  item: PropTypes.object.isRequired,
+};
 
 export default ShowListProduct;

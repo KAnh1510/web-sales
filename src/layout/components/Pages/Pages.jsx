@@ -1,4 +1,4 @@
-import React from "react";
+import PropTypes from "prop-types";
 import styles from "./Pages.module.scss";
 import classnames from "classnames/bind";
 import { Link } from "react-router-dom";
@@ -42,5 +42,10 @@ function Pages({ children, title }) {
     </div>
   );
 }
+
+Pages.propTypes = {
+  title: PropTypes.string,
+  children: PropTypes.node.isRequired,
+};
 
 export default Pages;
