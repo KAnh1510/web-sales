@@ -5,7 +5,7 @@ export const LISTSIDEBAR = [
   },
   {
     title: "Shop",
-    to: "/collections/all",
+    to: "/collections/All",
   },
   {
     title: "Magazine",

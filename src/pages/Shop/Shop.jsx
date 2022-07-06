@@ -3,12 +3,20 @@ import classnames from "classnames/bind";
 import { NavLink, Outlet } from "react-router-dom";
 import User from "~/components/User";
 
-import { COLLECTION } from "~/data";
 import DefaultLayout from "~/layout/DefaultLayout";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAllCollections } from "~/components/Collections/CollectionSlice";
 
 const cx = classnames.bind(styles);
 
 function Shop() {
+  const dispatch = useDispatch();
+  const collectionList = useSelector((state) => state.collections.values);
+
+  useEffect(() => {
+    dispatch(getAllCollections());
+  }, []);
   return (
     <DefaultLayout>
       <div className={cx("wrapper")}>
@@ -21,7 +29,7 @@ function Shop() {
         <div className={cx("collection")}>
           <div className={cx("title")}>
             <ul>
-              {COLLECTION.map((item) => (
+              {collectionList.map((item) => (
                 <li key={item.id}>
                   <NavLink
                     className={({ isActive }) =>

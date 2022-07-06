@@ -24,8 +24,8 @@ function DefaultLayout({ children, cover }) {
 }
 
 DefaultLayout.propTypes = {
-  children: PropTypes.node.isRequired,
-  cover: PropTypes.string,
+  children: PropTypes.node,
+  cover: PropTypes.object,
 };
 
 export default DefaultLayout;

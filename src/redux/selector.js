@@ -1,7 +1,5 @@
-import { PRODUCTS } from "~/data";
-
-export const searchProductsSelector = (state) => {
-  return PRODUCTS.filter((product) => {
-    return product.name.includes(state.products.search);
+export const searchProductsSelector = (response, state) => {
+  return response.filter((product) => {
+    return product.name.includes(state.products);
   });
 };

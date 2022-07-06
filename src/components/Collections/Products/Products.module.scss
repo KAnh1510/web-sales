@@ -3,6 +3,15 @@
   align-items: center;
   justify-content: flex-end;
   padding: 20px 0;
+
+  label {
+    display: block;
+    margin: 0;
+    position: relative;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+  }
 }
 
 .header {
@@ -172,15 +181,6 @@
       color: #fff;
     }
   }
-}
-
-label {
-  display: block;
-  margin: 0;
-  position: relative;
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
 }
 
 input {

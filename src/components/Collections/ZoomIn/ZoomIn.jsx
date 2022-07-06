@@ -39,7 +39,7 @@ function ZoomIn({ props }) {
 }
 
 ZoomIn.propTypes = {
-  props: PropTypes.node.isRequired,
+  props: PropTypes.array.isRequired,
 };
 
 export default ZoomIn;

@@ -13,6 +13,7 @@ import Address from "./components/Address";
 import News from "./pages/News";
 import Recruitment from "./pages/Recruitment";
 import DefaultLayout from "./layout/DefaultLayout";
+import Cart from "./pages/Cart";
 
 function App() {
   return (
@@ -31,6 +32,14 @@ function App() {
             element={
               <DefaultLayout>
                 <Products />
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path="cart"
+            element={
+              <DefaultLayout>
+                <Cart />
               </DefaultLayout>
             }
           />

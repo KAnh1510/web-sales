@@ -3,7 +3,7 @@
 
 :root {
   --primary: #002079;
-  --secondary: #d0021b;
+  --secondary: #e00707;
   --text-title: #252a2b;
   --black: #000000;
 }
@@ -24,6 +24,7 @@ body {
   text-rendering: optimizeSpeed;
   overflow-x: hidden;
   background: #fff;
+  color: var(--text-title);
   line-height: 1.4;
   color: var(--black);
 }
@@ -76,6 +77,11 @@ a[href] {
   &:hover {
     color: var(--primary);
   }
+}
+
+p {
+  margin: 0 0 10px 0;
+  line-height: 21px;
 }
 
 ul {
