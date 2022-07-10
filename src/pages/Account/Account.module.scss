@@ -13,12 +13,20 @@
     padding-bottom: 8px;
   }
 
-  .name-account {
-    font-weight: 500;
-    font-size: 1.6rem;
-    line-height: 21px;
-    margin: 10px 0 5px;
-    color: var(--text-title);
+  .account {
+    h3,
+    h2 {
+      font-weight: 500;
+      margin: 10px 0 5px;
+      color: var(--text-title);
+    }
+    h2 {
+      font-size: 1.6rem;
+      line-height: 21px;
+    }
+    h3 {
+      font-size: 1.5rem;
+    }
   }
 }
 

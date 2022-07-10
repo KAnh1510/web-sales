@@ -11,6 +11,12 @@
   }
 }
 
+.section {
+  input {
+    display: inline-block;
+  }
+}
+
 .section-header {
   margin-bottom: 1.4rem;
 
@@ -148,6 +154,7 @@
 
 .prd-info {
   padding-bottom: 1.4rem;
+  margin: 1.4rem 0;
   border-bottom: 1px dotted #e1e1e1;
 }
 
@@ -192,7 +199,7 @@
 }
 
 .prd-desc {
-  display: flex;
+  display: flex !important;
   flex-direction: column;
   justify-content: center;
 
@@ -207,7 +214,7 @@
 }
 
 .prd-price {
-  display: flex;
+  display: flex !important;
   align-items: center;
   color: #4b4b4b;
 }

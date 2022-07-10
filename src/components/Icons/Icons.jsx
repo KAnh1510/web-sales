@@ -19,7 +19,7 @@ export const SearchIcon = ({
   </svg>
 );
 
-export const CardIcon = ({ width, height, className }) => (
+export const CartIcon = ({ width, height, className }) => (
   <svg className={className} width={width} height={height} viewBox="0 0 81 70">
     <g
       transform="translate(0 2)"

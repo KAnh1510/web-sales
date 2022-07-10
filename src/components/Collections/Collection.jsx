@@ -11,7 +11,6 @@ import { getAllCollections } from "./CollectionSlice";
 const cx = classnames.bind(styles);
 
 export default function Collections() {
-  const location = useLocation().pathname.split("/")[2];
   const productList = useSelector((state) => state.products.values);
   const collectionList = useSelector((state) => state.collections.values);
   const dispatch = useDispatch();

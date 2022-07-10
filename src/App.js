@@ -7,13 +7,14 @@ import Products from "./components/Collections/Products";
 import { publicRoutes } from "./routes";
 
 import Account from "./pages/Account";
-import Login from "./components/Login";
-import Register from "./components/Register";
+import Login from "./components/User/Login";
+import Register from "./components/User/Register";
 import Address from "./components/Address";
 import News from "./pages/News";
 import Recruitment from "./pages/Recruitment";
 import DefaultLayout from "./layout/DefaultLayout";
 import Cart from "./pages/Cart";
+import Payment from "./pages/Payment";
 
 function App() {
   return (
@@ -44,7 +45,15 @@ function App() {
             }
           />
           <Route
-            path="account"
+            path="cart/payment"
+            element={
+              <DefaultLayout>
+                <Payment />
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path="account/:id"
             element={
               <DefaultLayout>
                 <Account />
@@ -68,7 +77,7 @@ function App() {
             }
           />
           <Route
-            path="account/address"
+            path="account/address/:id"
             element={
               <DefaultLayout>
                 <Address />

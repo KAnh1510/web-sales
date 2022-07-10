@@ -5,10 +5,12 @@ import styles from "./Button.module.scss";
 
 const cx = classnames.bind(styles);
 
-function Button({ children, className }) {
+function Button({ children, className, onClick }) {
   return (
     <>
-      <button className={cx("btn-addtocard", className)}>{children}</button>
+      <button className={cx("btn-addtocard", className)} onClick={onClick}>
+        {children}
+      </button>
     </>
   );
 }

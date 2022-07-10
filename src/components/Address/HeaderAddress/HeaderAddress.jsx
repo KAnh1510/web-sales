@@ -8,7 +8,7 @@ import classnames from "classnames/bind";
 const cx = classnames.bind(styles);
 
 function HeaderAddress(props) {
-  const { edit, setEdit } = props;
+  const { edit, setEdit, currentUser } = props;
 
   const handelShowEdit = () => {
     setEdit(!edit);
@@ -24,20 +24,15 @@ function HeaderAddress(props) {
         <div className={cx("col l-12")}>
           <div className={cx("address-title")}>
             <h3>
-              <strong>Nguyen Anh</strong>
+              <strong>{currentUser[0].name}</strong>
             </h3>
             <p className={cx("address-actions")}>
-              <span className={cx("action-edit")}>
+              <span className={cx("action-edit")} title="Sửa">
                 <a to="#" onClick={handelShowEdit}>
                   <i
                     className={cx("fa fa-pencil-square-o")}
                     aria-hidden="true"
                   />
-                </a>
-              </span>
-              <span className={cx("action-delete")}>
-                <a to="#" onClick={handelDelete}>
-                  <i className={cx("fa fa-times")} aria-hidden="true" />
                 </a>
               </span>
             </p>
@@ -50,7 +45,7 @@ function HeaderAddress(props) {
 
 HeaderAddress.propTypes = {
   edit: PropTypes.bool,
-  setEdit: PropTypes.bool,
+  setEdit: PropTypes.func,
 };
 
 export default HeaderAddress;

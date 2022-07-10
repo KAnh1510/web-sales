@@ -2,18 +2,18 @@
 import axiosClient from "./axiosClient";
 
 const ordersApi = {
+  create: (data) => {
+    const url = `/orders`;
+    return axiosClient.post(url, data);
+  },
+
   getAll: (params) => {
     const url = "/orders";
     return axiosClient.get(url, { params });
   },
 
-  get: (id) => {
-    const url = `/orders/${id}`;
-    return axiosClient.get(url);
-  },
-
-  findByName: (nameUser) => {
-    return axiosClient.get(`/orders?name_user=${nameUser}`);
+  update: (id, data) => {
+    return axiosClient.patch(`/orders/${id}`, data);
   },
 };
 

@@ -1,42 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import styles from "./Address.module.scss";
 import classnames from "classnames/bind";
 
 import ViewAddress from "./View";
-import Button from "../Button";
 import EditAddress from "./Edit";
 import HeaderAddress from "./HeaderAddress";
 import PageAccountAddress from "~/layout/components/PageAccountAddress";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "../User/UserSlice";
 
 const cx = classnames.bind(styles);
 
 function Address() {
   const [edit, setEdit] = useState(false);
-  const [addAddress, setAddAddress] = useState(false);
+  const params = useParams();
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.users.values);
+
+  useEffect(() => {
+    dispatch(getUser(params.id));
+  }, []);
 
   return (
     <PageAccountAddress title="Thông tin địa chỉ">
       <div className={cx("col l-7")}>
-        <HeaderAddress setEdit={setEdit} edit={edit} />
+        <HeaderAddress
+          setEdit={setEdit}
+          edit={edit}
+          currentUser={currentUser}
+        />
         <div className={cx("address-table")}>
           {edit ? (
-            <EditAddress setEdit={setEdit} setAddAddress={setAddAddress} />
+            <EditAddress setEdit={setEdit} currentUser={currentUser} />
           ) : (
-            <ViewAddress />
+            <ViewAddress currentUser={currentUser} />
           )}
         </div>
-      </div>
-      <div className={cx("col l-5")}>
-        <div
-          className={cx("btn-addAddress")}
-          onClick={() => setAddAddress(!addAddress)}
-        >
-          <Button className={cx("add-newaddress")}>Nhập địa chỉ mới</Button>
-        </div>
-        {addAddress ? (
-          <EditAddress setEdit={setEdit} setAddAddress={setAddAddress} />
-        ) : null}
       </div>
     </PageAccountAddress>
   );

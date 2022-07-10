@@ -15,10 +15,10 @@ export const productSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getAllProducts.pending, (state, action) => {
+      .addCase(getAllProducts.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getAllProducts.rejected, (state, action) => {
+      .addCase(getAllProducts.rejected, (state) => {
         state.loading = false;
       })
       .addCase(getAllProducts.fulfilled, (state, action) => {

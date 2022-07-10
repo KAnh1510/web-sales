@@ -9,32 +9,67 @@ import ShowListProduct from "../ShowListProduct";
 import ZoomIn from "../ZoomIn";
 import Button from "~/components/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { PRODUCTS } from "~/data";
 import { getAllProducts } from "./ProductSlice";
 import { getAllCollections } from "../CollectionSlice";
+import { getAuthUser } from "~/components/User/AuthSlice";
+import { createOrder, getOrders } from "~/pages/Cart/OrderSlice";
+import { createOrderDetail } from "~/pages/Cart/OrderDetailSlice";
 
 const cx = classnames.bind(styles);
 
 export default function Products() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { productName } = useParams();
+  let date = new Date().toLocaleDateString();
+
   const [size, setSize] = useState();
   const [color, setColor] = useState();
   const [counter, setCounter] = useState(1);
-  const navigate = useNavigate();
+  const [messSuccess, setMessSuccess] = useState(false);
+  const [messErr, setMessErr] = useState(false);
 
-  const dispatch = useDispatch();
   const productList = useSelector((state) => state.products.values);
   const collectionList = useSelector((state) => state.collections.values);
+  const currentUser = useSelector((state) => state.auth.values);
 
   const currentProduct = productList.filter(
     (item) => item.name === productName
   );
   let type = "";
+  const valueUser = { ...currentUser[0] };
+  const valueProduct = { ...currentProduct[0] };
 
   useEffect(() => {
     dispatch(getAllProducts(productName));
     dispatch(getAllCollections());
+    dispatch(getAuthUser());
   }, []);
+
+  const handleAddCard = (e) => {
+    e.preventDefault();
+    if (currentUser.length > 0) {
+      dispatch(
+        createOrder({
+          user_id: valueUser.user_id,
+          note: "",
+          create_at: date,
+        })
+      );
+      dispatch(
+        createOrderDetail({
+          user_id: valueUser.user_id,
+          product_id: valueProduct.id,
+          number: counter,
+          color: color,
+          size: size,
+        })
+      );
+      setMessSuccess(true);
+    } else {
+      setMessErr(true);
+    }
+  };
 
   return (
     <div className={cx("grid")}>
@@ -102,20 +137,20 @@ export default function Products() {
                     </p>
                   </div>
 
-                  <form method="post" action="/">
+                  <form>
                     <div className={cx("product_color")}>
                       {product.color &&
                         product.color.map((item, index) => (
                           <div className={cx("color_element")} key={index}>
                             <input
                               type="radio"
-                              id={`swatch-${item.name}`}
-                              name={`option${item.name}`}
-                              value={item.name}
+                              id={`swatch-${item.idColor}`}
+                              name={`option${item.idColor}`}
+                              value={item.idColor}
                               onChange={(e) => setColor(e.target.value)}
-                              checked={color === item.name}
+                              checked={color === item.idColor}
                             />
-                            <label htmlFor={`swatch-${item.name}`}>
+                            <label htmlFor={`swatch-${item.idColor}`}>
                               <span
                                 style={{ background: `${item.idColor}` }}
                               ></span>
@@ -172,9 +207,25 @@ export default function Products() {
                       </div>
                     </form>
                     <div className={cx("add-card")}>
-                      <Button>Thêm vào giỏ hàng</Button>
+                      <Button onClick={handleAddCard}>Thêm vào giỏ hàng</Button>
                     </div>
                   </div>
+
+                  {messErr ? (
+                    <p style={{ marginTop: "10px", color: "red" }}>
+                      Bạn chưa đăng nhập, vui lòng đăng nhập để thêm sản phẩm!
+                    </p>
+                  ) : (
+                    <></>
+                  )}
+
+                  {messSuccess ? (
+                    <p style={{ marginTop: "10px", color: "blue" }}>
+                      Sản phẩm đã được thêm vào giỏ hàng!
+                    </p>
+                  ) : (
+                    <></>
+                  )}
 
                   <div className={cx("desc")}>
                     <h2>Mô Tả</h2>

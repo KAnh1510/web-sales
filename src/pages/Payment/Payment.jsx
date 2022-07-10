@@ -3,11 +3,48 @@ import classnames from "classnames/bind";
 import HeaderPage from "~/layout/components/HeaderPage";
 import Images from "~/components/Images";
 import { Link } from "react-router-dom";
-import Button from "~/components/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { getOrders } from "../Cart/OrderSlice";
+import { getAllUsers, getUser, updateUser } from "~/components/User/UserSlice";
+import { getAllOrderDetail } from "../Cart/OrderDetailSlice";
+import Logout from "~/components/User/Logout";
+import VndFormat from "~/components/VndFormat/VndFormat";
+import { getAllProducts } from "~/components/Collections/Products/ProductSlice";
 
 const cx = classnames.bind(styles);
 
 function Payment() {
+  const dispatch = useDispatch();
+  const orderList = useSelector((state) => state.orders.values);
+  const userList = useSelector((state) => state.users.values);
+  const orderDetail = useSelector((state) => state.order_detail.values);
+  const productList = useSelector((state) => state.products.values);
+  const [confirmLogout, setConfirmLogout] = useState(false);
+  const [confirmOrder, setConfirmOrder] = useState(false);
+  let totalMoney = 0;
+
+  const handleLogout = () => {
+    setConfirmLogout(true);
+  };
+
+  const valueOrder = { ...orderList[0] };
+  const currentUser = userList.filter((item) => item.id === valueOrder.user_id);
+  const [valueCurrentUser, setValueCurrentUser] = useState({
+    ...currentUser[0],
+  });
+
+  useEffect(() => {
+    dispatch(getOrders());
+    dispatch(getAllUsers());
+    dispatch(getAllOrderDetail());
+    dispatch(getAllProducts());
+  }, []);
+
+  const handlePayment = () => {
+    setConfirmOrder(true);
+  };
+
   return (
     <div className={cx("wrapper", "grid")}>
       <div className={cx("row")}>
@@ -28,77 +65,51 @@ function Payment() {
                       "logged-in-customer-information-avatar-wrapper"
                     )}
                   >
-                    <Images src="https://www.gravatar.com/avatar/30dede84fd5bb8b9e3d67d1d12976782.jpg?s=100&d=blank" />
+                    <Images src="khongcogi" />
                   </div>
                   <p className={cx("logged-in-customer-information-paragraph")}>
-                    Nguyen Anh (nguyenkimanh15102000@gmail.com)
+                    {valueCurrentUser.name} ({valueCurrentUser.email})
                     <br />
-                    <Link to="/account/login">Đăng xuất</Link>
+                    <a href="#!" onClick={handleLogout}>
+                      Đăng xuất
+                    </a>
                   </p>
                 </div>
+
+                {confirmLogout ? (
+                  <Logout setConfirmLogout={setConfirmLogout} />
+                ) : (
+                  <></>
+                )}
 
                 <div className={cx("fieldset")}>
                   <div className={cx("field")}>
                     <div className={cx("field-input-wrapper")}>
                       <label
                         className={cx("field-label")}
-                        for="stored_addresses"
+                        for="billing_address_full_name"
                       >
-                        Thêm địa chỉ mới...
+                        Địa chỉ
                       </label>
-                      <select
+                      <input
+                        placeholder="Địa chỉ"
+                        autoCapitalize="off"
+                        spellCheck="false"
+                        readOnly
                         className={cx("field-input")}
-                        id="stored_addresses"
-                      >
-                        {/* <option value="0" data-properties="{}">
-                          Địa chỉ đã lưu trữ
-                        </option>
-
-                        <option
-                          value="1104586138"
-                          data-properties='{"id":1104586138,
-																				"last_name":"Anh",
-																				"first_name":"Nguyễn Thị",
-																				"phone":"0359127610",
-																				"address1":"Hà nội",
-																				"zip":null,
-																				"city":null,
-																				"country":"Vietnam",
-																				"country_id":"241",
-																				"province":null,
-																				"province_id":null,
-																				"district":null,
-																				"district_id":null,
-																				"ward":null,
-																				"wardid":null,
-																				"default":true}'
-                          selected=""
-                        >
-                          0359127610, Hà nội, Vietnam
-                        </option>
-
-                        <option
-                          value="1104988919"
-                          data-properties='{"id":1104988919,
-																				"last_name":"Anh Nguyễn",
-																				"first_name":"Thị",
-																				"phone":"0359127610",
-																				"address1":"Hà nội",
-																				"zip":null,
-																				"city":null,
-																				"country":"Vietnam",
-																				"country_id":"241",
-																				"province":null,
-																				"province_id":null,
-																				"district":null,
-																				"district_id":null,
-																				"ward":null,
-																				"wardid":null,
-																				"default":false}'
-                        >
-                          0359127610, Hà nội, Vietnam
-                        </option> */}
-                      </select>
+                        size="30"
+                        type="text"
+                        id="address"
+                        name="address"
+                        value={valueCurrentUser.address}
+                        onChange={(e) =>
+                          setValueCurrentUser({
+                            ...valueCurrentUser,
+                            address: e.target.value,
+                          })
+                        }
+                        autoComplete="false"
+                      />
                     </div>
                   </div>
 
@@ -112,15 +123,22 @@ function Payment() {
                       </label>
                       <input
                         placeholder="Họ và tên"
-                        autocapitalize="off"
-                        spellcheck="false"
+                        autoCapitalize="off"
+                        spellCheck="false"
+                        readOnly
                         className={cx("field-input")}
                         size="30"
                         type="text"
                         id="billing_address_full_name"
                         name="billing_address[full_name]"
-                        value="Anh Nguyễn Thị"
-                        autocomplete="false"
+                        value={valueCurrentUser.name}
+                        onChange={(e) =>
+                          setValueCurrentUser({
+                            ...valueCurrentUser,
+                            name: e.target.value,
+                          })
+                        }
+                        autoComplete="false"
                       />
                     </div>
                   </div>
@@ -134,48 +152,97 @@ function Payment() {
                         Số điện thoại
                       </label>
                       <input
-                        autocomplete="false"
+                        autoComplete="false"
                         placeholder="Số điện thoại"
-                        autocapitalize="off"
-                        spellcheck="false"
+                        readOnly
+                        autoCapitalize="off"
+                        spellCheck="false"
                         className={cx("field-input")}
                         size="30"
-                        maxlength="15"
+                        maxLength="15"
                         type="tel"
                         id="billing_address_phone"
                         name="billing_address[phone]"
-                        value="0359127610"
+                        value={valueCurrentUser.phoneNumber}
+                        onChange={(e) =>
+                          setValueCurrentUser({
+                            ...valueCurrentUser,
+                            phoneNumber: e.target.value,
+                          })
+                        }
                       />
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            <div className={cx("section")}>
+              <div className={cx("section-header")}>
+                <h2>Phương thức thanh toán</h2>
+              </div>
+              <input
+                type="radio"
+                id="payment_normal"
+                name="payment_normal"
+                value="payment_normal"
+                defaultChecked
+              />
+              <label for="payment_normal" style={{ margin: " 0 10px" }}>
+                Thanh toán khi nhận hàng
+              </label>
+            </div>
             <div className={cx("footer")}>
               <Link to={"/cart"}>Giỏ hàng</Link>
-              <button className={cx("btn-payment")}>
-                Tiếp tục đến phương thức thanh toán
-              </button>
+              {confirmOrder ? (
+                <button
+                  className={cx("btn-payment")}
+                  style={{ backgroundColor: "green" }}
+                >
+                  Đặt hàng thành công
+                </button>
+              ) : (
+                <button className={cx("btn-payment")} onClick={handlePayment}>
+                  Xác nhận đặt hàng
+                </button>
+              )}
             </div>
           </div>
         </div>
         <div className={cx("col l-6")}>
           <div className={cx("sidebar-content")}>
-            <div className={cx("row", "prd-info")}>
-              <div className={cx("col l-2", "prd-img-wrapper")}>
-                <div className={cx("prd-img")}>
-                  <Images src="" />
+            {orderDetail.map((item) => {
+              let name = "";
+              let imgFront = "";
+              let prices = "";
+
+              productList.forEach((product) => {
+                const check = product.id === item.product_id;
+                if (check) {
+                  imgFront = product.imgFront;
+                  name = product.name;
+                  prices = product.prices;
+                }
+              });
+              totalMoney += prices * item.number;
+              return (
+                <div className={cx("row", "prd-info")} key={item.id}>
+                  <div className={cx("col l-2", "prd-img-wrapper")}>
+                    <div className={cx("prd-img")}>
+                      <Images src={imgFront} />
+                    </div>
+                    <span className={cx("prd-quantity")}>{item.number}</span>
+                  </div>
+                  <div className={cx("col l-7", "prd-desc")}>
+                    <span className={cx("prd-name")}>{name}</span>
+                    <span className={cx("prd-size")}>{item.size}</span>
+                  </div>
+                  <div className={cx("col l-3", "prd-price")}>
+                    <span>{VndFormat(prices * item.number)}</span>
+                  </div>
                 </div>
-                <span className={cx("prd-quantity")}>1</span>
-              </div>
-              <div className={cx("col l-7", "prd-desc")}>
-                <span className={cx("prd-name")}>CND SUMMER TEE BLUE</span>
-                <span className={cx("prd-size")}>SIZE L</span>
-              </div>
-              <div className={cx("col l-3", "prd-price")}>
-                <span>320000</span>
-              </div>
-            </div>
+              );
+            })}
+
             <div className={cx("prd-total")}>
               <table className={cx("total-line-table")}>
                 <thead>
@@ -188,12 +255,7 @@ function Payment() {
                   <tr className={cx("total-line")}>
                     <td>Tạm tính</td>
                     <td>
-                      <span
-                        className={cx("order-summary-emphasis")}
-                        data-checkout-subtotal-price-target="32000000"
-                      >
-                        320,000₫
-                      </span>
+                      <span>{VndFormat(totalMoney)}</span>
                     </td>
                   </tr>
 
@@ -222,7 +284,7 @@ function Payment() {
                         className={cx("payment-due-price")}
                         data-checkout-payment-due-target="32000000"
                       >
-                        320,000₫
+                        {VndFormat(totalMoney)}
                       </span>
                     </td>
                   </tr>

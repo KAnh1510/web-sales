@@ -3,21 +3,21 @@ import classnames from "classnames/bind";
 
 import Search from "./Search";
 import { useState } from "react";
-import Card from "./Card";
-import { CardIcon, SearchIcon } from "../Icons";
+import Cart from "./Cart";
+import { CartIcon, SearchIcon } from "../Icons";
 
 const cx = classnames.bind(styles);
 
 function User() {
   const [showSearch, setShowSearch] = useState(false);
-  const [showCard, setShowCard] = useState(false);
+  const [showCart, setShowCart] = useState(false);
 
   const handelShowSearch = () => {
     setShowSearch(true);
   };
 
-  const handelShowCard = () => {
-    setShowCard(true);
+  const handelShowCart = () => {
+    setShowCart(true);
   };
 
   return (
@@ -25,8 +25,8 @@ function User() {
       <div className={showSearch ? cx("showing") : cx("search-wrapper")}>
         <Search setShowSearch={setShowSearch} />
       </div>
-      <div className={showCard ? cx("showing") : cx("search-wrapper")}>
-        <Card setShowCard={setShowCard} />
+      <div className={showCart ? cx("showing") : cx("search-wrapper")}>
+        <Cart setShowCart={setShowCart} />
       </div>
       <span className={cx("choose-item")}>
         <div onClick={handelShowSearch}>
@@ -35,8 +35,8 @@ function User() {
       </span>
 
       <span className={cx("choose-item")}>
-        <div className={cx("cart")} onClick={handelShowCard}>
-          <CardIcon width="2.6rem" height="2.6rem" />
+        <div className={cx("cart")} onClick={handelShowCart}>
+          <CartIcon width="2.6rem" height="2.6rem" />
         </div>
       </span>
     </>

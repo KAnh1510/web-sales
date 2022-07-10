@@ -14,37 +14,46 @@ import {
   getAllProducts,
   searchProductsByName,
 } from "~/components/Collections/Products/ProductSlice";
+import { useDebounce } from "~/components/hooks";
 
 const cx = classnames.bind(styles);
 
 function Search({ setShowSearch }) {
   const [showResults, setShowResults] = useState(true);
-  const [searchText, setSearchText] = useState();
+  const [searchText, setSearchText] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
+  const debouncedValue = useDebounce(searchText, 500);
 
   const inputRef = useRef();
-  const typingTimeOurRef = useRef();
   const dispatch = useDispatch();
 
   const productList = useSelector((state) => state.products.values);
-  let searchResults = [];
+
   useEffect(() => {
-    dispatch(getAllProducts());
-  }, []);
+    if (!debouncedValue.trim()) {
+      setSearchResults([]);
+      return;
+    }
 
-  if (typingTimeOurRef.current) {
-    clearTimeout(typingTimeOurRef.current);
-  }
-
-  typingTimeOurRef.current = setTimeout(() => {
-    searchResults = productList.filter((product) => {
-      return product.name.includes(searchText);
+    const results = productList.filter((product) => {
+      return product.name.includes(debouncedValue);
     });
-  }, 500);
+    setSearchResults(results);
 
-  console.log(searchResults);
+    dispatch(getAllProducts());
+  }, [debouncedValue]);
+
   const handleSearchTextChange = (e) => {
-    setSearchText(e.target.value);
+    const searchText = e.target.value;
+    if (!searchText.startsWith(" ")) {
+      setSearchText(searchText);
+    }
     if (!setShowSearch) return;
+  };
+
+  const handelHideResults = () => {
+    setShowResults(false);
   };
 
   const handelClose = () => {
@@ -61,22 +70,24 @@ function Search({ setShowSearch }) {
       </div>
       <HeadlessTippy
         interactive
-        // visible={showResults && searchResults.length > 0}
+        visible={showResults && searchResults.length > 0}
         render={(attrs) => (
           <div className={cx("search-results")} tabIndex="-1" {...attrs}>
             <Wrapper>
-              {/* {searchResults.map((result, index) => (
+              {searchResults.map((result, index) => (
                 <ProductItem key={index} data={result} />
-              ))} */}
+              ))}
             </Wrapper>
           </div>
         )}
+        onClickOutside={handelHideResults}
       >
         <div className={cx("search")}>
           <input
             ref={inputRef}
             type="text"
-            value={searchText ?? ""}
+            value={searchText}
+            spellCheck={false}
             onChange={handleSearchTextChange}
             onFocus={() => setShowResults(true)}
             placeholder="Tìm kiếm sản phẩm..."

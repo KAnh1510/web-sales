@@ -2,6 +2,11 @@
 import axiosClient from "./axiosClient";
 
 const usersApi = {
+  register: (data) => {
+    const url = `/users`;
+    return axiosClient.post(url, data);
+  },
+
   getAll: (params) => {
     const url = "/users";
     return axiosClient.get(url, { params });
@@ -13,7 +18,7 @@ const usersApi = {
   },
 
   update: (id, data) => {
-    return axiosClient.put(`/users/${id}`, data);
+    return axiosClient.patch(`/users/${id}`, data);
   },
 
   delete: (id) => {

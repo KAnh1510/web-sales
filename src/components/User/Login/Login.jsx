@@ -1,16 +1,54 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import styles from "./Login.module.scss";
 import classnames from "classnames/bind";
-import Button from "../Button";
-import { Link } from "react-router-dom";
-import Capcha from "../Capcha";
+import Button from "../../Button";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import Capcha from "../../Capcha";
 import PageLoginRegister from "~/layout/components/PageLoginRegister";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllUsers } from "../UserSlice";
+import { Form } from "react-bootstrap";
+import { loginUser } from "../AuthSlice";
 
 const cx = classnames.bind(styles);
 
 function Login() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [forgotPassword, setForgotPassword] = useState(false);
+  const [errMes, setErrMes] = useState(false);
+  const userList = useSelector((state) => state.users.values);
+  const [values, setValues] = useState({});
+
+  const currentUser = [];
+  userList.forEach((user) => {
+    if (
+      user.email === values.email &&
+      user.password === values.password &&
+      user.role === "user"
+    ) {
+      currentUser.push(user);
+    }
+  });
+
+  useEffect(() => {
+    dispatch(getAllUsers());
+  }, []);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (currentUser.length > 0) {
+      navigate(`/account/${currentUser[0].id}`);
+      dispatch(
+        loginUser({
+          user_id: currentUser[0].id,
+          email: values.email,
+          password: values.password,
+        })
+      );
+    } else setErrMes(true);
+  };
 
   return (
     <PageLoginRegister title="Đăng nhập">
@@ -44,12 +82,16 @@ function Login() {
         </div>
       ) : (
         <div className={cx("user-box")}>
-          <form action="/account/login" id="customer_login" method="post">
+          <Form onClick={handleLogin}>
             <div className={cx("input-form")}>
               <input
                 required
                 type="email"
                 name="customer[email]"
+                values={values.email}
+                onChange={(e) =>
+                  setValues({ ...values, email: e.target.value })
+                }
                 id="customer_email"
                 placeholder="Email"
               />
@@ -61,10 +103,22 @@ function Login() {
                 type="password"
                 name="customer[password]"
                 id="customer_password"
+                values={values.password}
+                onChange={(e) =>
+                  setValues({ ...values, password: e.target.value })
+                }
                 placeholder="Mật khẩu"
                 size="16"
               />
             </div>
+
+            {errMes ? (
+              <p style={{ marginTop: "10px", color: "red" }}>
+                Email hoặc mật khẩu không đúng! Vui lòng kiểm tra lại.
+              </p>
+            ) : (
+              <></>
+            )}
 
             <Capcha />
 
@@ -88,7 +142,7 @@ function Login() {
                 </Link>
               </div>
             </div>
-          </form>
+          </Form>
         </div>
       )}
     </PageLoginRegister>
