@@ -1,15 +1,14 @@
 import PropTypes from "prop-types";
 import styles from "./PageAccountAddress.module.scss";
 import classnames from "classnames/bind";
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import Logout from "~/components/User/Logout";
 
 const cx = classnames.bind(styles);
 
 function PageAccountAddress({ title, children, userId }) {
   const [confirmLogout, setConfirmLogout] = useState(false);
-
   const handleLogout = () => {
     setConfirmLogout(true);
   };

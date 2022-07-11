@@ -2,10 +2,20 @@ import { Link, NavLink } from "react-router-dom";
 import classnames from "classnames/bind";
 import styles from "./SideBar.module.scss";
 import { LISTSIDEBAR } from "~/data";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAuthUser } from "~/components/User/AuthSlice";
 
 const cx = classnames.bind(styles);
 
 function SideBar() {
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.auth.values);
+
+  useEffect(() => {
+    dispatch(getAuthUser());
+  }, []);
+
   return (
     <div className={cx("wrapper")}>
       <Link to="/" title="Logo">
@@ -19,13 +29,23 @@ function SideBar() {
         {LISTSIDEBAR.map((item, index) => {
           return (
             <li key={index}>
-              <NavLink
-                to={item.to}
-                title={item.title}
-                className={({ isActive }) => (isActive ? cx("active") : " ")}
-              >
-                {item.title}
-              </NavLink>
+              {currentUser.length > 0 && item.to2 ? (
+                <NavLink
+                  to={item.to2 + currentUser[0].user_id}
+                  title={item.title}
+                  className={({ isActive }) => (isActive ? cx("active") : " ")}
+                >
+                  {item.title}
+                </NavLink>
+              ) : (
+                <NavLink
+                  to={item.to}
+                  title={item.title}
+                  className={({ isActive }) => (isActive ? cx("active") : " ")}
+                >
+                  {item.title}
+                </NavLink>
+              )}
             </li>
           );
         })}

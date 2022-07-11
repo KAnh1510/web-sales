@@ -29,9 +29,10 @@ export const AuthSlice = createSlice({
 
 export const loginUser = createAsyncThunk(
   "auth/login",
-  async ({ user_id, email, password }) => {
+  async ({ role, user_id, email, password }) => {
     const res = await authApi.login({
       user_id,
+      role,
       email,
       password,
     });

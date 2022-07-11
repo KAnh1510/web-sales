@@ -9,7 +9,7 @@ import PageLoginRegister from "~/layout/components/PageLoginRegister";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../UserSlice";
 import { Form } from "react-bootstrap";
-import { loginUser } from "../AuthSlice";
+import { getAuthUser, loginUser } from "../AuthSlice";
 
 const cx = classnames.bind(styles);
 
@@ -43,6 +43,7 @@ function Login() {
       dispatch(
         loginUser({
           user_id: currentUser[0].id,
+          role: "user",
           email: values.email,
           password: values.password,
         })
@@ -82,7 +83,7 @@ function Login() {
         </div>
       ) : (
         <div className={cx("user-box")}>
-          <Form onClick={handleLogin}>
+          <Form>
             <div className={cx("input-form")}>
               <input
                 required
@@ -124,7 +125,7 @@ function Login() {
 
             <div className={cx("action-account")}>
               <div className={cx("btn-submit")}>
-                <Button>
+                <Button onClick={handleLogin}>
                   <input type="submit" value="Đăng nhập" />
                 </Button>
               </div>

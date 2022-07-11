@@ -18,12 +18,12 @@ const cx = classnames.bind(styles);
 function Cart() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [note, setNote] = useState("");
   const productItem = useSelector((state) => state.order_detail.values);
   const productList = useSelector((state) => state.products.values);
   const currentOrder = useSelector((state) => state.orders.values);
 
   const valueOrder = { ...currentOrder[0] };
+  const [note, setNote] = useState(valueOrder.note);
 
   useEffect(() => {
     dispatch(getAllOrderDetail());
@@ -134,9 +134,10 @@ function Cart() {
                   <div className={cx("checkout-note")}>
                     <textarea
                       placeholder="Ghi chú"
+                      type="text"
                       id="note"
+                      value={note}
                       name="note"
-                      rows="5"
                       onChange={(e) => setNote(e.target.value)}
                     />
                   </div>

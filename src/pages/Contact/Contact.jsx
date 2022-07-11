@@ -1,12 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Contact.module.scss";
 import classnames from "classnames/bind";
 import Button from "~/components/Button";
 import Capcha from "~/components/Capcha";
+import { useDispatch } from "react-redux";
+import { createQuestion } from "./ContactSlice";
 
 const cx = classnames.bind(styles);
 
 function Contact() {
+  const dispatch = useDispatch();
+  const [mess, setMess] = useState(false);
+  const [values, setValues] = useState({
+    name: "",
+    email: "",
+    phoneNumber: "",
+    note: "",
+  });
+  useEffect(() => {}, []);
+  const handleSubmit = () => {
+    dispatch(
+      createQuestion({
+        name: values.name,
+        email: values.email,
+        phoneNumber: values.phoneNumber,
+        note: values.note,
+      })
+    );
+    setMess(true);
+  };
   return (
     <div className={cx("contact row")}>
       <div className={cx("col l-6")}>
@@ -65,6 +87,10 @@ function Contact() {
                     required
                     name="name"
                     placeholder="Tên của bạn"
+                    value={values.name}
+                    onChange={(e) =>
+                      setValues({ ...values, name: e.target.value })
+                    }
                     className={cx("form-control")}
                   />
                 </div>
@@ -76,6 +102,10 @@ function Contact() {
                     required
                     name="email"
                     placeholder="Email của bạn"
+                    value={values.email}
+                    onChange={(e) =>
+                      setValues({ ...values, email: e.target.value })
+                    }
                     className={cx("form-control")}
                   />
                 </div>
@@ -87,6 +117,10 @@ function Contact() {
                     required
                     name="phone"
                     placeholder="Số điện thoại của bạn"
+                    value={values.phoneNumber}
+                    onChange={(e) =>
+                      setValues({ ...values, phoneNumber: e.target.value })
+                    }
                     className={cx("form-control")}
                   />
                 </div>
@@ -98,13 +132,26 @@ function Contact() {
                     required
                     name="note"
                     placeholder="Nội dung"
+                    value={values.note}
+                    onChange={(e) =>
+                      setValues({ ...values, note: e.target.value })
+                    }
                     className={cx("form-control")}
                   />
                   <Capcha />
                 </div>
               </div>
+
+              {mess ? (
+                <p style={{ marginTop: "10px", color: "blue" }}>
+                  Bạn đã gửi phản hồi cho chúng tôi ^^
+                </p>
+              ) : (
+                <></>
+              )}
+
               <div className={cx("col l-12")}>
-                <Button>Gửi cho chúng tôi</Button>
+                <Button onClick={handleSubmit}>Gửi cho chúng tôi</Button>
               </div>
             </div>
           </div>

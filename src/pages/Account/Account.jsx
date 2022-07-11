@@ -43,13 +43,6 @@ export default function Account() {
           </Link>
         </div>
       </div>
-      <div className={cx("col l-12")}>
-        <div className={cx("customer-order-wrap")}>
-          <div className={cx("customer-order")}>
-            <p>Bạn chưa đặt mua sản phẩm</p>
-          </div>
-        </div>
-      </div>
     </PageAccountAddress>
   ));
 }
