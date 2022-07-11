@@ -18,6 +18,7 @@ function Button({ children, className, onClick }) {
 Button.prototype = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default Button;

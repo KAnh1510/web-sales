@@ -15,7 +15,7 @@ export default function Account() {
 
   useEffect(() => {
     dispatch(getUser(params.id));
-  }, []);
+  }, [dispatch, params.id]);
 
   return currentUser.map((user) => (
     <PageAccountAddress

@@ -68,7 +68,7 @@ export const registerUser = createAsyncThunk(
       gender,
       password,
     });
-    return res.data;
+    return res;
   }
 );
 

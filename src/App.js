@@ -15,6 +15,7 @@ import Recruitment from "./pages/Recruitment";
 import DefaultLayout from "./layout/DefaultLayout";
 import Cart from "./pages/Cart";
 import Payment from "./pages/Payment";
+import OrderDone from "./components/OrderDone";
 
 function App() {
   return (
@@ -49,6 +50,14 @@ function App() {
             element={
               <DefaultLayout>
                 <Payment />
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path="orders"
+            element={
+              <DefaultLayout>
+                <OrderDone />
               </DefaultLayout>
             }
           />

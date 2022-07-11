@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Form } from "react-bootstrap";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "./Register.module.scss";
 import classnames from "classnames/bind";
 import Button from "../../Button";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Capcha from "../../Capcha";
+import Captcha from "../../Captcha";
 import PageLoginRegister from "~/layout/components/PageLoginRegister";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../UserSlice";
@@ -221,7 +220,7 @@ function Register() {
             <></>
           )}
 
-          <Capcha />
+          <Captcha />
 
           <div className={cx("action-account")}>
             <div className={cx("btn-submit")}>

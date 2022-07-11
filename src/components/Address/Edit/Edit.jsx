@@ -122,7 +122,7 @@ function EditAddress(props) {
 EditAddress.propTypes = {
   className: PropTypes.string,
   setEdit: PropTypes.func,
-  setAddAddress: PropTypes.bool,
+  setAddAddress: PropTypes.func,
 };
 
 export default EditAddress;

@@ -16,7 +16,7 @@ function Shop() {
 
   useEffect(() => {
     dispatch(getAllCollections());
-  }, []);
+  }, [dispatch]);
   return (
     <DefaultLayout>
       <div className={cx("wrapper")}>

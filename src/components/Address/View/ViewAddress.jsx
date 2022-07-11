@@ -46,6 +46,7 @@ function ViewAddress({ className, currentUser }) {
 
 ViewAddress.propTypes = {
   className: PropTypes.string,
+  currentUser: PropTypes.object.isRequired,
 };
 
 export default ViewAddress;

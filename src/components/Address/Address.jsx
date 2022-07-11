@@ -21,7 +21,7 @@ function Address() {
 
   useEffect(() => {
     dispatch(getUser(params.id));
-  }, []);
+  }, [dispatch, params.id]);
 
   return (
     <PageAccountAddress title="Thông tin địa chỉ">

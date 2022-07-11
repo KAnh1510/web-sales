@@ -35,9 +35,6 @@ function Footer() {
             <div className={cx("link")}>
               <h2>Liên Kết</h2>
               <p>
-                <Link to="/search">Tìm Kiếm</Link>
-              </p>
-              <p>
                 <Link to="/pages/about">Giới thiệu</Link>
               </p>
               <p>

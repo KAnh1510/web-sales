@@ -15,9 +15,6 @@ function Pages({ children, title }) {
           <h3>Danh mục trang</h3>
           <ul>
             <li>
-              <Link to="/search">Tìm Kiếm</Link>
-            </li>
-            <li>
               <Link to="/pages/about">Giới thiệu</Link>
             </li>
             <li>
@@ -45,7 +42,7 @@ function Pages({ children, title }) {
 
 Pages.propTypes = {
   title: PropTypes.string,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };
 
 export default Pages;

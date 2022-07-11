@@ -15,7 +15,7 @@ export const ContactSlice = createSlice({
       })
 
       .addCase(createQuestion.fulfilled, (state, action) => {
-        state.values.push(action.meta.arg);
+        state.values.push(action.payload);
       })
 
       .addCase(updateQuestion.fulfilled, (state, action) => {
@@ -35,7 +35,7 @@ export const createQuestion = createAsyncThunk(
       phoneNumber,
       note,
     });
-    return res.data;
+    return res;
   }
 );
 

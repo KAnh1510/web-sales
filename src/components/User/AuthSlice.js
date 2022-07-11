@@ -36,7 +36,7 @@ export const loginUser = createAsyncThunk(
       email,
       password,
     });
-    return res.data;
+    return res;
   }
 );
 

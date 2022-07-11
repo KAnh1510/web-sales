@@ -12,7 +12,6 @@
 
     li {
       margin-bottom: 7px;
-      cursor: pointer;
 
       a {
         font-family: "Helvetica", sans-serif !important;
@@ -23,10 +22,9 @@
         &.active {
           color: var(--secondary);
         }
-      }
-
-      &:hover a {
-        color: #d0021b;
+        &:hover {
+          color: #d0021b;
+        }
       }
     }
   }

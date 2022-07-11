@@ -17,7 +17,6 @@ function DefaultLayout({ children, cover }) {
           <div className={cx("content")}>{children}</div>
         </div>
       </div>
-      {cover}
       <Footer />
     </div>
   );

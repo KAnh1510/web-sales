@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./Contact.module.scss";
 import classnames from "classnames/bind";
 import Button from "~/components/Button";
-import Capcha from "~/components/Capcha";
+import Captcha from "~/components/Captcha";
 import { useDispatch } from "react-redux";
 import { createQuestion } from "./ContactSlice";
 
@@ -17,7 +17,7 @@ function Contact() {
     phoneNumber: "",
     note: "",
   });
-  useEffect(() => {}, []);
+
   const handleSubmit = () => {
     dispatch(
       createQuestion({
@@ -138,7 +138,7 @@ function Contact() {
                     }
                     className={cx("form-control")}
                   />
-                  <Capcha />
+                  <Captcha />
                 </div>
               </div>
 

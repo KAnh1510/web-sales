@@ -5,7 +5,7 @@ import classnames from "classnames/bind";
 import styles from "./Cart.module.scss";
 import { CartIcon } from "~/components/Icons";
 import Button from "~/components/Button";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -15,6 +15,7 @@ import {
 } from "~/pages/Cart/OrderDetailSlice";
 import { getAllProducts } from "~/components/Collections/Products/ProductSlice";
 import VndFormat from "~/components/VndFormat/VndFormat";
+import { getAuthUser } from "../AuthSlice";
 
 const cx = classnames.bind(styles);
 
@@ -22,19 +23,26 @@ function Cart({ setShowCart }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [cartEmpty, setCartEmpty] = useState(false);
+  const authUser = useSelector((state) => state.auth.values);
   const productList = useSelector((state) => state.products.values);
-  const productItem = useSelector((state) => state.order_detail.values);
+  const orderDetail = useSelector((state) => state.order_detail.values);
+
+  const valueAuthUser = { ...authUser[0] };
+  const currentOrderDetail = orderDetail.filter(
+    (item) => item.user_id === valueAuthUser.user_id
+  );
 
   useEffect(() => {
+    dispatch(getAuthUser());
     dispatch(getAllProducts());
     dispatch(getAllOrderDetail());
 
-    if (productItem.length > 0) {
+    if (currentOrderDetail.length > 0) {
       setCartEmpty(false);
     } else {
       setCartEmpty(true);
     }
-  }, []);
+  }, [dispatch, currentOrderDetail.length]);
 
   const handleDeleteProduct = (id) => {
     dispatch(deleteOrderDetail({ id: id }));
@@ -62,7 +70,7 @@ function Cart({ setShowCart }) {
             <p className={cx("note")}>Hiện chưa có sản phẩm</p>
           </div>
         ) : (
-          productItem.map((item, index) => {
+          currentOrderDetail.map((item, index) => {
             let name = "";
             let imgFront = "";
             let prices = "";
@@ -93,26 +101,31 @@ function Cart({ setShowCart }) {
                     />
                   </span>
 
-                  <div
-                    className={cx("color")}
-                    style={{
-                      display: "inline-block",
-                      margin: "10px 0",
-                      fontSize: "1.4rem",
-                    }}
-                  >
-                    Màu:
-                    <span
+                  {item.idColor ? (
+                    <div
+                      className={cx("color")}
                       style={{
-                        background: `${item.idColor}`,
-                        marginLeft: "10px",
-                        width: "20px",
-                        height: "20px",
-                        border: "1px solid #000000",
-                        borderRadius: "50%",
+                        display: "block",
+                        margin: "10px 0",
+                        fontSize: "1.4rem",
                       }}
-                    ></span>
-                  </div>
+                    >
+                      Màu:
+                      <span
+                        style={{
+                          background: `${item.idColor}`,
+                          marginLeft: "10px",
+                          width: "20px",
+                          height: "20px",
+                          border: "1px solid #000000",
+                          borderRadius: "50%",
+                        }}
+                      ></span>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+
                   <div className={cx("size")}>Size {item.size}</div>
                   <div className={cx("footer")}>
                     <p className={cx("num")}>{item.number}</p>
@@ -130,7 +143,22 @@ function Cart({ setShowCart }) {
           </div>
           <div className={cx("button")}>
             <Button onClick={() => navigate("/cart")}>Xem giỏ hàng</Button>
-            <Button>Thanh toán</Button>
+            <Button
+              onClick={() => {
+                authUser.length > 0 && navigate("/cart/payment");
+              }}
+            >
+              Thanh toán
+            </Button>
+          </div>
+          <div className={cx("button")}>
+            <Button
+              onClick={() => {
+                navigate("/orders");
+              }}
+            >
+              Xem đơn hàng của bạn
+            </Button>
           </div>
         </div>
       </div>

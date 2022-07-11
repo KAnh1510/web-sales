@@ -15,7 +15,7 @@ export const OrderSlice = createSlice({
       })
 
       .addCase(createOrder.fulfilled, (state, action) => {
-        state.values.push(action.meta.arg);
+        state.values.push(action.payload);
       })
 
       .addCase(updateOrder.fulfilled, (state, action) => {
@@ -34,7 +34,7 @@ export const createOrder = createAsyncThunk(
       user_id,
       create_at,
     });
-    return res.data;
+    return res;
   }
 );
 

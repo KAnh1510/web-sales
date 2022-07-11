@@ -2,13 +2,14 @@ import PropTypes from "prop-types";
 import styles from "./PageAccountAddress.module.scss";
 import classnames from "classnames/bind";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Logout from "~/components/User/Logout";
 
 const cx = classnames.bind(styles);
 
 function PageAccountAddress({ title, children, userId }) {
   const [confirmLogout, setConfirmLogout] = useState(false);
+
   const handleLogout = () => {
     setConfirmLogout(true);
   };
@@ -59,6 +60,7 @@ function PageAccountAddress({ title, children, userId }) {
 PageAccountAddress.propTypes = {
   title: PropTypes.string,
   children: PropTypes.node.isRequired,
+  userId: PropTypes.number.isRequired,
 };
 
 export default PageAccountAddress;

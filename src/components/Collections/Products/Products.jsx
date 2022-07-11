@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "./ProductSlice";
 import { getAllCollections } from "../CollectionSlice";
 import { getAuthUser } from "~/components/User/AuthSlice";
-import { createOrder, getOrders } from "~/pages/Cart/OrderSlice";
+import { createOrder } from "~/pages/Cart/OrderSlice";
 import { createOrderDetail } from "~/pages/Cart/OrderDetailSlice";
 
 const cx = classnames.bind(styles);
@@ -44,7 +44,7 @@ export default function Products() {
     dispatch(getAllProducts(productName));
     dispatch(getAllCollections());
     dispatch(getAuthUser());
-  }, []);
+  }, [dispatch, productName]);
 
   const handleAddCard = (e) => {
     e.preventDefault();

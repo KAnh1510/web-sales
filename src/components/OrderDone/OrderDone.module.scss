@@ -1,0 +1,143 @@
+.header {
+  text-align: center;
+  margin: 30px 0;
+  text-transform: uppercase;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 1em;
+}
+
+td:last-child,
+th:last-child {
+  text-align: right;
+}
+
+.total-line td {
+  padding-top: 0.75em;
+}
+
+.sidebar-content {
+  width: 100%;
+  color: #717171;
+  padding-right: 10rem;
+}
+
+.prd-info {
+  padding-bottom: 1.4rem;
+  margin: 1.4rem 0;
+  border-bottom: 1px dotted #e1e1e1;
+}
+
+.prd-img-wrapper {
+  position: relative;
+}
+
+.prd-img {
+  height: 4.6em;
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border-radius: 8px;
+    box-shadow: 0 0 0 1px rgb(0 0 0 / 10%) inset;
+  }
+  img {
+    border-radius: 8px;
+    width: 100%;
+  }
+}
+
+.prd-quantity {
+  font-size: 1.2rem;
+  font-weight: 500;
+  white-space: nowrap;
+  padding: 2px 8px;
+  border-radius: 2em;
+  background-color: rgba(153, 153, 153, 0.9);
+  color: #fff;
+  position: absolute;
+  top: -8px;
+  right: 4px;
+  z-index: 2;
+}
+
+.prd-desc {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+
+  .prd-size {
+    color: #969696;
+    font-size: 1.2rem;
+  }
+}
+
+.prd-total {
+  padding: 1.4rem 0;
+}
+
+.prd-price {
+  display: flex !important;
+  align-items: center;
+  color: #4b4b4b;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 1em;
+}
+
+td:last-child,
+th:last-child {
+  text-align: right;
+}
+
+.total-line td {
+  padding-top: 0.75em;
+}
+
+.order-summary-emphasis {
+  font-weight: 500;
+  color: #4b4b4b;
+}
+
+.total-line-table-footer {
+  white-space: nowrap;
+  .total-line td {
+    padding-top: 3em;
+    position: relative;
+  }
+}
+
+.payment-due-label-total {
+  font-size: 1.6rem;
+  color: #4b4b4b;
+}
+
+.payment-due-currency {
+  font-size: 1.4rem;
+  vertical-align: 0.2em;
+  margin-right: 0.5em;
+  color: #969696;
+}
+
+.payment-due-price {
+  font-size: 1.71429em;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  color: #4b4b4b;
+  line-height: 1em;
+}

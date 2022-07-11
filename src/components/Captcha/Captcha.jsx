@@ -1,9 +1,9 @@
-import styles from "./Capcha.module.scss";
+import styles from "./Captcha.module.scss";
 import classnames from "classnames/bind";
 
 const cx = classnames.bind(styles);
 
-function Capcha() {
+function Captcha() {
   return (
     <div className={cx("capcha")}>
       This site is protected by reCAPTCHA and the Google&nbsp;
@@ -27,4 +27,4 @@ function Capcha() {
   );
 }
 
-export default Capcha;
+export default Captcha;

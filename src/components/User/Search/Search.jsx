@@ -42,7 +42,7 @@ function Search({ setShowSearch }) {
     setSearchResults(results);
 
     dispatch(getAllProducts());
-  }, [debouncedValue]);
+  }, [debouncedValue, dispatch, productList]);
 
   const handleSearchTextChange = (e) => {
     const searchText = e.target.value;

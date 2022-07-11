@@ -12,29 +12,42 @@ import { deleteOrderDetail, getAllOrderDetail } from "./OrderDetailSlice";
 import { getAllProducts } from "~/components/Collections/Products/ProductSlice";
 import VndFormat from "~/components/VndFormat/VndFormat";
 import { getOrders, updateOrder } from "./OrderSlice";
+import { getAuthUser } from "~/components/User/AuthSlice";
 
 const cx = classnames.bind(styles);
 
 function Cart() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const productItem = useSelector((state) => state.order_detail.values);
+  const authUser = useSelector((state) => state.auth.values);
+  const orderDetail = useSelector((state) => state.order_detail.values);
   const productList = useSelector((state) => state.products.values);
   const currentOrder = useSelector((state) => state.orders.values);
 
-  const valueOrder = { ...currentOrder[0] };
+  const valueAuthUser = { ...authUser[0] };
+
+  const temp = currentOrder.filter(
+    (item) => item.user_id === valueAuthUser.user_id
+  );
+  const valueOrder = temp.slice(0, 1);
+
   const [note, setNote] = useState(valueOrder.note);
 
+  const currentOrderDetail = orderDetail.filter(
+    (item) => item.user_id === valueAuthUser.user_id
+  );
+
   useEffect(() => {
+    dispatch(getAuthUser());
     dispatch(getAllOrderDetail());
     dispatch(getAllProducts());
     dispatch(getOrders());
-  }, []);
+  }, [dispatch]);
 
   const handleToPayment = () => {
     dispatch(
       updateOrder({
-        id: valueOrder.id,
+        id: valueOrder[0].id,
         data: { note: note },
       })
     );
@@ -54,15 +67,12 @@ function Cart() {
         <div className={cx("row")}>
           <div className={cx("col l-12", "header")}>
             <h1>Giỏ hàng của bạn</h1>
-            <p className={cx("count-cart")}>
-              Có <span>1 sản phẩm</span> trong giỏ hàng
-            </p>
           </div>
         </div>
 
         <div className={cx("row")}>
           <div className={cx("col l-8")}>
-            {productItem.map((item, index) => {
+            {currentOrderDetail.map((item, index) => {
               let name = "";
               let imgFront = "";
               let prices = "";
@@ -94,25 +104,30 @@ function Cart() {
                         />
                       </div>
                       <p className={cx("prices")}>{VndFormat(prices)}</p>
-                      <div
-                        className={cx("color")}
-                        style={{
-                          display: "inline-block",
-                          margin: "10px 0",
-                          fontSize: "1.4rem",
-                        }}
-                      >
-                        Màu:
-                        <span
+                      {item.color ? (
+                        <div
+                          className={cx("color")}
                           style={{
-                            background: `${item.color}`,
-                            marginLeft: "10px",
-                            padding: "0px 8px",
-                            border: "1px solid #000000",
-                            borderRadius: "50%",
+                            display: "inline-block",
+                            margin: "10px 0",
+                            fontSize: "1.4rem",
                           }}
-                        ></span>
-                      </div>
+                        >
+                          Màu:
+                          <span
+                            style={{
+                              background: `${item.color}`,
+                              marginLeft: "10px",
+                              padding: "0px 8px",
+                              border: "1px solid #000000",
+                              borderRadius: "50%",
+                            }}
+                          ></span>
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+
                       <p className={cx("size")}>Size L</p>
                       <p>
                         Số lượng:{" "}

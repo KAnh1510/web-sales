@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 import styles from "./Collection.module.scss";
 import classnames from "classnames/bind";
@@ -19,7 +19,7 @@ export default function Collections() {
   useEffect(() => {
     dispatch(getAllCollections());
     dispatch(getAllProducts());
-  }, []);
+  }, [dispatch]);
 
   const collectionItem = [];
 

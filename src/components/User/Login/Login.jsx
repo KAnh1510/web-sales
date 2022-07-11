@@ -3,13 +3,13 @@ import React, { useEffect, useState } from "react";
 import styles from "./Login.module.scss";
 import classnames from "classnames/bind";
 import Button from "../../Button";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import Capcha from "../../Capcha";
+import { Link, useNavigate } from "react-router-dom";
+import Captcha from "../../Captcha";
 import PageLoginRegister from "~/layout/components/PageLoginRegister";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../UserSlice";
 import { Form } from "react-bootstrap";
-import { getAuthUser, loginUser } from "../AuthSlice";
+import { loginUser } from "../AuthSlice";
 
 const cx = classnames.bind(styles);
 
@@ -34,7 +34,7 @@ function Login() {
 
   useEffect(() => {
     dispatch(getAllUsers());
-  }, []);
+  }, [dispatch]);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -68,7 +68,7 @@ function Login() {
                 id="recover-email"
               />
             </div>
-            <Capcha />
+            <Captcha />
             <div className={cx("action-account")}>
               <div className={cx("btn-submit")}>
                 <Button>
@@ -121,7 +121,7 @@ function Login() {
               <></>
             )}
 
-            <Capcha />
+            <Captcha />
 
             <div className={cx("action-account")}>
               <div className={cx("btn-submit")}>

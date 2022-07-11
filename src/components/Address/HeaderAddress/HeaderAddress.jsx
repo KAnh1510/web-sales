@@ -14,10 +14,6 @@ function HeaderAddress(props) {
     setEdit(!edit);
   };
 
-  const handelDelete = () => {
-    alert("Bạn có chắc chắn muốn xóa địa chỉ này?");
-  };
-
   return (
     <div>
       <div className={cx("row")}>

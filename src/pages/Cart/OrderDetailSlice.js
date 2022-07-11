@@ -15,7 +15,7 @@ export const OrderDetailSlice = createSlice({
       })
 
       .addCase(createOrderDetail.fulfilled, (state, action) => {
-        state.values.push(action.meta.arg);
+        state.values.push(action.payload);
       })
 
       .addCase(updateOrderDetail.fulfilled, (state, action) => {
@@ -47,7 +47,7 @@ export const createOrderDetail = createAsyncThunk(
       color,
       size,
     });
-    return res.data;
+    return res;
   }
 );
 

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Images from "~/components/Images";
 import styles from "./ShowListProduct.module.scss";
 import classnames from "classnames/bind";
+import VndFormat from "~/components/VndFormat/VndFormat";
 
 const cx = classnames.bind(styles);
 function ShowListProduct({ item }) {
@@ -24,7 +25,7 @@ function ShowListProduct({ item }) {
       </div>
       <div className={cx("prd_desc")}>
         <Link to={`/products/${item.name}`}>{item.name}</Link>
-        <p className={cx("prd_price")}>{item.prices}</p>
+        <p className={cx("prd_price")}>{VndFormat(item.prices)}</p>
       </div>
     </>
   );
