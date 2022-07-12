@@ -1,4 +1,4 @@
-import React, { startTransition, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import HeadlessTippy from "@tippyjs/react/headless";
 import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
@@ -10,10 +10,7 @@ import styles from "./Search.module.scss";
 import ProductItem from "~/components/Collections/ProductItem";
 import { Wrapper } from "~/components/Popper";
 import { SearchIcon } from "~/components/Icons";
-import {
-  getAllProducts,
-  searchProductsByName,
-} from "~/components/Collections/Products/ProductSlice";
+import { getAllProducts } from "~/components/Collections/Products/ProductSlice";
 import { useDebounce } from "~/components/hooks";
 
 const cx = classnames.bind(styles);

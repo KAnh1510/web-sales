@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import classnames from "classnames/bind";
 import styles from "./ProductItem.module.scss";
 import Image from "~/components/Images";
+import VndFormat from "~/components/VndFormat/VndFormat";
 const cx = classnames.bind(styles);
 
 function ProductItem({ data }) {
@@ -10,7 +11,7 @@ function ProductItem({ data }) {
     <Link to={`/`} className={cx("wrapper")}>
       <div className={cx("info")}>
         <p className={cx("name")}>{data.name}</p>
-        <span className={cx("prices")}>{data.prices}</span>
+        <span className={cx("prices")}>{VndFormat(data.prices)}</span>
       </div>
       <Image className={cx("image")} src={data.imgFront} alt={data.name} />
     </Link>
