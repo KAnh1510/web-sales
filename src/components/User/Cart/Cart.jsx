@@ -15,7 +15,7 @@ import {
 } from "~/pages/Cart/OrderDetailSlice";
 import { getAllProducts } from "~/components/Collections/Products/ProductSlice";
 import VndFormat from "~/components/VndFormat/VndFormat";
-import { getAuthUser } from "../AuthSlice";
+import StorageKeys from "~/constant/storage-keys";
 
 const cx = classnames.bind(styles);
 
@@ -23,17 +23,15 @@ function Cart({ setShowCart }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [cartEmpty, setCartEmpty] = useState(false);
-  const authUser = useSelector((state) => state.auth.values);
+  const authUser = JSON.parse(localStorage.getItem(StorageKeys.user));
   const productList = useSelector((state) => state.products.values);
   const orderDetail = useSelector((state) => state.order_detail.values);
 
-  const valueAuthUser = { ...authUser[0] };
   const currentOrderDetail = orderDetail.filter(
-    (item) => item.user_id === valueAuthUser.user_id
+    (item) => item.user_id === authUser.user_id
   );
 
   useEffect(() => {
-    dispatch(getAuthUser());
     dispatch(getAllProducts());
     dispatch(getAllOrderDetail());
 

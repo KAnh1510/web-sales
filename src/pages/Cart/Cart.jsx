@@ -12,33 +12,28 @@ import { deleteOrderDetail, getAllOrderDetail } from "./OrderDetailSlice";
 import { getAllProducts } from "~/components/Collections/Products/ProductSlice";
 import VndFormat from "~/components/VndFormat/VndFormat";
 import { getOrders, updateOrder } from "./OrderSlice";
-import { getAuthUser } from "~/components/User/AuthSlice";
+import StorageKeys from "~/constant/storage-keys";
 
 const cx = classnames.bind(styles);
 
 function Cart() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const authUser = useSelector((state) => state.auth.values);
+  const authUser = JSON.parse(localStorage.getItem(StorageKeys.user));
   const orderDetail = useSelector((state) => state.order_detail.values);
   const productList = useSelector((state) => state.products.values);
   const currentOrder = useSelector((state) => state.orders.values);
 
-  const valueAuthUser = { ...authUser[0] };
-
-  const temp = currentOrder.filter(
-    (item) => item.user_id === valueAuthUser.user_id
-  );
+  const temp = currentOrder.filter((item) => item.user_id === authUser.user_id);
   const valueOrder = temp.slice(0, 1);
 
   const [note, setNote] = useState(valueOrder.note);
 
   const currentOrderDetail = orderDetail.filter(
-    (item) => item.user_id === valueAuthUser.user_id
+    (item) => item.user_id === authUser.user_id
   );
 
   useEffect(() => {
-    dispatch(getAuthUser());
     dispatch(getAllOrderDetail());
     dispatch(getAllProducts());
     dispatch(getOrders());

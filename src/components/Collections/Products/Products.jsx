@@ -11,9 +11,9 @@ import Button from "~/components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "./ProductSlice";
 import { getAllCollections } from "../CollectionSlice";
-import { getAuthUser } from "~/components/User/AuthSlice";
 import { createOrder } from "~/pages/Cart/OrderSlice";
 import { createOrderDetail } from "~/pages/Cart/OrderDetailSlice";
+import StorageKeys from "~/constant/storage-keys";
 
 const cx = classnames.bind(styles);
 
@@ -31,34 +31,32 @@ export default function Products() {
 
   const productList = useSelector((state) => state.products.values);
   const collectionList = useSelector((state) => state.collections.values);
-  const currentUser = useSelector((state) => state.auth.values);
+  const currentUser = JSON.parse(localStorage.getItem(StorageKeys.user));
 
   const currentProduct = productList.filter(
     (item) => item.name === productName
   );
   let type = "";
-  const valueUser = { ...currentUser[0] };
   const valueProduct = { ...currentProduct[0] };
 
   useEffect(() => {
     dispatch(getAllProducts(productName));
     dispatch(getAllCollections());
-    dispatch(getAuthUser());
   }, [dispatch, productName]);
 
   const handleAddCard = (e) => {
     e.preventDefault();
-    if (currentUser.length > 0) {
+    if (currentUser) {
       dispatch(
         createOrder({
-          user_id: valueUser.user_id,
+          user_id: currentUser.user_id,
           note: "",
           create_at: date,
         })
       );
       dispatch(
         createOrderDetail({
-          user_id: valueUser.user_id,
+          user_id: currentUser.user_id,
           product_id: valueProduct.id,
           number: counter,
           color: color,

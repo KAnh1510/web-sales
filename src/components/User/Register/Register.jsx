@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
-import "react-datepicker/dist/react-datepicker.css";
 import styles from "./Register.module.scss";
 import classnames from "classnames/bind";
 import Button from "../../Button";
@@ -125,7 +124,7 @@ function Register() {
                   fontSize: "1.4rem",
                 }}
               >
-                Gender:{" "}
+                Giới tính:{" "}
               </Form.Label>
               <Form.Control
                 style={{

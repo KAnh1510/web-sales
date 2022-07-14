@@ -13,13 +13,14 @@ import VndFormat from "~/components/VndFormat/VndFormat";
 import { getAllProducts } from "~/components/Collections/Products/ProductSlice";
 import { getAuthUser } from "~/components/User/AuthSlice";
 import OrderDone from "~/components/OrderDone";
+import StorageKeys from "~/constant/storage-keys";
 
 const cx = classnames.bind(styles);
 
 function Payment() {
   const dispatch = useDispatch();
   let date = new Date().toLocaleDateString();
-  const authUser = useSelector((state) => state.auth.values);
+  const authUser = JSON.parse(localStorage.getItem(StorageKeys.user));
   const userList = useSelector((state) => state.users.values);
   const orderDetail = useSelector((state) => state.order_detail.values);
   const productList = useSelector((state) => state.products.values);
@@ -58,7 +59,6 @@ function Payment() {
   const valueOrder = temp.slice(0, 1);
 
   useEffect(() => {
-    dispatch(getAuthUser());
     dispatch(getAllUsers());
     dispatch(getAllOrderDetail());
     dispatch(getAllProducts());
