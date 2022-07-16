@@ -1,20 +1,44 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./OrderDone.module.scss";
 import classnames from "classnames/bind";
 import Images from "../Images";
 import VndFormat from "../VndFormat/VndFormat";
 import { Link } from "react-router-dom";
+import StorageKeys from "~/constant/storage-keys";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllUsers } from "../User/UserSlice";
+import { getOrders } from "~/components/OrderDone/OrderSlice";
+import { getOrderDetail } from "~/components/OrderDone/OrderDetailSlice";
+import { getAllProducts } from "../Collections/Products/ProductSlice";
 
 const cx = classnames.bind(styles);
 
-const OrderDone = ({
-  valueCurrentUser,
-  currentOrderDetail,
-  productList,
-  totalMoney,
-  valueOrder,
-}) => {
+const OrderDone = () => {
+  const dispatch = useDispatch();
+  const currentOrder = JSON.parse(localStorage.getItem(StorageKeys.orders));
+  const currentOrderDetail = JSON.parse(
+    localStorage.getItem(StorageKeys.orderDetail)
+  );
+  const valueOrder = useSelector((state) => state.orders.values);
+  const valueOrderDetail = useSelector((state) => state.order_detail.values);
+  const userList = useSelector((state) => state.users.values);
+  const productList = useSelector((state) => state.products.values);
+
+  const currentUser = userList.filter(
+    (item) => item.id === currentOrder.user_id
+  );
+  const { name, email, address, phoneNumber } = { ...currentUser[0] };
+
+  useEffect(() => {
+    dispatch(getOrders(currentOrder.id));
+    dispatch(getOrderDetail(currentOrderDetail.id));
+    dispatch(getAllUsers());
+    dispatch(getAllProducts());
+  }, [dispatch]);
+
+  let totalMoney = 0;
+
   return (
     <div style={{ margin: "20px 0" }}>
       <h1 className={cx("header")}>Đơn hàng của bạn</h1>
@@ -36,19 +60,25 @@ const OrderDone = ({
                   <tr className={cx("total-line")}>
                     <td>Người nhận:</td>
                     <td>
-                      <span>{valueCurrentUser.name}</span>
+                      <span>{name}</span>
                     </td>
                   </tr>
                   <tr className={cx("total-line")}>
                     <td>Email:</td>
                     <td>
-                      <span>{valueCurrentUser.email}</span>
+                      <span>{email}</span>
                     </td>
                   </tr>
                   <tr className={cx("total-line")}>
                     <td>Số điện thoại:</td>
                     <td>
-                      <span>{valueCurrentUser.phoneNumber}</span>
+                      <span>{phoneNumber}</span>
+                    </td>
+                  </tr>
+                  <tr className={cx("total-line")}>
+                    <td>Địa chỉ:</td>
+                    <td>
+                      <span>{address}</span>
                     </td>
                   </tr>
                 </tbody>
@@ -56,49 +86,52 @@ const OrderDone = ({
               <p>Ghi chú:</p>
               <textarea
                 type="text"
-                value={valueCurrentUser.note}
+                readOnly
+                defaultValue={valueOrder.note}
                 id="note"
-                rows="3"
-                style={{ outline: "none" }}
+                rows="4"
+                style={{ outline: "none", padding: "10px" }}
               ></textarea>
-              <p>Thời gian đặt:{valueCurrentUser.create_at} </p>
+              <p>Thời gian đặt: &nbsp;{valueOrder.create_at} </p>
             </div>
             <div className={cx("col l-6")}>
               <div className={cx("sidebar-content")}>
-                {currentOrderDetail.map((item) => {
-                  let name = "";
-                  let imgFront = "";
-                  let prices = "";
+                {valueOrderDetail
+                  ? valueOrderDetail.map((item, index) => {
+                      let name = "";
+                      let imgFront = "";
+                      let prices = "";
 
-                  productList.forEach((product) => {
-                    const check = product.id === item.product_id;
-                    if (check) {
-                      imgFront = product.imgFront;
-                      name = product.name;
-                      prices = product.prices;
-                    }
-                  });
-                  totalMoney += prices * item.number;
-                  return (
-                    <div className={cx("row", "prd-info")} key={item.id}>
-                      <div className={cx("col l-2", "prd-img-wrapper")}>
-                        <div className={cx("prd-img")}>
-                          <Images src={imgFront} />
+                      productList.forEach((product) => {
+                        const check = product.id === item.product_id;
+                        if (check) {
+                          imgFront = product.imgFront;
+                          name = product.name;
+                          prices = product.prices;
+                        }
+                      });
+                      totalMoney += prices * item.number;
+                      return (
+                        <div className={cx("row", "prd-info")} key={index}>
+                          <div className={cx("col l-2", "prd-img-wrapper")}>
+                            <div className={cx("prd-img")}>
+                              <Images src={imgFront} />
+                            </div>
+                            <span className={cx("prd-quantity")}>
+                              {item.number}
+                            </span>
+                          </div>
+                          <div className={cx("col l-7", "prd-desc")}>
+                            <span className={cx("prd-name")}>{name}</span>
+                            <span className={cx("prd-size")}>{item.size}</span>
+                          </div>
+                          <div className={cx("col l-3", "prd-price")}>
+                            <span>{VndFormat(prices * item.number)}</span>
+                          </div>
                         </div>
-                        <span className={cx("prd-quantity")}>
-                          {item.number}
-                        </span>
-                      </div>
-                      <div className={cx("col l-7", "prd-desc")}>
-                        <span className={cx("prd-name")}>{name}</span>
-                        <span className={cx("prd-size")}>{item.size}</span>
-                      </div>
-                      <div className={cx("col l-3", "prd-price")}>
-                        <span>{VndFormat(prices * item.number)}</span>
-                      </div>
-                    </div>
-                  );
-                })}
+                      );
+                    })
+                  : ""}
 
                 <div className={cx("prd-total")}>
                   <table className={cx("total-line-table")}>
@@ -117,7 +150,7 @@ const OrderDone = ({
                             className={cx("payment-due-price")}
                             data-checkout-payment-due-target="32000000"
                           >
-                            {VndFormat(totalMoney)}
+                            {totalMoney ? VndFormat(totalMoney) : ""}
                           </span>
                         </td>
                       </tr>
@@ -148,7 +181,7 @@ const OrderDone = ({
 
 OrderDone.propTypes = {
   valueCurrentUser: PropTypes.object,
-  currentOrderDetail: PropTypes.array,
+  currentOrderDetail: PropTypes.object,
   productList: PropTypes.array,
   totalMoney: PropTypes.number,
   valueOrder: PropTypes.object,

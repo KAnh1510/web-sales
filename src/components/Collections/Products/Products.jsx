@@ -11,8 +11,6 @@ import Button from "~/components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "./ProductSlice";
 import { getAllCollections } from "../CollectionSlice";
-import { createOrder } from "~/pages/Cart/OrderSlice";
-import { createOrderDetail } from "~/pages/Cart/OrderDetailSlice";
 import StorageKeys from "~/constant/storage-keys";
 
 const cx = classnames.bind(styles);
@@ -21,7 +19,7 @@ export default function Products() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { productName } = useParams();
-  let date = new Date().toLocaleDateString();
+  let date = new Date().toLocaleString();
 
   const [size, setSize] = useState();
   const [color, setColor] = useState();
@@ -32,6 +30,9 @@ export default function Products() {
   const productList = useSelector((state) => state.products.values);
   const collectionList = useSelector((state) => state.collections.values);
   const currentUser = JSON.parse(localStorage.getItem(StorageKeys.user));
+  const currentOrderDetail = JSON.parse(
+    localStorage.getItem(StorageKeys.orderDetail)
+  );
 
   const currentProduct = productList.filter(
     (item) => item.name === productName
@@ -40,29 +41,53 @@ export default function Products() {
   const valueProduct = { ...currentProduct[0] };
 
   useEffect(() => {
-    dispatch(getAllProducts(productName));
+    dispatch(getAllProducts());
     dispatch(getAllCollections());
-  }, [dispatch, productName]);
+  }, [dispatch]);
 
   const handleAddCard = (e) => {
     e.preventDefault();
     if (currentUser) {
-      dispatch(
-        createOrder({
+      localStorage.setItem(
+        StorageKeys.orders,
+        JSON.stringify({
+          id: Math.floor(Math.random(100) * 100) + 1,
           user_id: currentUser.user_id,
-          note: "",
           create_at: date,
         })
       );
-      dispatch(
-        createOrderDetail({
-          user_id: currentUser.user_id,
+      if (!currentOrderDetail) {
+        localStorage.setItem(
+          StorageKeys.orderDetail,
+          JSON.stringify({
+            id: Math.floor(Math.random(100) * 100) + 1,
+            temp_product: [
+              {
+                product_id: valueProduct.id,
+                number: counter,
+                color: color,
+                size: size,
+              },
+            ],
+          })
+        );
+      } else {
+        currentOrderDetail.temp_product.push({
           product_id: valueProduct.id,
           number: counter,
           color: color,
           size: size,
-        })
-      );
+        });
+
+        localStorage.setItem(
+          StorageKeys.orderDetail,
+          JSON.stringify({
+            id: Math.floor(Math.random(100) * 100) + 1,
+            temp_product: currentOrderDetail.temp_product,
+          })
+        );
+      }
+
       setMessSuccess(true);
     } else {
       setMessErr(true);
@@ -142,6 +167,7 @@ export default function Products() {
                           <div className={cx("color_element")} key={index}>
                             <input
                               type="radio"
+                              required
                               id={`swatch-${item.idColor}`}
                               name={`option${item.idColor}`}
                               value={item.idColor}
@@ -163,6 +189,7 @@ export default function Products() {
                           <div className={cx("size_element")} key={index}>
                             <input
                               type="radio"
+                              required
                               id={`swatch-${item.name}`}
                               name={`option${item.name}`}
                               value={item.name}
@@ -227,7 +254,41 @@ export default function Products() {
 
                   <div className={cx("desc")}>
                     <h2>Mô Tả</h2>
-                    <p>Lorem Ipsum</p>
+                    -Chất liệu: thun cotton
+                    <br />- Size:&nbsp;
+                    {product.size.map((item, index) => (
+                      <span key={index}> {item.name}</span>
+                    ))}
+                    <br />- Màu sắc:{" "}
+                    {product.color.map((item, index) => (
+                      <span key={index}> {item.name_color}</span>
+                    ))}
+                    <br />
+                    -Thiết kế độc đáo
+                    <br />
+                    - Dễ kết hợp với các trang phục và phụ kiện khác nhau.
+                    <br />
+                    _________________
+                    <br />
+                    Thông tin về Colkidsclub:
+                    <br />
+                    -Các sản phẩm do CND thiết kế và sản xuất
+                    <br />- Sử dụng nguyên liệu vải, phụ kiện tốt sử dụng lâu
+                    bền.
+                    <br />
+                    -Tất cả các sản phẩm bên CND đều đảm bảo như hình
+                    <br />- Chất lượng sản phẩm tốt 100%
+                    <br />- Giao hàng toàn quốc, nhận hàng rồi mới thanh toán
+                    <br />
+                    _________________
+                    <br />
+                    Lưu ý:các bạn vui lòng quay clip unboxing. Shop chỉ nhận đổi
+                    trả sản phẩm khi bị lỗi hoặc giao nhầm sản phẩm (phải có
+                    clip unboxing nhé) . Các bạn có thể đổi size trong vòng 3
+                    ngày kể từ ngày nhận hàng
+                    <br />
+                    Chúc bạn có được những trải nghiệm thú vị và lựa chọn cho
+                    mình được những sản phẩm ưng ý khi đến với CND.
                   </div>
                 </div>
               </div>

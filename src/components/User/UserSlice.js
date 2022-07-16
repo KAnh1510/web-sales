@@ -79,7 +79,7 @@ export const getAllUsers = createAsyncThunk("users/getAll", async () => {
 
 export const getUser = createAsyncThunk("users/get", async (id) => {
   const res = await usersApi.get(id);
-  return [res];
+  return res;
 });
 
 export const updateUser = createAsyncThunk(

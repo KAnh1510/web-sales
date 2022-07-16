@@ -8,10 +8,8 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "~/components/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteOrderDetail, getAllOrderDetail } from "./OrderDetailSlice";
 import { getAllProducts } from "~/components/Collections/Products/ProductSlice";
 import VndFormat from "~/components/VndFormat/VndFormat";
-import { getOrders, updateOrder } from "./OrderSlice";
 import StorageKeys from "~/constant/storage-keys";
 
 const cx = classnames.bind(styles);
@@ -19,38 +17,40 @@ const cx = classnames.bind(styles);
 function Cart() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const authUser = JSON.parse(localStorage.getItem(StorageKeys.user));
-  const orderDetail = useSelector((state) => state.order_detail.values);
-  const productList = useSelector((state) => state.products.values);
-  const currentOrder = useSelector((state) => state.orders.values);
-
-  const temp = currentOrder.filter((item) => item.user_id === authUser.user_id);
-  const valueOrder = temp.slice(0, 1);
-
-  const [note, setNote] = useState(valueOrder.note);
-
-  const currentOrderDetail = orderDetail.filter(
-    (item) => item.user_id === authUser.user_id
+  const currentOrderDetail = JSON.parse(
+    localStorage.getItem(StorageKeys.orderDetail)
   );
+  const currentUser = JSON.parse(localStorage.getItem(StorageKeys.user));
+  const productList = useSelector((state) => state.products.values);
+  const [note, setNote] = useState("");
 
   useEffect(() => {
-    dispatch(getAllOrderDetail());
     dispatch(getAllProducts());
-    dispatch(getOrders());
   }, [dispatch]);
 
   const handleToPayment = () => {
-    dispatch(
-      updateOrder({
-        id: valueOrder[0].id,
-        data: { note: note },
+    localStorage.setItem(
+      StorageKeys.noteOrder,
+      JSON.stringify({
+        note: note,
       })
     );
     navigate("/cart/payment");
   };
 
   const handleDeleteProduct = (id) => {
-    dispatch(deleteOrderDetail({ id: id }));
+    currentOrderDetail.temp_product = currentOrderDetail.temp_product.filter(
+      (item) => item.product_id !== id
+    );
+
+    localStorage.setItem(
+      StorageKeys.orderDetail,
+      JSON.stringify({
+        id: Math.floor(Math.random(100) * 100) + 1,
+        user_id: currentUser.user_id,
+        temp_product: currentOrderDetail.temp_product,
+      })
+    );
   };
 
   let total = 0;
@@ -67,75 +67,79 @@ function Cart() {
 
         <div className={cx("row")}>
           <div className={cx("col l-8")}>
-            {currentOrderDetail.map((item, index) => {
-              let name = "";
-              let imgFront = "";
-              let prices = "";
+            {currentOrderDetail
+              ? currentOrderDetail.temp_product.map((item, index) => {
+                  let name = "";
+                  let imgFront = "";
+                  let prices = "";
 
-              productList.forEach((product) => {
-                const check = product.id === item.product_id;
-                if (check) {
-                  imgFront = product.imgFront;
-                  name = product.name;
-                  prices = product.prices;
-                }
-              });
-              total += prices * item.number;
+                  productList.forEach((product) => {
+                    const check = product.id === item.product_id;
+                    if (check) {
+                      imgFront = product.imgFront;
+                      name = product.name;
+                      prices = product.prices;
+                    }
+                  });
+                  total += prices * item.number;
 
-              return (
-                <div className={cx("row", "info-prd")} key={index}>
-                  <div className={cx("col l-2")}>
-                    <Link to="product/name" className={cx("img-prd")}>
-                      <Images src={imgFront} />
-                    </Link>
-                  </div>
-                  <div className={cx("col l-10")}>
-                    <div className={cx("info-text")}>
-                      <div className={cx("name-prd")}>
-                        <h3>{name}</h3>
-                        <FontAwesomeIcon
-                          icon={faTimes}
-                          onClick={() => handleDeleteProduct(item.id)}
-                        />
+                  return (
+                    <div className={cx("row", "info-prd")} key={index}>
+                      <div className={cx("col l-2")}>
+                        <Link to="product/name" className={cx("img-prd")}>
+                          <Images src={imgFront} />
+                        </Link>
                       </div>
-                      <p className={cx("prices")}>{VndFormat(prices)}</p>
-                      {item.color ? (
-                        <div
-                          className={cx("color")}
-                          style={{
-                            display: "inline-block",
-                            margin: "10px 0",
-                            fontSize: "1.4rem",
-                          }}
-                        >
-                          Màu:
-                          <span
-                            style={{
-                              background: `${item.color}`,
-                              marginLeft: "10px",
-                              padding: "0px 8px",
-                              border: "1px solid #000000",
-                              borderRadius: "50%",
-                            }}
-                          ></span>
-                        </div>
-                      ) : (
-                        <></>
-                      )}
+                      <div className={cx("col l-10")}>
+                        <div className={cx("info-text")}>
+                          <div className={cx("name-prd")}>
+                            <h3>{name}</h3>
+                            <FontAwesomeIcon
+                              icon={faTimes}
+                              onClick={() => {
+                                handleDeleteProduct(item.product_id);
+                              }}
+                            />
+                          </div>
+                          <p className={cx("prices")}>{VndFormat(prices)}</p>
+                          {item.color ? (
+                            <div
+                              className={cx("color")}
+                              style={{
+                                display: "inline-block",
+                                margin: "10px 0",
+                                fontSize: "1.4rem",
+                              }}
+                            >
+                              Màu:
+                              <span
+                                style={{
+                                  background: `${item.color}`,
+                                  marginLeft: "10px",
+                                  padding: "0px 8px",
+                                  border: "1px solid #000000",
+                                  borderRadius: "50%",
+                                }}
+                              ></span>
+                            </div>
+                          ) : (
+                            <></>
+                          )}
 
-                      <p className={cx("size")}>Size L</p>
-                      <p>
-                        Số lượng:{" "}
-                        <span style={{ color: "red", fontWeight: "600" }}>
-                          {item.number}{" "}
-                        </span>
-                        sản phẩm
-                      </p>
+                          <p className={cx("size")}>Size L</p>
+                          <p>
+                            Số lượng:{" "}
+                            <span style={{ color: "red", fontWeight: "600" }}>
+                              {item.number}{" "}
+                            </span>
+                            sản phẩm
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              );
-            })}
+                  );
+                })
+              : ""}
 
             <div className={cx("row")}>
               <div className={cx("col l-5")}>

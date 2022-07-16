@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import authApi from "~/api/authApi";
+import StorageKeys from "~/constant/storage-keys";
 export const AuthSlice = createSlice({
   name: "auth",
   initialState: {
@@ -8,9 +9,12 @@ export const AuthSlice = createSlice({
   },
 
   reducers: {
-    logout(state) {
+    logout() {
       //clear local storage
-      localStorage.removeItem("currentUser");
+      localStorage.removeItem(StorageKeys.user);
+      localStorage.removeItem(StorageKeys.orderDetail);
+      localStorage.removeItem(StorageKeys.orders);
+      localStorage.removeItem(StorageKeys.noteOrder);
     },
   },
   extraReducers: (builder) => {

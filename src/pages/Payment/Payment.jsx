@@ -5,73 +5,80 @@ import Images from "~/components/Images";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getOrders, updateOrder } from "../Cart/OrderSlice";
-import { getAllUsers } from "~/components/User/UserSlice";
-import { getAllOrderDetail } from "../Cart/OrderDetailSlice";
+import { createOrder } from "../../components/OrderDone/OrderSlice";
+import { createOrderDetail } from "../../components/OrderDone/OrderDetailSlice";
 import Logout from "~/components/User/Logout";
 import VndFormat from "~/components/VndFormat/VndFormat";
 import { getAllProducts } from "~/components/Collections/Products/ProductSlice";
-import { getAuthUser } from "~/components/User/AuthSlice";
 import OrderDone from "~/components/OrderDone";
 import StorageKeys from "~/constant/storage-keys";
+import { getUser } from "~/components/User/UserSlice";
 
 const cx = classnames.bind(styles);
 
 function Payment() {
   const dispatch = useDispatch();
-  let date = new Date().toLocaleDateString();
-  const authUser = JSON.parse(localStorage.getItem(StorageKeys.user));
-  const userList = useSelector((state) => state.users.values);
-  const orderDetail = useSelector((state) => state.order_detail.values);
+  let date = new Date().toLocaleString();
+
   const productList = useSelector((state) => state.products.values);
-  const currentOrder = useSelector((state) => state.orders.values);
+  const currentUser = useSelector((state) => state.users.values);
+
+  const currentOrderDetail = JSON.parse(
+    localStorage.getItem(StorageKeys.orderDetail)
+  );
+  const currentOrder = JSON.parse(localStorage.getItem(StorageKeys.orders));
+  const tempNote = JSON.parse(localStorage.getItem(StorageKeys.noteOrder));
 
   const [confirmLogout, setConfirmLogout] = useState(false);
   const [confirmOrder, setConfirmOrder] = useState(false);
   const [orderDone, setOrderDone] = useState(false);
   let totalMoney = 0;
+  console.log(currentOrder);
 
   const handleLogout = () => {
     setConfirmLogout(true);
   };
 
-  const valueAuthUser = { ...authUser[0] };
-
-  const currentUser = userList.filter(
-    (item) => item.id === valueAuthUser.user_id
-  );
-
-  const currentOrderDetail = orderDetail.filter(
-    (item) => item.user_id === valueAuthUser.user_id
-  );
-
-  const { name, address, email, phoneNumber } = currentUser[0];
-  const [valueCurrentUser, setValueCurrentUser] = useState({
-    name,
-    address,
-    email,
-    phoneNumber,
-  });
-
-  const temp = currentOrder.filter(
-    (item) => item.user_id === valueAuthUser.user_id
-  );
-  const valueOrder = temp.slice(0, 1);
+  const { name, email, address, phoneNumber } = { ...currentUser[0] };
 
   useEffect(() => {
-    dispatch(getAllUsers());
-    dispatch(getAllOrderDetail());
     dispatch(getAllProducts());
-    dispatch(getOrders());
-  }, [dispatch]);
+    dispatch(getUser(currentOrder.user_id));
+  }, [dispatch, currentOrder.user_id]);
 
   const handlePayment = () => {
     dispatch(
-      updateOrder({
-        id: valueOrder[0].id,
-        data: { order: "done", create_at: date },
+      createOrder({
+        id: currentOrder.id,
+        user_id: currentOrder.user_id,
+        note: tempNote.note,
+        create_at: date,
       })
     );
+
+    currentOrderDetail.temp_product.map((item) =>
+      dispatch(
+        createOrderDetail({
+          id: Math.floor(Math.random(100) * 100) + 1,
+          order_id: currentOrder.id,
+          product_id: item.product_id,
+          number: item.number,
+          color: item.color,
+          size: item.size,
+        })
+      )
+    );
+
+    currentOrderDetail.temp_product = [];
+    localStorage.setItem(
+      StorageKeys.orderDetail,
+      JSON.stringify({
+        id: Math.floor(Math.random(100) * 100) + 1,
+        user_id: currentUser.user_id,
+        temp_product: currentOrderDetail.temp_product,
+      })
+    );
+
     setConfirmOrder(true);
     setOrderDone(true);
   };
@@ -80,11 +87,11 @@ function Payment() {
     <div className={cx("wrapper", "grid")}>
       {orderDone ? (
         <OrderDone
-          valueOrder={valueOrder}
-          valueCurrentUser={valueCurrentUser}
           currentOrderDetail={currentOrderDetail}
           productList={productList}
           totalMoney={totalMoney}
+          note={tempNote.note}
+          createOrder={date}
         />
       ) : (
         <div className={cx("row")}>
@@ -110,7 +117,7 @@ function Payment() {
                     <p
                       className={cx("logged-in-customer-information-paragraph")}
                     >
-                      {valueCurrentUser.name} ({valueCurrentUser.email})
+                      {name} ({email})
                       <br />
                       <a href="#!" onClick={handleLogout}>
                         Đăng xuất
@@ -129,7 +136,7 @@ function Payment() {
                       <div className={cx("field-input-wrapper")}>
                         <label
                           className={cx("field-label")}
-                          for="billing_address_full_name"
+                          htmlFor="billing_address_full_name"
                         >
                           Địa chỉ
                         </label>
@@ -143,13 +150,7 @@ function Payment() {
                           type="text"
                           id="address"
                           name="address"
-                          value={valueCurrentUser.address}
-                          onChange={(e) =>
-                            setValueCurrentUser({
-                              ...valueCurrentUser,
-                              address: e.target.value,
-                            })
-                          }
+                          defaultValue={address ? address : ""}
                           autoComplete="false"
                         />
                       </div>
@@ -159,7 +160,7 @@ function Payment() {
                       <div className={cx("field-input-wrapper")}>
                         <label
                           className={cx("field-label")}
-                          for="billing_address_full_name"
+                          htmlFor="billing_address_full_name"
                         >
                           Họ và tên
                         </label>
@@ -173,13 +174,7 @@ function Payment() {
                           type="text"
                           id="billing_address_full_name"
                           name="billing_address[full_name]"
-                          value={valueCurrentUser.name}
-                          onChange={(e) =>
-                            setValueCurrentUser({
-                              ...valueCurrentUser,
-                              name: e.target.value,
-                            })
-                          }
+                          defaultValue={name ? name : ""}
                           autoComplete="false"
                         />
                       </div>
@@ -189,7 +184,7 @@ function Payment() {
                       <div className={cx("field-input-wrapper")}>
                         <label
                           className={cx("field-label")}
-                          for="billing_address_phone"
+                          htmlFor="billing_address_phone"
                         >
                           Số điện thoại
                         </label>
@@ -205,13 +200,7 @@ function Payment() {
                           type="tel"
                           id="billing_address_phone"
                           name="billing_address[phone]"
-                          value={valueCurrentUser.phoneNumber}
-                          onChange={(e) =>
-                            setValueCurrentUser({
-                              ...valueCurrentUser,
-                              phoneNumber: e.target.value,
-                            })
-                          }
+                          defaultValue={phoneNumber ? phoneNumber : ""}
                         />
                       </div>
                     </div>
@@ -229,7 +218,7 @@ function Payment() {
                   value="payment_normal"
                   defaultChecked
                 />
-                <label for="payment_normal" style={{ margin: " 0 10px" }}>
+                <label htmlFor="payment_normal" style={{ margin: " 0 10px" }}>
                   Thanh toán khi nhận hàng
                 </label>
               </div>
@@ -252,8 +241,8 @@ function Payment() {
           </div>
           <div className={cx("col l-6")}>
             <div className={cx("sidebar-content")}>
-              {currentOrderDetail.map((item) => {
-                let name = "";
+              {currentOrderDetail.temp_product.map((item, index) => {
+                let prd_name = "";
                 let imgFront = "";
                 let prices = "";
 
@@ -261,13 +250,13 @@ function Payment() {
                   const check = product.id === item.product_id;
                   if (check) {
                     imgFront = product.imgFront;
-                    name = product.name;
+                    prd_name = product.name;
                     prices = product.prices;
                   }
                 });
                 totalMoney += prices * item.number;
                 return (
-                  <div className={cx("row", "prd-info")} key={item.id}>
+                  <div className={cx("row", "prd-info")} key={index}>
                     <div className={cx("col l-2", "prd-img-wrapper")}>
                       <div className={cx("prd-img")}>
                         <Images src={imgFront} />
@@ -275,8 +264,18 @@ function Payment() {
                       <span className={cx("prd-quantity")}>{item.number}</span>
                     </div>
                     <div className={cx("col l-7", "prd-desc")}>
-                      <span className={cx("prd-name")}>{name}</span>
-                      <span className={cx("prd-size")}>{item.size}</span>
+                      <span className={cx("prd-name")}>{prd_name}</span>
+                      <span className={cx("prd-size")}>Size: {item.size}</span>
+                      <span>
+                        Màu: &nbsp;
+                        <span
+                          style={{
+                            backgroundColor: `${item.color}`,
+                            padding: "3px 10px",
+                            borderRadius: "50%",
+                          }}
+                        ></span>
+                      </span>
                     </div>
                     <div className={cx("col l-3", "prd-price")}>
                       <span>{VndFormat(prices * item.number)}</span>
@@ -284,7 +283,6 @@ function Payment() {
                   </div>
                 );
               })}
-
               <div className={cx("prd-total")}>
                 <table className={cx("total-line-table")}>
                   <thead>

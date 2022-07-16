@@ -3,8 +3,8 @@ import CollectionSlice from "~/components/Collections/CollectionSlice";
 import productSlice from "~/components/Collections/Products/ProductSlice";
 import AuthSlice from "~/components/User/AuthSlice";
 import UserSlice from "~/components/User/UserSlice";
-import OrderDetailSlice from "~/pages/Cart/OrderDetailSlice";
-import OrderSlice from "~/pages/Cart/OrderSlice";
+import OrderDetailSlice from "~/components/OrderDone/OrderDetailSlice";
+import OrderSlice from "~/components/OrderDone/OrderSlice";
 import ContactSlice from "~/pages/Contact/ContactSlice";
 
 const store = configureStore({

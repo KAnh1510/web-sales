@@ -6,7 +6,7 @@ import classnames from "classnames/bind";
 
 const cx = classnames.bind(styles);
 
-function DefaultLayout({ children, cover }) {
+function DefaultLayout({ children }) {
   return (
     <div className="grid">
       <div className="row">
@@ -24,7 +24,6 @@ function DefaultLayout({ children, cover }) {
 
 DefaultLayout.propTypes = {
   children: PropTypes.node,
-  cover: PropTypes.object,
 };
 
 export default DefaultLayout;

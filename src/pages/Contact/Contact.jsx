@@ -25,10 +25,12 @@ function Contact() {
         email: values.email,
         phoneNumber: values.phoneNumber,
         note: values.note,
+        status: 0,
       })
     );
     setMess(true);
   };
+
   return (
     <div className={cx("contact row")}>
       <div className={cx("col l-6")}>

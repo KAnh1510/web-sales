@@ -6,7 +6,7 @@ export const productSlice = createSlice({
   initialState: {
     loading: false,
     values: [],
-    search: "a",
+    search: "",
   },
   reducers: {
     searchProduct: (state, action) => {

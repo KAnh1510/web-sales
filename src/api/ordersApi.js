@@ -12,6 +12,11 @@ const ordersApi = {
     return axiosClient.get(url, { params });
   },
 
+  get: (id) => {
+    const url = `/orders/${id}`;
+    return axiosClient.get(url);
+  },
+
   update: (id, data) => {
     return axiosClient.patch(`/orders/${id}`, data);
   },

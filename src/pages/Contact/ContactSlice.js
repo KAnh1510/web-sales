@@ -28,12 +28,13 @@ export const ContactSlice = createSlice({
 
 export const createQuestion = createAsyncThunk(
   "question/create",
-  async ({ name, email, phoneNumber, note }) => {
+  async ({ name, email, phoneNumber, note, status }) => {
     const res = await questionsApi.create({
       name,
       email,
       phoneNumber,
       note,
+      status,
     });
     return res;
   }

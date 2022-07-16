@@ -14,6 +14,10 @@ export const OrderDetailSlice = createSlice({
         state.values = action.payload;
       })
 
+      .addCase(getOrderDetail.fulfilled, (state, action) => {
+        state.values = action.payload;
+      })
+
       .addCase(createOrderDetail.fulfilled, (state, action) => {
         state.values.push(action.payload);
       })
@@ -39,9 +43,10 @@ export const OrderDetailSlice = createSlice({
 
 export const createOrderDetail = createAsyncThunk(
   "order_detail/create",
-  async ({ user_id, product_id, number, color, size }) => {
+  async ({ id, order_id, product_id, number, color, size }) => {
     const res = await orderDetailApi.create({
-      user_id,
+      id,
+      order_id,
       product_id,
       number,
       color,
@@ -55,6 +60,14 @@ export const getAllOrderDetail = createAsyncThunk("orders/getAll", async () => {
   const res = await orderDetailApi.getAll();
   return res;
 });
+
+export const getOrderDetail = createAsyncThunk(
+  "order_detail/get",
+  async (id) => {
+    const res = await orderDetailApi.get(id);
+    return res;
+  }
+);
 
 export const updateOrderDetail = createAsyncThunk(
   "order_detail/update",

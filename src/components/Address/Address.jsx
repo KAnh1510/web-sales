@@ -24,7 +24,7 @@ function Address() {
   }, [dispatch, params.id]);
 
   return (
-    <PageAccountAddress title="Thông tin địa chỉ">
+    <PageAccountAddress title="Thông tin địa chỉ" userId={params.id}>
       <div className={cx("col l-7")}>
         <HeaderAddress
           setEdit={setEdit}

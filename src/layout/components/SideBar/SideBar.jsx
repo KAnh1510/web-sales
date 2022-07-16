@@ -2,19 +2,12 @@ import { Link, NavLink } from "react-router-dom";
 import classnames from "classnames/bind";
 import styles from "./SideBar.module.scss";
 import { LISTSIDEBAR } from "~/data";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getAuthUser } from "~/components/User/AuthSlice";
+import StorageKeys from "~/constant/storage-keys";
 
 const cx = classnames.bind(styles);
 
 function SideBar() {
-  const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.auth.values);
-
-  useEffect(() => {
-    dispatch(getAuthUser());
-  }, []);
+  const currentUser = JSON.parse(localStorage.getItem(StorageKeys.user));
 
   return (
     <div className={cx("wrapper")}>
@@ -29,9 +22,9 @@ function SideBar() {
         {LISTSIDEBAR.map((item, index) => {
           return (
             <li key={index}>
-              {currentUser.length > 0 && item.to2 ? (
+              {currentUser && item.to2 ? (
                 <NavLink
-                  to={item.to2 + currentUser[0].user_id}
+                  to={item.to2 + currentUser.user_id}
                   title={item.title}
                   className={({ isActive }) => (isActive ? cx("active") : " ")}
                 >

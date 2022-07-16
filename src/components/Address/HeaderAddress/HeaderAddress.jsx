@@ -20,7 +20,7 @@ function HeaderAddress(props) {
         <div className={cx("col l-12")}>
           <div className={cx("address-title")}>
             <h3>
-              <strong>{currentUser[0].name}</strong>
+              <strong>{currentUser.name}</strong>
             </h3>
             <p className={cx("address-actions")}>
               <span className={cx("action-edit")} title="Sửa">

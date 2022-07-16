@@ -10,6 +10,10 @@ export const OrderSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(getAllOrders.fulfilled, (state, action) => {
+        state.values = action.payload;
+      })
+
       .addCase(getOrders.fulfilled, (state, action) => {
         state.values = action.payload;
       })
@@ -28,18 +32,24 @@ export const OrderSlice = createSlice({
 
 export const createOrder = createAsyncThunk(
   "orders/create",
-  async ({ user_id, create_at, note }) => {
+  async ({ id, user_id, create_at, note }) => {
     const res = await ordersApi.create({
-      note,
+      id,
       user_id,
+      note,
       create_at,
     });
     return res;
   }
 );
 
-export const getOrders = createAsyncThunk("orders/get", async () => {
+export const getAllOrders = createAsyncThunk("orders/getAll", async () => {
   const res = await ordersApi.getAll();
+  return res;
+});
+
+export const getOrders = createAsyncThunk("orders/get", async (id) => {
+  const res = await ordersApi.get(id);
   return res;
 });
 

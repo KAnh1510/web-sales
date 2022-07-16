@@ -9,10 +9,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import {
-  deleteOrderDetail,
-  getAllOrderDetail,
-} from "~/pages/Cart/OrderDetailSlice";
 import { getAllProducts } from "~/components/Collections/Products/ProductSlice";
 import VndFormat from "~/components/VndFormat/VndFormat";
 import StorageKeys from "~/constant/storage-keys";
@@ -23,27 +19,36 @@ function Cart({ setShowCart }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [cartEmpty, setCartEmpty] = useState(false);
+
   const authUser = JSON.parse(localStorage.getItem(StorageKeys.user));
   const productList = useSelector((state) => state.products.values);
-  const orderDetail = useSelector((state) => state.order_detail.values);
-
-  const currentOrderDetail = orderDetail.filter(
-    (item) => item.user_id === authUser.user_id
+  const currentOrderDetail = JSON.parse(
+    localStorage.getItem(StorageKeys.orderDetail)
   );
 
   useEffect(() => {
     dispatch(getAllProducts());
-    dispatch(getAllOrderDetail());
 
-    if (currentOrderDetail.length > 0) {
+    if (currentOrderDetail.temp_product.length > 0) {
       setCartEmpty(false);
     } else {
       setCartEmpty(true);
     }
-  }, [dispatch, currentOrderDetail.length]);
+  }, [dispatch]);
 
   const handleDeleteProduct = (id) => {
-    dispatch(deleteOrderDetail({ id: id }));
+    currentOrderDetail.temp_product = currentOrderDetail.temp_product.filter(
+      (item) => item.product_id !== id
+    );
+
+    localStorage.setItem(
+      StorageKeys.orderDetail,
+      JSON.stringify({
+        id: Math.floor(Math.random(100) * 100) + 1,
+        user_id: currentOrderDetail.user_id,
+        temp_product: currentOrderDetail.temp_product,
+      })
+    );
   };
 
   const handelClose = () => {
@@ -67,8 +72,8 @@ function Cart({ setShowCart }) {
             </div>
             <p className={cx("note")}>Hiện chưa có sản phẩm</p>
           </div>
-        ) : (
-          currentOrderDetail.map((item, index) => {
+        ) : currentOrderDetail ? (
+          currentOrderDetail.temp_product.map((item, index) => {
             let name = "";
             let imgFront = "";
             let prices = "";
@@ -133,6 +138,8 @@ function Cart({ setShowCart }) {
               </div>
             );
           })
+        ) : (
+          " "
         )}
         <div className={cx("payment")}>
           <div className={cx("total")}>

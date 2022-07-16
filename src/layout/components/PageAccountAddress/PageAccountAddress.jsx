@@ -60,7 +60,7 @@ function PageAccountAddress({ title, children, userId }) {
 PageAccountAddress.propTypes = {
   title: PropTypes.string,
   children: PropTypes.node.isRequired,
-  userId: PropTypes.number.isRequired,
+  userId: PropTypes.number,
 };
 
 export default PageAccountAddress;
