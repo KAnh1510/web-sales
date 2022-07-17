@@ -4,19 +4,25 @@ import classnames from "classnames/bind";
 import { Link } from "react-router-dom";
 import PageAccountAddress from "~/layout/components/PageAccountAddress";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "~/components/User/UserSlice";
+import { getAllUsers } from "~/components/User/UserSlice";
 import StorageKeys from "~/constant/storage-keys";
 
 const cx = classnames.bind(styles);
 
 export default function Account() {
   const dispatch = useDispatch();
-  const currentUser = JSON.parse(localStorage.getItem(StorageKeys.user));
-  const valueUser = useSelector((state) => state.users.values);
+  const authUser = JSON.parse(localStorage.getItem(StorageKeys.user));
+  const userList = useSelector((state) => state.users.values);
 
   useEffect(() => {
-    dispatch(getUser(currentUser.user_id));
-  }, [dispatch, currentUser.user_id]);
+    dispatch(getAllUsers());
+  }, []);
+
+  const currentUser = userList.filter(
+    (item) => parseInt(item.id, 10) === authUser.user_id
+  );
+
+  const valueUser = { ...currentUser[0] };
 
   return (
     <PageAccountAddress

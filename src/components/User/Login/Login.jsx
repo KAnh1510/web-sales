@@ -22,19 +22,20 @@ function Login() {
   const [values, setValues] = useState({});
 
   const currentUser = [];
-  userList.forEach((user) => {
-    if (
-      user.email === values.email &&
-      user.password === values.password &&
-      user.role === "user"
-    ) {
-      currentUser.push(user);
-    }
-  });
+  userList.length > 0 &&
+    userList.forEach((user) => {
+      if (
+        user.email === values.email &&
+        user.password === values.password &&
+        user.role === "user"
+      ) {
+        currentUser.push(user);
+      }
+    });
 
   useEffect(() => {
     dispatch(getAllUsers());
-  }, [dispatch]);
+  }, []);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -46,6 +47,7 @@ function Login() {
           role: "user",
           email: values.email,
           password: values.password,
+          login_at: new Date().toLocaleString(),
         })
       );
     } else setErrMes(true);

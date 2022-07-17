@@ -39,9 +39,12 @@ function Cart() {
   };
 
   const handleDeleteProduct = (id) => {
-    currentOrderDetail.temp_product = currentOrderDetail.temp_product.filter(
-      (item) => item.product_id !== id
-    );
+    currentOrderDetail
+      ? (currentOrderDetail.temp_product =
+          currentOrderDetail.temp_product.filter(
+            (item) => item.product_id !== id
+          ))
+      : (currentOrderDetail.temp_product = []);
 
     localStorage.setItem(
       StorageKeys.orderDetail,

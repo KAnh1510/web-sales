@@ -34,7 +34,7 @@ export const loginUser = createAsyncThunk(
       password,
       login_at,
     });
-    localStorage.setItem("currentUser", JSON.stringify(res));
+    localStorage.setItem(StorageKeys.user, JSON.stringify(res));
     return res;
   }
 );

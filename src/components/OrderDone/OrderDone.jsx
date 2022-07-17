@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import styles from "./OrderDone.module.scss";
 import classnames from "classnames/bind";
@@ -9,35 +8,55 @@ import StorageKeys from "~/constant/storage-keys";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../User/UserSlice";
 import { getOrders } from "~/components/OrderDone/OrderSlice";
-import { getOrderDetail } from "~/components/OrderDone/OrderDetailSlice";
+import { getAllOrderDetail } from "~/components/OrderDone/OrderDetailSlice";
 import { getAllProducts } from "../Collections/Products/ProductSlice";
 
 const cx = classnames.bind(styles);
 
 const OrderDone = () => {
   const dispatch = useDispatch();
-  const currentOrder = JSON.parse(localStorage.getItem(StorageKeys.orders));
-  const currentOrderDetail = JSON.parse(
-    localStorage.getItem(StorageKeys.orderDetail)
-  );
+
   const valueOrder = useSelector((state) => state.orders.values);
-  const valueOrderDetail = useSelector((state) => state.order_detail.values);
+  const orderDetailList = useSelector((state) => state.order_detail.values);
   const userList = useSelector((state) => state.users.values);
   const productList = useSelector((state) => state.products.values);
 
-  const currentUser = userList.filter(
-    (item) => item.id === currentOrder.user_id
+  const currentOrder = JSON.parse(localStorage.getItem(StorageKeys.orders));
+
+  let currentUser = [];
+  Array.isArray(userList)
+    ? (currentUser = userList.filter(
+        (item) => item.id === currentOrder.user_id
+      ))
+    : currentUser.push(userList);
+
+  const valueOrderDetail = orderDetailList.filter(
+    (item) => item.order_id === currentOrder.id
   );
+
+  const { note, create_at } = { ...valueOrder[0] };
   const { name, email, address, phoneNumber } = { ...currentUser[0] };
 
   useEffect(() => {
     dispatch(getOrders(currentOrder.id));
-    dispatch(getOrderDetail(currentOrderDetail.id));
+    dispatch(getAllOrderDetail());
     dispatch(getAllUsers());
     dispatch(getAllProducts());
-  }, [dispatch]);
+  }, []);
 
   let totalMoney = 0;
+
+  // currentOrderDetail.temp_product = [];
+  useEffect(() => {
+    localStorage.setItem(
+      StorageKeys.orderDetail,
+      JSON.stringify({
+        id: Math.floor(Math.random(100) * 100) + 1,
+        user_id: currentUser.user_id,
+        temp_product: [],
+      })
+    );
+  }, []);
 
   return (
     <div style={{ margin: "20px 0" }}>
@@ -87,12 +106,12 @@ const OrderDone = () => {
               <textarea
                 type="text"
                 readOnly
-                defaultValue={valueOrder.note}
+                defaultValue={note}
                 id="note"
                 rows="4"
                 style={{ outline: "none", padding: "10px" }}
               ></textarea>
-              <p>Thời gian đặt: &nbsp;{valueOrder.create_at} </p>
+              <p>Thời gian đặt: &nbsp;{create_at} </p>
             </div>
             <div className={cx("col l-6")}>
               <div className={cx("sidebar-content")}>
@@ -179,11 +198,4 @@ const OrderDone = () => {
   );
 };
 
-OrderDone.propTypes = {
-  valueCurrentUser: PropTypes.object,
-  currentOrderDetail: PropTypes.object,
-  productList: PropTypes.array,
-  totalMoney: PropTypes.number,
-  valueOrder: PropTypes.object,
-};
 export default OrderDone;

@@ -33,13 +33,12 @@ function Payment() {
   const [confirmOrder, setConfirmOrder] = useState(false);
   const [orderDone, setOrderDone] = useState(false);
   let totalMoney = 0;
-  console.log(currentOrder);
 
   const handleLogout = () => {
     setConfirmLogout(true);
   };
 
-  const { name, email, address, phoneNumber } = { ...currentUser[0] };
+  const { name, email, address, phoneNumber } = currentUser;
 
   useEffect(() => {
     dispatch(getAllProducts());
@@ -53,6 +52,7 @@ function Payment() {
         user_id: currentOrder.user_id,
         note: tempNote.note,
         create_at: date,
+        total_money: totalMoney,
       })
     );
 
@@ -69,15 +69,14 @@ function Payment() {
       )
     );
 
-    currentOrderDetail.temp_product = [];
-    localStorage.setItem(
-      StorageKeys.orderDetail,
-      JSON.stringify({
-        id: Math.floor(Math.random(100) * 100) + 1,
-        user_id: currentUser.user_id,
-        temp_product: currentOrderDetail.temp_product,
-      })
-    );
+    productList.forEach((product) => {
+      currentOrderDetail.temp_product.forEach((item) => {
+        let number = product.number;
+        if (item.product_id === product.id && number > 0) {
+          number = number - 1;
+        }
+      });
+    });
 
     setConfirmOrder(true);
     setOrderDone(true);

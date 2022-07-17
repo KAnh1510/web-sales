@@ -65,7 +65,7 @@ export const getOrderDetail = createAsyncThunk(
   "order_detail/get",
   async (id) => {
     const res = await orderDetailApi.get(id);
-    return res;
+    return [res];
   }
 );
 

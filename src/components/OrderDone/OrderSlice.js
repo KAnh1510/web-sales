@@ -32,12 +32,13 @@ export const OrderSlice = createSlice({
 
 export const createOrder = createAsyncThunk(
   "orders/create",
-  async ({ id, user_id, create_at, note }) => {
+  async ({ id, user_id, create_at, note, total_money }) => {
     const res = await ordersApi.create({
       id,
       user_id,
       note,
       create_at,
+      total_money,
     });
     return res;
   }
@@ -50,7 +51,7 @@ export const getAllOrders = createAsyncThunk("orders/getAll", async () => {
 
 export const getOrders = createAsyncThunk("orders/get", async (id) => {
   const res = await ordersApi.get(id);
-  return res;
+  return [res];
 });
 
 export const updateOrder = createAsyncThunk(

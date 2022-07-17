@@ -29,7 +29,7 @@ function Cart({ setShowCart }) {
   useEffect(() => {
     dispatch(getAllProducts());
 
-    if (currentOrderDetail.temp_product.length > 0) {
+    if (currentOrderDetail && currentOrderDetail.temp_product.length > 0) {
       setCartEmpty(false);
     } else {
       setCartEmpty(true);
@@ -37,9 +37,12 @@ function Cart({ setShowCart }) {
   }, [dispatch]);
 
   const handleDeleteProduct = (id) => {
-    currentOrderDetail.temp_product = currentOrderDetail.temp_product.filter(
-      (item) => item.product_id !== id
-    );
+    currentOrderDetail
+      ? (currentOrderDetail.temp_product =
+          currentOrderDetail.temp_product.filter(
+            (item) => item.product_id !== id
+          ))
+      : (currentOrderDetail.temp_product = []);
 
     localStorage.setItem(
       StorageKeys.orderDetail,
