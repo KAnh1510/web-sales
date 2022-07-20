@@ -96,7 +96,7 @@ function Payment() {
         <div className={cx("row")}>
           <div className={cx("col l-6", "main")}>
             <div className={cx("main-header")}>
-              <h1>COLDKIDSCLUBVN</h1>
+              <h1>COLKIDSCLUBVN</h1>
               <HeaderPage title="Phương thức thanh toán" />
             </div>
             <div className={cx("main-content")}>

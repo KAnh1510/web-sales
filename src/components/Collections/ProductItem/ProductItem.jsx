@@ -8,7 +8,7 @@ const cx = classnames.bind(styles);
 
 function ProductItem({ data }) {
   return (
-    <Link to={`/`} className={cx("wrapper")}>
+    <Link to={`/products/${data.name}`} className={cx("wrapper")}>
       <div className={cx("info")}>
         <p className={cx("name")}>{data.name}</p>
         <span className={cx("prices")}>{VndFormat(data.prices)}</span>

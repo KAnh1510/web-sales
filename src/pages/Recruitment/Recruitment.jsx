@@ -8,7 +8,7 @@ const cx = classnames.bind(styles);
 function Recruitment() {
   return (
     <DefaultLayout>
-      <div className={cx("wrapper", "grid")}>
+      <div className={cx("wrapper", "grid")} style={{ marginTop: "20px" }}>
         <div className={cx("row")}>
           <div className={cx("col l-2")}></div>
           <div className={cx("container", "col l-8")}>

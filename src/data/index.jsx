@@ -1,6 +1,6 @@
 export const LISTSIDEBAR = [
   {
-    title: "ColdKid's story",
+    title: "ColKid's story",
     to: "/",
   },
   {

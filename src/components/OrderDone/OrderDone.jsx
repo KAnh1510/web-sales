@@ -35,6 +35,7 @@ const OrderDone = () => {
   );
 
   const { note, create_at } = { ...valueOrder[0] };
+  console.log(valueOrder);
   const { name, email, address, phoneNumber } = { ...currentUser[0] };
 
   useEffect(() => {

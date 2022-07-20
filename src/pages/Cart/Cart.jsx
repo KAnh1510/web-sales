@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import styles from "./Cart.module.scss";
 import classnames from "classnames/bind";
 import HeaderPage from "~/layout/components/HeaderPage";
-import Images from "~/components/Images";
 import { Link, useNavigate } from "react-router-dom";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -41,9 +40,7 @@ function Cart() {
   const handleDeleteProduct = (id) => {
     currentOrderDetail
       ? (currentOrderDetail.temp_product =
-          currentOrderDetail.temp_product.filter(
-            (item) => item.product_id !== id
-          ))
+          currentOrderDetail.temp_product.filter((item) => item.id !== id))
       : (currentOrderDetail.temp_product = []);
 
     localStorage.setItem(
@@ -89,8 +86,8 @@ function Cart() {
                   return (
                     <div className={cx("row", "info-prd")} key={index}>
                       <div className={cx("col l-2")}>
-                        <Link to="product/name" className={cx("img-prd")}>
-                          <Images src={imgFront} />
+                        <Link to={`product/${name}`} className={cx("img-prd")}>
+                          <img src={imgFront} alt={name} />
                         </Link>
                       </div>
                       <div className={cx("col l-10")}>
@@ -100,7 +97,7 @@ function Cart() {
                             <FontAwesomeIcon
                               icon={faTimes}
                               onClick={() => {
-                                handleDeleteProduct(item.product_id);
+                                handleDeleteProduct(item.id);
                               }}
                             />
                           </div>
@@ -129,7 +126,7 @@ function Cart() {
                             <></>
                           )}
 
-                          <p className={cx("size")}>Size L</p>
+                          <p className={cx("size")}>{item.size}</p>
                           <p>
                             Số lượng:{" "}
                             <span style={{ color: "red", fontWeight: "600" }}>

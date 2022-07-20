@@ -4,11 +4,13 @@ import classnames from "classnames/bind";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import Logout from "~/components/User/Logout";
+import StorageKeys from "~/constant/storage-keys";
 
 const cx = classnames.bind(styles);
 
-function PageAccountAddress({ title, children, userId }) {
+function PageAccountAddress({ title, children }) {
   const [confirmLogout, setConfirmLogout] = useState(false);
+  const currentUser = JSON.parse(localStorage.getItem(StorageKeys.user));
 
   const handleLogout = () => {
     setConfirmLogout(true);
@@ -31,10 +33,12 @@ function PageAccountAddress({ title, children, userId }) {
               <div className={cx("account-list")}>
                 <ul>
                   <li>
-                    <Link to={`/account/${userId}`}>Thông tin tài khoản</Link>
+                    <Link to={`/account/${currentUser.user_id}`}>
+                      Thông tin tài khoản
+                    </Link>
                   </li>
                   <li>
-                    <Link to={`/account/address/${userId}`}>
+                    <Link to={`/account/address/${currentUser.user_id}`}>
                       Thông tin địa chỉ
                     </Link>
                   </li>
@@ -60,7 +64,6 @@ function PageAccountAddress({ title, children, userId }) {
 PageAccountAddress.propTypes = {
   title: PropTypes.string,
   children: PropTypes.node.isRequired,
-  userId: PropTypes.number,
 };
 
 export default PageAccountAddress;

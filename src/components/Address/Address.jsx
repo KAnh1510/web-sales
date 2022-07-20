@@ -9,7 +9,7 @@ import HeaderAddress from "./HeaderAddress";
 import PageAccountAddress from "~/layout/components/PageAccountAddress";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "../User/UserSlice";
+import { getAllUsers, getUser } from "../User/UserSlice";
 
 const cx = classnames.bind(styles);
 
@@ -17,10 +17,15 @@ function Address() {
   const [edit, setEdit] = useState(false);
   const params = useParams();
   const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.users.values);
+  const userList = useSelector((state) => state.users.values);
+
+  const currentUser = userList.filter(
+    (item) => item.id === parseInt(params.id, 10)
+  );
+  console.log(currentUser);
 
   useEffect(() => {
-    dispatch(getUser(params.id));
+    dispatch(getAllUsers());
   }, [dispatch, params.id]);
 
   return (
@@ -35,7 +40,7 @@ function Address() {
           {edit ? (
             <EditAddress setEdit={setEdit} currentUser={currentUser} />
           ) : (
-            <ViewAddress currentUser={currentUser} />
+            <ViewAddress currentUser={{ ...currentUser[0] }} />
           )}
         </div>
       </div>

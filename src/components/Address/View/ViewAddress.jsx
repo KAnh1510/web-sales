@@ -5,6 +5,7 @@ import classnames from "classnames/bind";
 
 const cx = classnames.bind(styles);
 function ViewAddress({ className, currentUser }) {
+  console.log(currentUser);
   return (
     <div className={cx(className)}>
       <div className={cx("view-address")}>

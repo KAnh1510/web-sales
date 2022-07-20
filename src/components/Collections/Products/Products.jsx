@@ -19,13 +19,13 @@ export default function Products() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { productName } = useParams();
-  let date = new Date().toLocaleString();
 
   const [size, setSize] = useState();
   const [color, setColor] = useState();
   const [counter, setCounter] = useState(1);
   const [messSuccess, setMessSuccess] = useState(false);
   const [messErr, setMessErr] = useState(false);
+  const [forgot, setForgot] = useState(false);
 
   const productList = useSelector((state) => state.products.values);
   const collectionList = useSelector((state) => state.collections.values);
@@ -47,51 +47,75 @@ export default function Products() {
 
   const handleAddCard = (e) => {
     e.preventDefault();
-    if (currentUser) {
-      localStorage.setItem(
-        StorageKeys.orders,
-        JSON.stringify({
-          id: Math.floor(Math.random(100) * 100) + 1,
-          user_id: currentUser.user_id,
-          create_at: date,
-        })
-      );
-      if (!currentOrderDetail) {
+    if (size && color) {
+      if (currentUser) {
         localStorage.setItem(
-          StorageKeys.orderDetail,
+          StorageKeys.orders,
           JSON.stringify({
             id: Math.floor(Math.random(100) * 100) + 1,
-            temp_product: [
-              {
-                product_id: valueProduct.id,
-                number: counter,
-                color: color,
-                size: size,
-              },
-            ],
+            user_id: currentUser.user_id,
           })
         );
+
+        if (!currentOrderDetail) {
+          localStorage.setItem(
+            StorageKeys.orderDetail,
+            JSON.stringify({
+              id: Math.floor(Math.random(100) * 100) + 1,
+              temp_product: [
+                {
+                  id: Math.floor(Math.random(100) * 100 + 1),
+                  product_id: valueProduct.id,
+                  number: counter,
+                  color: color,
+                  size: size,
+                },
+              ],
+            })
+          );
+        } else {
+          currentOrderDetail.temp_product.push({
+            id: Math.floor(Math.random(100) * 100 + 1),
+            product_id: valueProduct.id,
+            number: counter,
+            color: color,
+            size: size,
+          });
+
+          for (let i = 0; i < currentOrderDetail.temp_product.length; i++) {
+            for (
+              let j = i + 1;
+              j < currentOrderDetail.temp_product.length;
+              j++
+            ) {
+              if (
+                currentOrderDetail.temp_product[i].product_id ===
+                  currentOrderDetail.temp_product[j].product_id &&
+                currentOrderDetail.temp_product[i].size ===
+                  currentOrderDetail.temp_product[j].size &&
+                currentOrderDetail.temp_product[i].color ===
+                  currentOrderDetail.temp_product[j].color
+              ) {
+                currentOrderDetail.temp_product[i].number++;
+                currentOrderDetail.temp_product.splice(j, 1);
+              }
+            }
+          }
+
+          localStorage.setItem(
+            StorageKeys.orderDetail,
+            JSON.stringify({
+              id: Math.floor(Math.random(100) * 100) + 1,
+              temp_product: currentOrderDetail.temp_product,
+            })
+          );
+        }
+
+        setMessSuccess(true);
       } else {
-        currentOrderDetail.temp_product.push({
-          product_id: valueProduct.id,
-          number: counter,
-          color: color,
-          size: size,
-        });
-
-        localStorage.setItem(
-          StorageKeys.orderDetail,
-          JSON.stringify({
-            id: Math.floor(Math.random(100) * 100) + 1,
-            temp_product: currentOrderDetail.temp_product,
-          })
-        );
+        setMessErr(true);
       }
-
-      setMessSuccess(true);
-    } else {
-      setMessErr(true);
-    }
+    } else setForgot(true);
   };
 
   return (
@@ -239,6 +263,14 @@ export default function Products() {
                   {messErr ? (
                     <p style={{ marginTop: "10px", color: "red" }}>
                       Bạn chưa đăng nhập, vui lòng đăng nhập để thêm sản phẩm!
+                    </p>
+                  ) : (
+                    <></>
+                  )}
+
+                  {forgot ? (
+                    <p style={{ marginTop: "10px", color: "red" }}>
+                      Bạn chưa chọn size hoặc màu.
                     </p>
                   ) : (
                     <></>
