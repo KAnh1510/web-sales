@@ -32,3 +32,24 @@
 .content {
   padding: 10rem;
 }
+
+@media (min-width: 740px) and (max-width: 1023px) {
+  .wrapper {
+    height: 50vh;
+    border-bottom: 1px solid #ededed;
+    border-right: none;
+    margin-bottom: 20px;
+    .title {
+      left: 0;
+
+      h1 {
+        width: 100%;
+        text-align: center;
+
+        &::after {
+          margin: 50px auto 0;
+        }
+      }
+    }
+  }
+}

@@ -3,6 +3,9 @@
   margin: 30px 0;
   text-transform: uppercase;
 }
+.info {
+  padding: "0 100px";
+}
 
 table {
   width: 100%;
@@ -37,7 +40,6 @@ th:last-child {
 }
 
 .prd-img {
-  height: 4.6em;
   position: relative;
   overflow: hidden;
 
@@ -140,4 +142,12 @@ th:last-child {
   letter-spacing: -0.04em;
   color: #4b4b4b;
   line-height: 1em;
+}
+
+// responsive
+@media (min-width: 740px) and (max-width: 1023px) {
+  .info,
+  .sidebar-content {
+    padding: 12px;
+  }
 }

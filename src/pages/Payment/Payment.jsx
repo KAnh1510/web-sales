@@ -13,6 +13,7 @@ import { getAllProducts } from "~/components/Collections/Products/ProductSlice";
 import OrderDone from "~/components/OrderDone";
 import StorageKeys from "~/constant/storage-keys";
 import { getUser } from "~/components/User/UserSlice";
+import { CartIcon } from "~/components/Icons";
 
 const cx = classnames.bind(styles);
 
@@ -32,6 +33,7 @@ function Payment() {
   const [confirmLogout, setConfirmLogout] = useState(false);
   const [confirmOrder, setConfirmOrder] = useState(false);
   const [orderDone, setOrderDone] = useState(false);
+  const [showInfo, setShowInfo] = useState(false);
   let totalMoney = 0;
 
   const handleLogout = () => {
@@ -82,8 +84,12 @@ function Payment() {
     setOrderDone(true);
   };
 
+  const handleShowInfo = () => {
+    setShowInfo(!showInfo);
+  };
+
   return (
-    <div className={cx("wrapper", "grid")}>
+    <div className={cx("wrapper", "grid wide")}>
       {orderDone ? (
         <OrderDone
           currentOrderDetail={currentOrderDetail}
@@ -94,10 +100,145 @@ function Payment() {
         />
       ) : (
         <div className={cx("row")}>
-          <div className={cx("col l-6", "main")}>
+          <div className={cx("col l-6 m-12", "main")}>
             <div className={cx("main-header")}>
               <h1>COLKIDSCLUBVN</h1>
               <HeaderPage title="Phương thức thanh toán" />
+            </div>
+            <div className="row">
+              <div className={cx("col l-0 m-12", "mobile")}>
+                <div className={cx("display_info", "col", "l-0", "m-6")}>
+                  <CartIcon width="2.3rem" height="2.3rem" />
+                  {!showInfo ? (
+                    <p>Hiển thị thông tin đơn hàng</p>
+                  ) : (
+                    <p>Ẩn thông tin đơn hàng</p>
+                  )}
+                  <span onClick={handleShowInfo}>
+                    <ion-icon name="chevron-down-outline"></ion-icon>
+                  </span>
+                </div>
+                {showInfo ? (
+                  currentOrderDetail.temp_product.map((item, index) => {
+                    let prd_name = "";
+                    let imgFront = "";
+                    let prices = "";
+
+                    productList.forEach((product) => {
+                      const check = product.id === item.product_id;
+                      if (check) {
+                        imgFront = product.imgFront;
+                        prd_name = product.name;
+                        prices = product.prices;
+                      }
+                    });
+                    totalMoney += prices * item.number;
+                    return (
+                      <div className={cx("row", "prd-info")} key={index}>
+                        <div className={cx("col m-2", "prd-img-wrapper")}>
+                          <div className={cx("prd-img")}>
+                            <Images src={imgFront} />
+                          </div>
+                          <span className={cx("prd-quantity")}>
+                            {item.number}
+                          </span>
+                        </div>
+                        <div className={cx("col m-7", "prd-desc")}>
+                          <span className={cx("prd-name")}>{prd_name}</span>
+                          <span className={cx("prd-size")}>
+                            Size: {item.size}
+                          </span>
+                          <span>
+                            Màu: &nbsp;
+                            <span
+                              style={{
+                                backgroundColor: `${item.color}`,
+                                padding: "3px 10px",
+                                borderRadius: "50%",
+                              }}
+                            ></span>
+                          </span>
+                        </div>
+                        <div className={cx("col m-3", "prd-price")}>
+                          <span>{VndFormat(prices * item.number)}</span>
+                        </div>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <></>
+                )}
+                {showInfo ? (
+                  <div className={cx("prd-total", "col", "m-12")}>
+                    <table className={cx("total-line-table")}>
+                      <thead>
+                        <tr>
+                          <th scope="col"></th>
+                          <th scope="col"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr className={cx("total-line")}>
+                          <td>Tạm tính</td>
+                          <td>
+                            <span>{VndFormat(totalMoney)}</span>
+                          </td>
+                        </tr>
+
+                        <tr className={cx("total-line")}>
+                          <td>Phí vận chuyển</td>
+                          <td>
+                            <span
+                              className={cx("order-summary-emphasis")}
+                              data-checkout-total-shipping-target="4000000"
+                            >
+                              —
+                            </span>
+                          </td>
+                        </tr>
+                      </tbody>
+                      <tfoot className={cx("total-line-table-footer")}>
+                        <tr className={cx("total-line")}>
+                          <td className={cx("payment-due-label")}>
+                            <span className={cx("payment-due-label-total")}>
+                              Tổng cộng
+                            </span>
+                          </td>
+                          <td className={cx("payment-due")}>
+                            <span className={cx("payment-due-currency")}>
+                              VND
+                            </span>
+                            <span
+                              className={cx("payment-due-price")}
+                              data-checkout-payment-due-target="32000000"
+                            >
+                              {VndFormat(totalMoney)}
+                            </span>
+                          </td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                ) : (
+                  <></>
+                )}
+                {/* <div
+                  className={cx("col", "l-0", "m-6")}
+                  style={{ height: "100%" }}
+                >
+                  <div
+                    className={cx("payment-due-price")}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      height: "100%",
+                    }}
+                  >
+                    {VndFormat(totalMoney)}
+                  </div>
+                </div> */}
+              </div>
             </div>
             <div className={cx("main-content")}>
               <div className={cx("section")}>
@@ -238,7 +379,7 @@ function Payment() {
               </div>
             </div>
           </div>
-          <div className={cx("col l-6")}>
+          <div className={cx("col l-6 m-0")}>
             <div className={cx("sidebar-content")}>
               {currentOrderDetail.temp_product.map((item, index) => {
                 let prd_name = "";

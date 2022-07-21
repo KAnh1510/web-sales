@@ -85,3 +85,12 @@
     }
   }
 }
+
+// responsive
+@media (min-width: 740px) and (max-width: 1023px) {
+  .map {
+    height: 50vh;
+    border-right: none;
+    text-align: center;
+  }
+}

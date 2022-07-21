@@ -85,6 +85,9 @@
     }
   }
 }
+.slick-item {
+  width: 100%;
+}
 
 .product_title {
   padding: 0 0 10px;
@@ -271,5 +274,11 @@ input {
     text-transform: uppercase;
     margin: 10px 0 0;
     font-weight: 500;
+  }
+}
+
+@media (min-width: 740px) {
+  .product_info {
+    margin-top: 20px;
   }
 }

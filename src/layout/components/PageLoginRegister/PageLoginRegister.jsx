@@ -8,14 +8,14 @@ function PageLoginRegister({ title, children }) {
   return (
     <div className={cx("grid")}>
       <div className={cx("row")}>
-        <div className={cx("col l-6")}>
+        <div className={cx("col l-6 m-12")}>
           <div className={cx("wrapper")}>
             <div className={cx("title")}>
               <h1>{title}</h1>
             </div>
           </div>
         </div>
-        <div className={cx("col l-6")}>
+        <div className={cx("col l-6 m-12")}>
           <div className={cx("content")}>{children}</div>
         </div>
       </div>

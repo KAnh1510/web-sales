@@ -145,7 +145,6 @@
 }
 
 //Sidebar
-
 .sidebar-content {
   width: 100%;
   color: #717171;
@@ -163,7 +162,7 @@
 }
 
 .prd-img {
-  height: 4.6em;
+  // height: 4.6em;
   position: relative;
   overflow: hidden;
 
@@ -266,4 +265,38 @@ th:last-child {
   letter-spacing: -0.04em;
   color: #4b4b4b;
   line-height: 1em;
+}
+
+//mobile
+.mobile {
+  padding: 0 20px;
+  margin: 20px 0;
+  background-color: #fafafa;
+  border-top: 1px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6;
+}
+.display_info {
+  padding: 17.5px 0;
+  display: flex;
+  align-items: center;
+  color: #338dbc;
+
+  svg {
+    margin-right: 10px;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  ion-icon {
+    vertical-align: middle;
+    transition: fill 0.2s ease-in-out;
+    fill: #338dbc;
+    padding-left: 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }

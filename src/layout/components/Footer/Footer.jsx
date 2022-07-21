@@ -18,7 +18,7 @@ function Footer() {
     <div className="grid">
       <div className={cx("wrapper")}>
         <div className="row">
-          <div className="col l-12">
+          <div className="col l-12 m-12">
             <div className={cx("hot_line")}>
               <FontAwesomeIcon icon={faPhoneFlip} className={cx("icon")} />
               <p>Hotline</p>
@@ -31,7 +31,7 @@ function Footer() {
           </div>
         </div>
         <div className={cx("row", "contact")}>
-          <div className="col l-3">
+          <div className="col l-3 m-6">
             <div className={cx("link")}>
               <h2>Liên Kết</h2>
               <p>
@@ -51,7 +51,7 @@ function Footer() {
               </p>
             </div>
           </div>
-          <div className="col l-3">
+          <div className="col l-3 m-6">
             <div className={cx("infomation")}>
               <h2>Thông tin liên hệ</h2>
               <p>
@@ -70,7 +70,7 @@ function Footer() {
               </p>
             </div>
           </div>
-          <div className="col l-3">
+          <div className="col l-3 m-5">
             <div className={cx("fanpage")}>
               <h2>Fanpage</h2>
               <iframe

@@ -9,7 +9,7 @@ import HeaderAddress from "./HeaderAddress";
 import PageAccountAddress from "~/layout/components/PageAccountAddress";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUsers, getUser } from "../User/UserSlice";
+import { getAllUsers } from "../User/UserSlice";
 
 const cx = classnames.bind(styles);
 
@@ -30,7 +30,7 @@ function Address() {
 
   return (
     <PageAccountAddress title="Thông tin địa chỉ" userId={params.id}>
-      <div className={cx("col l-7")}>
+      <div className={cx("col l-7 m-9")}>
         <HeaderAddress
           setEdit={setEdit}
           edit={edit}

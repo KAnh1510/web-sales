@@ -33,7 +33,7 @@ function Contact() {
 
   return (
     <div className={cx("contact row")}>
-      <div className={cx("col l-6")}>
+      <div className={cx("col l-6 m-9")}>
         <div className={cx("map")}>
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.157376607699!2d106.6786539405679!3d10.799255989063358!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175296a896275f3%3A0x3277c214e39e4343!2sShop%20colkids.club!5e0!3m2!1svi!2s!4v1654695386197!5m2!1svi!2s"
@@ -45,7 +45,7 @@ function Contact() {
           ></iframe>
         </div>
       </div>
-      <div className={cx("col l-6")}>
+      <div className={cx("col l-6 m-12")}>
         <div className={cx("info")}>
           <h1 className={cx("header")}>Liên Hệ</h1>
           <div className={cx("box-contact")}>
@@ -82,7 +82,7 @@ function Contact() {
           <h2 className={cx("title")}>Gửi thắc mắc về cho chúng tôi</h2>
           <div className={cx("contact-form")}>
             <div className={cx("row")}>
-              <div className={cx("col l-12")}>
+              <div className={cx("col l-12 m-12")}>
                 <div className={cx("input-group")}>
                   <input
                     type="text"
@@ -97,7 +97,7 @@ function Contact() {
                   />
                 </div>
               </div>
-              <div className={cx("col l-6")}>
+              <div className={cx("col l-6 m-6")}>
                 <div className={cx("input-group")}>
                   <input
                     type="text"
@@ -112,7 +112,7 @@ function Contact() {
                   />
                 </div>
               </div>
-              <div className={cx("col l-6")}>
+              <div className={cx("col l-6 m-6")}>
                 <div className={cx("input-group")}>
                   <input
                     type="text"
@@ -127,7 +127,7 @@ function Contact() {
                   />
                 </div>
               </div>
-              <div className={cx("col l-12")}>
+              <div className={cx("col l-12 m-12")}>
                 <div className={cx("input-group")}>
                   <textarea
                     type="text"

@@ -19,14 +19,14 @@ function PageAccountAddress({ title, children }) {
   return (
     <div className={cx("grid")}>
       <div className={cx("row")}>
-        <div className={cx("col l-12")}>
+        <div className={cx("col l-12 m-12")}>
           <div className={cx("header")}>
             <h1>{title}</h1>
           </div>
         </div>
         <div className={cx("container", "grid")}>
           <div className={cx("row")}>
-            <div className={cx("col l-3")}>
+            <div className={cx("col l-3 m-5")}>
               <div className={cx("title")}>
                 <h3>Tài khoản</h3>
               </div>
@@ -50,7 +50,7 @@ function PageAccountAddress({ title, children }) {
                 </ul>
               </div>
             </div>
-            <div className={cx("col l-9")}>
+            <div className={cx("col l-9 m-7")}>
               <div className={cx("row")}>{children}</div>
             </div>
           </div>

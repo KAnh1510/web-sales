@@ -17,6 +17,7 @@ function Shop() {
   useEffect(() => {
     dispatch(getAllCollections());
   }, [dispatch]);
+
   return (
     <DefaultLayout>
       <div className={cx("wrapper")}>
@@ -26,8 +27,8 @@ function Shop() {
             alt="Welcome"
           />
         </div>
-        <div className={cx("collection")}>
-          <div className={cx("title")}>
+        <div className={cx("collection", "row")}>
+          <div className={cx("title", "col", "l-10", "m-12")}>
             <ul>
               {collectionList.map((item) => (
                 <li key={item.id}>
@@ -43,7 +44,7 @@ function Shop() {
               ))}
             </ul>
           </div>
-          <div className={cx("choose")}>
+          <div className={cx("choose", "col", "l-2", "m-0")}>
             <User />
           </div>
         </div>

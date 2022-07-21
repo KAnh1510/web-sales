@@ -1,27 +1,27 @@
 export const LISTSIDEBAR = [
   {
-    title: "ColKid's story",
+    title: "Trang chủ",
     to: "/",
   },
   {
-    title: "Shop",
+    title: "Tất cả sản phẩm",
     to: "/collections/All",
   },
   {
-    title: "Magazine",
+    title: "Tạp chí",
     to: "/magazine",
   },
   {
-    title: "Contact us",
+    title: "Liên hệ",
     to: "/pages/contact",
   },
   {
-    title: "Login",
+    title: "Đăng nhập",
     to: "/account/login",
     to2: "/account/",
   },
   {
-    title: "Recruitment",
+    title: "Tuyển dụng",
     to: "/recruitment",
   },
 ];

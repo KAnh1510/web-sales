@@ -60,13 +60,13 @@ function Cart() {
       <HeaderPage title={"Giỏ hàng"} />
       <div className={cx("wrapper", "grid")}>
         <div className={cx("row")}>
-          <div className={cx("col l-12", "header")}>
+          <div className={cx("col l-12 m-12", "header")}>
             <h1>Giỏ hàng của bạn</h1>
           </div>
         </div>
 
         <div className={cx("row")}>
-          <div className={cx("col l-8")}>
+          <div className={cx("col l-8 m-8")}>
             {currentOrderDetail
               ? currentOrderDetail.temp_product.map((item, index) => {
                   let name = "";
@@ -85,12 +85,12 @@ function Cart() {
 
                   return (
                     <div className={cx("row", "info-prd")} key={index}>
-                      <div className={cx("col l-2")}>
+                      <div className={cx("col l-2 m-4")}>
                         <Link to={`product/${name}`} className={cx("img-prd")}>
                           <img src={imgFront} alt={name} />
                         </Link>
                       </div>
-                      <div className={cx("col l-10")}>
+                      <div className={cx("col l-10 m-8")}>
                         <div className={cx("info-text")}>
                           <div className={cx("name-prd")}>
                             <h3>{name}</h3>
@@ -142,7 +142,7 @@ function Cart() {
               : ""}
 
             <div className={cx("row")}>
-              <div className={cx("col l-5")}>
+              <div className={cx("col l-5 m-12")}>
                 <div className={cx("note")}>
                   <h4 className={cx("title")}>Ghi chú đơn hàng</h4>
                   <div className={cx("checkout-note")}>
@@ -157,7 +157,7 @@ function Cart() {
                   </div>
                 </div>
               </div>
-              <div className={cx("col l-7")}>
+              <div className={cx("col l-7 m-12")}>
                 <div className={cx("policy")}>
                   <h4 className={cx("title")}>Chính sách mua hàng</h4>
                   <ul>
@@ -176,7 +176,7 @@ function Cart() {
               </div>
             </div>
           </div>
-          <div className={cx("col l-4")}>
+          <div className={cx("col l-4 m-4")}>
             <div className={cx("sidebox-order")}>
               <div className={cx("sidebox-order-inner")}>
                 <div className={cx("sidebox-order_title")}>

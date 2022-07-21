@@ -5,34 +5,33 @@ import classnames from "classnames/bind";
 
 const cx = classnames.bind(styles);
 function ViewAddress({ className, currentUser }) {
-  console.log(currentUser);
   return (
     <div className={cx(className)}>
       <div className={cx("view-address")}>
         <div className={cx("row")}>
-          <div className={cx("col l-12")}>
+          <div className={cx("col l-12 m-12")}>
             <p>
               <strong>{currentUser.name}</strong>
             </p>
           </div>
 
-          <div className={cx("col l-4")}>
+          <div className={cx("col l-4 m-4")}>
             <p>
               <b>Địa chỉ:</b>
             </p>
           </div>
-          <div className={cx("col l-8")}>
+          <div className={cx("col l-8 m-8")}>
             <p>
               <b>{currentUser.address}</b>
             </p>
           </div>
 
-          <div className={cx("col l-4")}>
+          <div className={cx("col l-4 m-4")}>
             <p>
               <b>Số điện thoại:</b>
             </p>
           </div>
-          <div className={cx("col l-8")}>
+          <div className={cx("col l-8 m-8")}>
             <p>
               <b>{currentUser.phoneNumber}</b>
             </p>

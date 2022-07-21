@@ -17,7 +17,7 @@ function HeaderAddress(props) {
   return (
     <div>
       <div className={cx("row")}>
-        <div className={cx("col l-12")}>
+        <div className={cx("col l-12 m-12")}>
           <div className={cx("address-title")}>
             <h3>
               <strong>{currentUser.name}</strong>

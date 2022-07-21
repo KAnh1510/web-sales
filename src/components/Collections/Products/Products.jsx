@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useParams, useNavigate } from "react-router-dom";
+import Slider from "react-slick";
 import styles from "./Products.module.scss";
 import classnames from "classnames/bind";
 
@@ -118,9 +119,20 @@ export default function Products() {
     } else setForgot(true);
   };
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    arrows: true,
+  };
+
   return (
     <div className={cx("grid")}>
-      <div className={cx("user")}>
+      <div className={cx("user", " m-0")}>
         <User />
       </div>
       {currentProduct.map((product) => {
@@ -148,7 +160,7 @@ export default function Products() {
               <span> {productName}</span>
             </div>
             <div className={cx("content", "row")}>
-              <div className={cx("col", "l-1")}>
+              <div className={cx("col", "l-1", "m-0")}>
                 <div className={cx("gallery")}>
                   {product.gallery.map((item, index) => (
                     <div key={index} className={cx("gallery-item")}>
@@ -164,11 +176,23 @@ export default function Products() {
                   ))}
                 </div>
               </div>
-              <div className={cx("main-img", "col", "l-7")}>
+              <div className={cx("main-img", "col", "l-7", "m-0")}>
                 <ZoomIn props={product.gallery} />
               </div>
 
-              <div className={cx("col", "l-4")}>
+              <div className={cx("col", "l-0", "m-2")}></div>
+              <div
+                className={cx("col", "l-0", "m-9")}
+                style={{ textAlign: "center" }}
+              >
+                <Slider {...settings}>
+                  {product.gallery.map((item) => (
+                    <Images src={item.src} className={cx("slick-item")} />
+                  ))}
+                </Slider>
+              </div>
+
+              <div className={cx("col", "l-4", "m-12")}>
                 <div className={cx("product_info")}>
                   <div className={cx("product_title")}>
                     <h1>{productName}</h1>
@@ -327,14 +351,14 @@ export default function Products() {
             </div>
 
             <div className={cx("row")}>
-              <div className={cx("title", "col", "l-12")}>
+              <div className={cx("title", "col", "l-12", "m-12")}>
                 <h2>Sản phẩm liên quan</h2>
               </div>
               <div className={cx("content", "row")}>
                 {productList.map(
                   (item) =>
                     product.collection_id === item.collection_id && (
-                      <div key={item.id} className={cx("col", "l-2-4")}>
+                      <div key={item.id} className={cx("col", "l-2-4", "m-6")}>
                         <ShowListProduct item={item} />
                       </div>
                     )
