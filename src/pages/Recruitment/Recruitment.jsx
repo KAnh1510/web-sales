@@ -10,8 +10,8 @@ function Recruitment() {
     <DefaultLayout>
       <div className={cx("wrapper", "grid")} style={{ marginTop: "20px" }}>
         <div className={cx("row")}>
-          <div className={cx("col l-2")}></div>
-          <div className={cx("container", "col l-8")}>
+          <div className={cx("col l-2 c-0")}></div>
+          <div className={cx("container", "col l-8 c-12")}>
             <p>
               <span className={cx("title")}>
                 <strong>Vị trí tuyển dụng tại hồ chí minh</strong>
@@ -31,7 +31,7 @@ function Recruitment() {
             </p>
             <Images src="https://file.hstatic.net/200000436739/file/recruitment-07_8380fe8e8a4c4ae58fe554e1c55f6c6e_grande.jpg" />
           </div>
-          <div className={cx("col l-2")}></div>
+          <div className={cx("col l-2 c-0")}></div>
         </div>
       </div>
     </DefaultLayout>

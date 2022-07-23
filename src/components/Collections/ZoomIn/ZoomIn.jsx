@@ -12,7 +12,7 @@ function ZoomIn({ props }) {
   return (
     <>
       {props.map((item, index) => (
-        <div key={index} className="img-item">
+        <div key={index} className="img-item col c-0">
           <Images
             alt="aaaaa"
             src={item.src}

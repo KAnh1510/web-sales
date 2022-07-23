@@ -12,16 +12,16 @@ const cx = classnames.bind(styles);
 
 function NewFooter() {
   return (
-    <div className={cx("footer")}>
-      <div className={cx("wrapper")}>
-        <p className={cx("copy-right")}>Copyright COLKIDS.CLUB ®</p>
-        <Link to="/" className={cx("logo")}>
+    <div className={cx("footer", "grid")}>
+      <div className={cx("wrapper", "row")}>
+        <p className={cx("copy-right", "col c-6")}>Copyright COLKIDS.CLUB ®</p>
+        <Link to="/" className={cx("logo", "col c-0")}>
           <img
             src="https://file.hstatic.net/200000436739/file/logo-01-01_09ce146264e44644ba139b66098f2e6c.png"
             alt="logo"
           />
         </Link>
-        <ul className={cx("social")}>
+        <ul className={cx("social", "col c-2")}>
           <li>
             <a href="https://www.facebook.com">
               <FontAwesomeIcon icon={faFacebookF} />

@@ -22,9 +22,9 @@ function MenuMobile({ setShowMenu }) {
           <Images
             src="https://file.hstatic.net/200000436739/file/logo-01-01_09ce146264e44644ba139b66098f2e6c.png"
             alt="Logo"
-            className={cx("logo", "col", "m-8")}
+            className={cx("logo", "col", "m-8", "c-9")}
           />
-          <div className={cx("icon_close", "col", "m-4")}>
+          <div className={cx("icon_close", "col", "m-4", "c-3")}>
             <FontAwesomeIcon icon={faTimesCircle} onClick={handelClose} />
           </div>
         </div>

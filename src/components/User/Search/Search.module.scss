@@ -69,3 +69,29 @@
     background-color: rgba(22, 24, 35, 0.03);
   }
 }
+
+//responsive
+@media (min-width: 740px) and (max-width: 1023px) {
+  .header {
+    display: none;
+  }
+}
+
+@media (max-width: 740px) {
+  .header {
+    display: none;
+  }
+
+  .search,
+  .search-results {
+    width: 100%;
+  }
+  .search {
+    input {
+      padding: 0 10px;
+    }
+  }
+  .search-btn {
+    padding-right: 10px;
+  }
+}

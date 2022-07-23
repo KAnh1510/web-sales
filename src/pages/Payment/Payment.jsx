@@ -31,7 +31,6 @@ function Payment() {
   const tempNote = JSON.parse(localStorage.getItem(StorageKeys.noteOrder));
 
   const [confirmLogout, setConfirmLogout] = useState(false);
-  const [confirmOrder, setConfirmOrder] = useState(false);
   const [orderDone, setOrderDone] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
   let totalMoney = 0;
@@ -79,8 +78,6 @@ function Payment() {
         }
       });
     });
-
-    setConfirmOrder(true);
     setOrderDone(true);
   };
 
@@ -100,14 +97,14 @@ function Payment() {
         />
       ) : (
         <div className={cx("row")}>
-          <div className={cx("col l-6 m-12", "main")}>
+          <div className={cx("col l-6 m-12 c-12", "main")}>
             <div className={cx("main-header")}>
               <h1>COLKIDSCLUBVN</h1>
               <HeaderPage title="Phương thức thanh toán" />
             </div>
             <div className="row">
-              <div className={cx("col l-0 m-12", "mobile")}>
-                <div className={cx("display_info", "col", "l-0", "m-6")}>
+              <div className={cx("col l-0 m-12 c-12", "mobile")}>
+                <div className={cx("display_info", "col", "l-0", "m-6", "c-6")}>
                   <CartIcon width="2.3rem" height="2.3rem" />
                   {!showInfo ? (
                     <p>Hiển thị thông tin đơn hàng</p>
@@ -135,7 +132,7 @@ function Payment() {
                     totalMoney += prices * item.number;
                     return (
                       <div className={cx("row", "prd-info")} key={index}>
-                        <div className={cx("col m-2", "prd-img-wrapper")}>
+                        <div className={cx("col m-2 c-2", "prd-img-wrapper")}>
                           <div className={cx("prd-img")}>
                             <Images src={imgFront} />
                           </div>
@@ -143,7 +140,7 @@ function Payment() {
                             {item.number}
                           </span>
                         </div>
-                        <div className={cx("col m-7", "prd-desc")}>
+                        <div className={cx("col m-7 c-7", "prd-desc")}>
                           <span className={cx("prd-name")}>{prd_name}</span>
                           <span className={cx("prd-size")}>
                             Size: {item.size}
@@ -159,7 +156,7 @@ function Payment() {
                             ></span>
                           </span>
                         </div>
-                        <div className={cx("col m-3", "prd-price")}>
+                        <div className={cx("col m-3 c-3", "prd-price")}>
                           <span>{VndFormat(prices * item.number)}</span>
                         </div>
                       </div>
@@ -169,7 +166,7 @@ function Payment() {
                   <></>
                 )}
                 {showInfo ? (
-                  <div className={cx("prd-total", "col", "m-12")}>
+                  <div className={cx("prd-total", "col", "m-12", "c-12")}>
                     <table className={cx("total-line-table")}>
                       <thead>
                         <tr>
@@ -188,10 +185,7 @@ function Payment() {
                         <tr className={cx("total-line")}>
                           <td>Phí vận chuyển</td>
                           <td>
-                            <span
-                              className={cx("order-summary-emphasis")}
-                              data-checkout-total-shipping-target="4000000"
-                            >
+                            <span className={cx("order-summary-emphasis")}>
                               —
                             </span>
                           </td>
@@ -208,10 +202,7 @@ function Payment() {
                             <span className={cx("payment-due-currency")}>
                               VND
                             </span>
-                            <span
-                              className={cx("payment-due-price")}
-                              data-checkout-payment-due-target="32000000"
-                            >
+                            <span className={cx("payment-due-price")}>
                               {VndFormat(totalMoney)}
                             </span>
                           </td>
@@ -362,24 +353,24 @@ function Payment() {
                   Thanh toán khi nhận hàng
                 </label>
               </div>
-              <div className={cx("footer")}>
-                <Link to={"/cart"}>Giỏ hàng</Link>
-                {confirmOrder ? (
-                  <button
-                    className={cx("btn-payment")}
-                    style={{ backgroundColor: "green" }}
-                  >
-                    Đặt hàng thành công
-                  </button>
-                ) : (
-                  <button className={cx("btn-payment")} onClick={handlePayment}>
-                    Xác nhận đặt hàng
-                  </button>
-                )}
+              <div className={cx("footer", "row")}>
+                <button
+                  className={cx("btn-payment", "col c-12")}
+                  onClick={handlePayment}
+                >
+                  Xác nhận đặt hàng
+                </button>
+                <Link
+                  to={"/cart"}
+                  className="col c-12"
+                  style={{ color: "var(--primary)" }}
+                >
+                  Giỏ hàng
+                </Link>
               </div>
             </div>
           </div>
-          <div className={cx("col l-6 m-0")}>
+          <div className={cx("col l-6 m-0 c-0")}>
             <div className={cx("sidebar-content")}>
               {currentOrderDetail.temp_product.map((item, index) => {
                 let prd_name = "";

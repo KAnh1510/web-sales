@@ -35,7 +35,7 @@
   }
 }
 
-.infomation {
+.information {
   svg {
     padding-right: 10px;
     font-size: 1.6rem;
@@ -46,5 +46,16 @@
 @media (min-width: 740px) and (max-width: 1023px) {
   .fanpage {
     padding: 20px 0px 30px;
+  }
+}
+
+@media (max-width: 740px) {
+  .fanpage {
+    padding: 20px 0px 30px;
+    text-align: center;
+  }
+  .link,
+  .information {
+    text-align: center;
   }
 }

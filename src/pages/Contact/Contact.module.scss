@@ -4,6 +4,11 @@
   border-right: 1px solid #ededed;
   height: 100vh;
   padding: 0;
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
 }
 
 .info {
@@ -92,5 +97,26 @@
     height: 50vh;
     border-right: none;
     text-align: center;
+  }
+}
+@media (max-width: 740px) {
+  .map {
+    height: 50vh;
+    border-right: none;
+    text-align: center;
+  }
+  .header,
+  .box-contact {
+    display: none;
+  }
+  .info {
+    padding: 0;
+  }
+  .title {
+    padding-top: 20px;
+    margin: 0;
+    &::after {
+      display: none;
+    }
   }
 }

@@ -57,13 +57,14 @@
   }
 }
 
-.react-datepicker__current-month {
-  font-size: 1.3rem !important;
-}
-
-.react-datepicker__month-container {
-  width: 100%;
-}
-.react-datepicker {
-  width: 100%;
+//responsive
+@media (max-width: 740px) {
+  .btn-submit {
+    button {
+      width: 100%;
+    }
+  }
+  .return-login {
+    margin-top: 15px;
+  }
 }

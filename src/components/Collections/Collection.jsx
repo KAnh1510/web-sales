@@ -36,19 +36,25 @@ export default function Collections() {
   );
 
   return (
-    <div className={cx("grid", "wide")}>
+    <div className={cx("grid")}>
       <div className={cx("row")}>
         {params.type === "All"
           ? productList.map((product) => {
               return (
-                <div key={product.id} className={cx("col", "l-3", "m-6")}>
+                <div
+                  key={product.id}
+                  className={cx("col", "l-3", "m-6", "c-6")}
+                >
                   <ShowListProduct item={product} />
                 </div>
               );
             })
           : productCollection.map((product) => {
               return (
-                <div key={product.id} className={cx("col", "l-3", "m-6")}>
+                <div
+                  key={product.id}
+                  className={cx("col", "l-3", "m-6", "c-6")}
+                >
                   <ShowListProduct item={product} />
                 </div>
               );

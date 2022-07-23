@@ -125,21 +125,21 @@ function Login() {
 
             <Captcha />
 
-            <div className={cx("action-account")}>
-              <div className={cx("btn-submit")}>
+            <div className={cx("action-account", "row")}>
+              <div className={cx("btn-submit", "col l-6 m-6 c-12")}>
                 <Button onClick={handleLogin}>
                   <input type="submit" value="Đăng nhập" />
                 </Button>
               </div>
-              <div className={cx("res-pass")}>
+              <div className={cx("res-pass", "col l-6 m-6 c-12")}>
                 <p
                   title="Mật khẩu"
                   onClick={() => setForgotPassword(!forgotPassword)}
                 >
                   Quên mật khẩu?
                 </p>
-                <br />
-                hoặc{" "}
+                <br className="col c-0" />
+                hoặc
                 <Link to="/account/register" title="Đăng ký">
                   Đăng ký
                 </Link>

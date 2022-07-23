@@ -77,3 +77,23 @@ input[type="email"] {
     }
   }
 }
+
+//responsive
+@media (max-width: 740px) {
+  .btn-submit {
+    button {
+      width: 100%;
+    }
+  }
+  .res-pass {
+    padding-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    a,
+    p {
+      margin: 0 10px;
+    }
+  }
+}

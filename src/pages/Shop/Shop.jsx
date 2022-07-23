@@ -21,14 +21,14 @@ function Shop() {
   return (
     <DefaultLayout>
       <div className={cx("wrapper")}>
-        <div className={cx("banner")}>
+        <div className={cx("banner", "col c-12")}>
           <img
             src="https://file.hstatic.net/200000436739/file/banner-shop-01_2138b3e555b142c699a9ece6eace8f45.jpg"
             alt="Welcome"
           />
         </div>
         <div className={cx("collection", "row")}>
-          <div className={cx("title", "col", "l-10", "m-12")}>
+          <div className={cx("title", "col", "l-10", "m-12", "c-12")}>
             <ul>
               {collectionList.map((item) => (
                 <li key={item.id}>
@@ -44,7 +44,7 @@ function Shop() {
               ))}
             </ul>
           </div>
-          <div className={cx("choose", "col", "l-2", "m-0")}>
+          <div className={cx("choose", "col", "l-2", "m-0", "c-0")}>
             <User />
           </div>
         </div>

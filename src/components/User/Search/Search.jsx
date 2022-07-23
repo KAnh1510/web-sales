@@ -79,7 +79,7 @@ function Search({ setShowSearch }) {
         )}
         onClickOutside={handelHideResults}
       >
-        <div className={cx("search")}>
+        <div className={cx("search", "col c-12")}>
           <input
             ref={inputRef}
             type="text"

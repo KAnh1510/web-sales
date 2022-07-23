@@ -5,6 +5,7 @@
 .logo {
   width: 100%;
 }
+
 .icon_close {
   display: flex;
   justify-content: flex-end;
@@ -29,5 +30,11 @@
       font-weight: 600;
       cursor: pointer;
     }
+  }
+}
+
+@media (max-width: 740px) {
+  .icon_close {
+    justify-content: center;
   }
 }

@@ -6,6 +6,7 @@ import { useState } from "react";
 import Cart from "./Cart";
 import { CartIcon, SearchIcon } from "../Icons";
 import MenuMobile from "./MenuMobile";
+import { Link } from "react-router-dom";
 
 const cx = classnames.bind(styles);
 
@@ -39,18 +40,20 @@ function User() {
         <MenuMobile setShowMenu={setShowMenu} />
       </div>
 
-      <div style={{ display: "flex" }} className={cx("choose")}>
-        <span className={cx("choose-item")}>
-          <div onClick={handelShowSearch}>
-            <SearchIcon />
-          </div>
-        </span>
+      <div className={cx("choose", "row")}>
+        <div
+          className={cx("choose-item", "col l-2 m-2 c-0")}
+          onClick={handelShowSearch}
+        >
+          <SearchIcon />
+        </div>
 
-        <span className={cx("choose-item")}>
-          <div className={cx("cart")} onClick={handelShowCart}>
-            <CartIcon width="2.6rem" height="2.6rem" />
-          </div>
-        </span>
+        <div
+          className={cx("choose-item", "cart", "col m-2 l-2")}
+          onClick={handelShowCart}
+        >
+          <CartIcon width="2.6rem" height="2.6rem" />
+        </div>
 
         <span className="col l-0">
           <div className={cx("menu")} onClick={handelShowMenu}>

@@ -10,8 +10,7 @@
   background-color: #fff;
   z-index: 999;
   border: 1px solid #ededed;
-  transition: all 0.35s;
-  -webkit-transition: all 0.25s;
+  -webkit-transition: all 0.75s;
 
   overflow-y: overlay;
 
@@ -40,14 +39,18 @@ html *::-webkit-scrollbar-track {
   right: -400px;
   opacity: 0;
 }
+
 .showing {
   right: 0px;
   opacity: 1;
 }
 
+.choose {
+  justify-content: center;
+}
+
 .choose-item {
   svg {
-    margin: 0 12px;
     &:hover {
       cursor: pointer;
       opacity: 0.8;
@@ -59,5 +62,12 @@ html *::-webkit-scrollbar-track {
   .choose {
     display: flex;
     justify-content: flex-end;
+  }
+}
+
+@media (max-width: 740px) {
+  .showing {
+    width: 330px;
+    padding: 0;
   }
 }

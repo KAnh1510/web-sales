@@ -60,7 +60,7 @@ function Cart() {
       <HeaderPage title={"Giỏ hàng"} />
       <div className={cx("wrapper", "grid")}>
         <div className={cx("row")}>
-          <div className={cx("col l-12 m-12", "header")}>
+          <div className={cx("col l-12 m-12 c-12", "header")}>
             <h1>Giỏ hàng của bạn</h1>
           </div>
         </div>
@@ -142,7 +142,7 @@ function Cart() {
               : ""}
 
             <div className={cx("row")}>
-              <div className={cx("col l-5 m-12")}>
+              <div className={cx("col l-5 m-12 c-12")}>
                 <div className={cx("note")}>
                   <h4 className={cx("title")}>Ghi chú đơn hàng</h4>
                   <div className={cx("checkout-note")}>
@@ -157,7 +157,47 @@ function Cart() {
                   </div>
                 </div>
               </div>
-              <div className={cx("col l-7 m-12")}>
+
+              <div className={cx("col l-4 m-4 c-12")}>
+                <div className={cx("sidebox-order")}>
+                  <div className={cx("sidebox-order-inner")}>
+                    <div className={cx("sidebox-order_title")}>
+                      <h3>Thông tin đơn hàng</h3>
+                    </div>
+                    <div className={cx("sidebox-order_total")}>
+                      <p>
+                        Tổng tiền:
+                        <span className={cx("total-price")}>
+                          {VndFormat(total)}
+                        </span>
+                      </p>
+                    </div>
+                    <div className={cx("sidebox-order_text")}>
+                      <p>
+                        Phí vận chuyển sẽ được tính ở trang thanh toán.
+                        <br />
+                        Bạn cũng có thể nhập mã giảm giá ở trang thanh toán.
+                      </p>
+                    </div>
+                    <div className={cx("sidebox-order_action")}>
+                      <Button
+                        className={cx("btncart-checkout")}
+                        onClick={handleToPayment}
+                      >
+                        Thanh toán
+                      </Button>
+                      <p className={cx("link-continue")}>
+                        <Link to="/collections/All">
+                          <ion-icon name="arrow-undo-outline"></ion-icon>
+                          Tiếp tục mua hàng
+                        </Link>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className={cx("col l-7 m-12 c-12")}>
                 <div className={cx("policy")}>
                   <h4 className={cx("title")}>Chính sách mua hàng</h4>
                   <ul>
@@ -176,7 +216,7 @@ function Cart() {
               </div>
             </div>
           </div>
-          <div className={cx("col l-4 m-4")}>
+          <div className={cx("col l-4 m-4 c-0")}>
             <div className={cx("sidebox-order")}>
               <div className={cx("sidebox-order-inner")}>
                 <div className={cx("sidebox-order_title")}>

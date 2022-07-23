@@ -113,3 +113,13 @@
     display: block;
   }
 }
+
+@media (max-width: 740px) {
+  .wrapper {
+    float: none;
+  }
+
+  .title ul {
+    display: block;
+  }
+}

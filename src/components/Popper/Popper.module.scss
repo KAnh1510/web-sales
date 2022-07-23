@@ -5,3 +5,9 @@
   min-height: 100px;
   padding-top: 8px;
 }
+@media (max-width: 740px) {
+  .wrapper {
+    background-color: #fff;
+    min-width: 366px;
+  }
+}

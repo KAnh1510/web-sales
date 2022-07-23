@@ -151,3 +151,14 @@ th:last-child {
     padding: 12px;
   }
 }
+
+@media (max-width: 740px) {
+  .sidebar-content {
+    padding: 0;
+  }
+  .info {
+    textarea {
+      width: 100%;
+    }
+  }
+}

@@ -132,7 +132,7 @@ export default function Products() {
 
   return (
     <div className={cx("grid")}>
-      <div className={cx("user", " m-0")}>
+      <div className={cx("user", "col", "m-0", "c-0")}>
         <User />
       </div>
       {currentProduct.map((product) => {
@@ -160,7 +160,7 @@ export default function Products() {
               <span> {productName}</span>
             </div>
             <div className={cx("content", "row")}>
-              <div className={cx("col", "l-1", "m-0")}>
+              <div className={cx("col", "l-1", "m-0", "c-0")}>
                 <div className={cx("gallery")}>
                   {product.gallery.map((item, index) => (
                     <div key={index} className={cx("gallery-item")}>
@@ -176,13 +176,13 @@ export default function Products() {
                   ))}
                 </div>
               </div>
-              <div className={cx("main-img", "col", "l-7", "m-0")}>
+              <div className={cx("main-img", "col", "l-7", "m-0", "c-0")}>
                 <ZoomIn props={product.gallery} />
               </div>
 
               <div className={cx("col", "l-0", "m-2")}></div>
               <div
-                className={cx("col", "l-0", "m-9")}
+                className={cx("col", "l-0", "m-9", "c-12")}
                 style={{ textAlign: "center" }}
               >
                 <Slider {...settings}>
@@ -192,7 +192,7 @@ export default function Products() {
                 </Slider>
               </div>
 
-              <div className={cx("col", "l-4", "m-12")}>
+              <div className={cx("col", "l-4", "m-12", "c-12")}>
                 <div className={cx("product_info")}>
                   <div className={cx("product_title")}>
                     <h1>{productName}</h1>
@@ -351,14 +351,17 @@ export default function Products() {
             </div>
 
             <div className={cx("row")}>
-              <div className={cx("title", "col", "l-12", "m-12")}>
+              <div className={cx("title", "col", "l-12", "m-12", "c-12")}>
                 <h2>Sản phẩm liên quan</h2>
               </div>
               <div className={cx("content", "row")}>
                 {productList.map(
                   (item) =>
                     product.collection_id === item.collection_id && (
-                      <div key={item.id} className={cx("col", "l-2-4", "m-6")}>
+                      <div
+                        key={item.id}
+                        className={cx("col", "l-2-4", "m-6", "c-6")}
+                      >
                         <ShowListProduct item={item} />
                       </div>
                     )

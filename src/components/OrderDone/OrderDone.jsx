@@ -64,7 +64,7 @@ const OrderDone = () => {
       {valueOrder ? (
         <>
           <div className="row">
-            <div className={cx("col l-6 m-6", "info")}>
+            <div className={cx("col l-6 m-6 c-12", "info")}>
               <table
                 className={cx("total-line-table")}
                 style={{ margin: "20px 0" }}
@@ -108,12 +108,12 @@ const OrderDone = () => {
                 readOnly
                 defaultValue={note}
                 id="note"
-                rows="4"
+                rows="5"
                 style={{ outline: "none", padding: "10px" }}
               ></textarea>
               <p>Thời gian đặt: &nbsp;{create_at} </p>
             </div>
-            <div className={cx("col l-6 m-6")}>
+            <div className={cx("col l-6 m-6 c-12")}>
               <div className={cx("sidebar-content")}>
                 {valueOrderDetail
                   ? valueOrderDetail.map((item, index) => {
@@ -132,7 +132,9 @@ const OrderDone = () => {
                       totalMoney += prices * item.number;
                       return (
                         <div className={cx("row", "prd-info")} key={index}>
-                          <div className={cx("col l-1 m-2", "prd-img-wrapper")}>
+                          <div
+                            className={cx("col l-1 m-2 c-2", "prd-img-wrapper")}
+                          >
                             <div className={cx("prd-img")}>
                               <Images src={imgFront} />
                             </div>
@@ -140,11 +142,11 @@ const OrderDone = () => {
                               {item.number}
                             </span>
                           </div>
-                          <div className={cx("col l-7 m-7", "prd-desc")}>
+                          <div className={cx("col l-7 m-7 c-7", "prd-desc")}>
                             <span className={cx("prd-name")}>{name}</span>
                             <span className={cx("prd-size")}>{item.size}</span>
                           </div>
-                          <div className={cx("col l-3 m-3", "prd-price")}>
+                          <div className={cx("col l-3 m-3 c-3", "prd-price")}>
                             <span>{VndFormat(prices * item.number)}</span>
                           </div>
                         </div>
@@ -165,10 +167,7 @@ const OrderDone = () => {
                           <span className={cx("payment-due-currency")}>
                             VND
                           </span>
-                          <span
-                            className={cx("payment-due-price")}
-                            data-checkout-payment-due-target="32000000"
-                          >
+                          <span className={cx("payment-due-price")}>
                             {totalMoney ? VndFormat(totalMoney) : ""}
                           </span>
                         </td>

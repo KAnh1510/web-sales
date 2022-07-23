@@ -16,7 +16,7 @@ function Magazine() {
         <h2 className={cx("header")}>Tin tức</h2>
         <div className={cx("content", "row")}>
           <div className={cx("col l-4")}>
-            <Link to={"/"}>
+            <Link to={"news"}>
               <img
                 className={cx("img")}
                 src="https://file.hstatic.net/200000436739/article/untitled-1-01_928d5005c073474c8037d7181050e768_grande.jpg"
