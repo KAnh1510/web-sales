@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
-import styles from "./Register.module.scss";
-import classnames from "classnames/bind";
-import Button from "../../Button";
 import { Link } from "react-router-dom";
 import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Captcha from "../../Captcha";
-import PageLoginRegister from "~/layout/components/PageLoginRegister";
 import { useDispatch } from "react-redux";
-import { registerUser } from "../UserSlice";
+
+import styles from "./Register.module.scss";
+import classnames from "classnames/bind";
+import PageLoginRegister from "~/layout/components/PageLoginRegister";
+import { registerUser } from "~/components/User/UserSlice";
+import Captcha from "~/components/Captcha";
+import Button from "~/components/Button";
 
 const cx = classnames.bind(styles);
 

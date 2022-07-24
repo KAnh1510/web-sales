@@ -3,19 +3,19 @@ import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import Magazine from "./pages/Magazine";
 import Collections from "./components/Collections";
-import Products from "./components/Collections/Products";
 import { publicRoutes } from "./routes";
 
 import Account from "./pages/Account";
-import Login from "./components/User/Login";
-import Register from "./components/User/Register";
-import Address from "./components/Address";
 import News from "./pages/News";
 import Recruitment from "./pages/Recruitment";
 import DefaultLayout from "./layout/DefaultLayout";
 import Cart from "./pages/Cart";
 import Payment from "./pages/Payment";
-import OrderDone from "./components/OrderDone";
+import Products from "./pages/Products";
+import OrderDone from "./pages/OrderDone";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Address from "./pages/Address";
 
 function App() {
   return (

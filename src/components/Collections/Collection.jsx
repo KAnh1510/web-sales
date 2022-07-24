@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import classnames from "classnames/bind";
 
 import styles from "./Collection.module.scss";
-import classnames from "classnames/bind";
 import ShowListProduct from "./ShowListProduct";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts } from "./Products/ProductSlice";
 import { getAllCollections } from "./CollectionSlice";
+import { getAllProducts } from "~/pages/Products/ProductSlice";
 
 const cx = classnames.bind(styles);
 

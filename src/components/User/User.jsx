@@ -6,7 +6,6 @@ import { useState } from "react";
 import Cart from "./Cart";
 import { CartIcon, SearchIcon } from "../Icons";
 import MenuMobile from "./MenuMobile";
-import { Link } from "react-router-dom";
 
 const cx = classnames.bind(styles);
 

@@ -10,8 +10,8 @@ import styles from "./Search.module.scss";
 import ProductItem from "~/components/Collections/ProductItem";
 import { Wrapper } from "~/components/Popper";
 import { SearchIcon } from "~/components/Icons";
-import { getAllProducts } from "~/components/Collections/Products/ProductSlice";
 import { useDebounce } from "~/components/hooks";
+import { getAllProducts } from "~/pages/Products/ProductSlice";
 
 const cx = classnames.bind(styles);
 

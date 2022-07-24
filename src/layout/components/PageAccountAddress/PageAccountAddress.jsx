@@ -3,8 +3,8 @@ import styles from "./PageAccountAddress.module.scss";
 import classnames from "classnames/bind";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import Logout from "~/components/User/Logout";
 import StorageKeys from "~/constant/storage-keys";
+import Logout from "~/pages/Logout";
 
 const cx = classnames.bind(styles);
 

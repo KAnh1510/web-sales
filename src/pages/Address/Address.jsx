@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
+import classnames from "classnames/bind";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./Address.module.scss";
-import classnames from "classnames/bind";
-
 import ViewAddress from "./View";
 import EditAddress from "./Edit";
 import HeaderAddress from "./HeaderAddress";
 import PageAccountAddress from "~/layout/components/PageAccountAddress";
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllUsers } from "../User/UserSlice";
+import { getAllUsers } from "~/components/User/UserSlice";
 
 const cx = classnames.bind(styles);
 

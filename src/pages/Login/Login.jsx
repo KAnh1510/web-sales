@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 
-import styles from "./Login.module.scss";
 import classnames from "classnames/bind";
-import Button from "../../Button";
 import { Link, useNavigate } from "react-router-dom";
-import Captcha from "../../Captcha";
-import PageLoginRegister from "~/layout/components/PageLoginRegister";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUsers } from "../UserSlice";
 import { Form } from "react-bootstrap";
-import { loginUser } from "../AuthSlice";
+import styles from "./Login.module.scss";
+
+import PageLoginRegister from "~/layout/components/PageLoginRegister";
+import { loginUser } from "./AuthSlice";
+import { getAllUsers } from "~/components/User/UserSlice";
+import Captcha from "~/components/Captcha";
+import Button from "~/components/Button";
 
 const cx = classnames.bind(styles);
 

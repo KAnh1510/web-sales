@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
-import styles from "./Cart.module.scss";
 import classnames from "classnames/bind";
-import HeaderPage from "~/layout/components/HeaderPage";
 import { Link, useNavigate } from "react-router-dom";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Button from "~/components/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts } from "~/components/Collections/Products/ProductSlice";
+
+import styles from "./Cart.module.scss";
+import HeaderPage from "~/layout/components/HeaderPage";
+import Button from "~/components/Button";
 import VndFormat from "~/components/VndFormat/VndFormat";
 import StorageKeys from "~/constant/storage-keys";
+import { getAllProducts } from "../Products/ProductSlice";
 
 const cx = classnames.bind(styles);
 

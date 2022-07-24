@@ -2,16 +2,17 @@ import PropTypes from "prop-types";
 import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classnames from "classnames/bind";
-import styles from "./Cart.module.scss";
-import { CartIcon } from "~/components/Icons";
-import Button from "~/components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getAllProducts } from "~/components/Collections/Products/ProductSlice";
+
+import styles from "./Cart.module.scss";
+import { CartIcon } from "~/components/Icons";
+import Button from "~/components/Button";
 import VndFormat from "~/components/VndFormat/VndFormat";
 import StorageKeys from "~/constant/storage-keys";
+import { getAllProducts } from "~/pages/Products/ProductSlice";
 
 const cx = classnames.bind(styles);
 

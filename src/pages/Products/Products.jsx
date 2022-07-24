@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useParams, useNavigate } from "react-router-dom";
 import Slider from "react-slick";
-import styles from "./Products.module.scss";
+import { useDispatch, useSelector } from "react-redux";
 import classnames from "classnames/bind";
 
+import styles from "./Products.module.scss";
 import User from "~/components/User";
 import Images from "~/components/Images";
-import ShowListProduct from "../ShowListProduct";
-import ZoomIn from "../ZoomIn";
 import Button from "~/components/Button";
-import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "./ProductSlice";
-import { getAllCollections } from "../CollectionSlice";
 import StorageKeys from "~/constant/storage-keys";
+import { getAllCollections } from "~/components/Collections/CollectionSlice";
+import ZoomIn from "~/components/Collections/ZoomIn";
+import ShowListProduct from "~/components/Collections/ShowListProduct";
 
 const cx = classnames.bind(styles);
 

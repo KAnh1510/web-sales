@@ -5,15 +5,16 @@ import Images from "~/components/Images";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { createOrder } from "../../components/OrderDone/OrderSlice";
-import { createOrderDetail } from "../../components/OrderDone/OrderDetailSlice";
-import Logout from "~/components/User/Logout";
+
 import VndFormat from "~/components/VndFormat/VndFormat";
-import { getAllProducts } from "~/components/Collections/Products/ProductSlice";
-import OrderDone from "~/components/OrderDone";
 import StorageKeys from "~/constant/storage-keys";
 import { getUser } from "~/components/User/UserSlice";
 import { CartIcon } from "~/components/Icons";
+import { getAllProducts } from "../Products/ProductSlice";
+import { createOrder } from "../OrderDone/OrderSlice";
+import Logout from "../Logout";
+import { createOrderDetail } from "../OrderDone/OrderDetailSlice";
+import OrderDone from "../OrderDone";
 
 const cx = classnames.bind(styles);
 

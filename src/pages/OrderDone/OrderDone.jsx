@@ -1,15 +1,16 @@
 import React, { useEffect } from "react";
-import styles from "./OrderDone.module.scss";
 import classnames from "classnames/bind";
-import Images from "../Images";
-import VndFormat from "../VndFormat/VndFormat";
 import { Link } from "react-router-dom";
-import StorageKeys from "~/constant/storage-keys";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUsers } from "../User/UserSlice";
-import { getOrders } from "~/components/OrderDone/OrderSlice";
-import { getAllOrderDetail } from "~/components/OrderDone/OrderDetailSlice";
-import { getAllProducts } from "../Collections/Products/ProductSlice";
+
+import styles from "./OrderDone.module.scss";
+import StorageKeys from "~/constant/storage-keys";
+import { getOrders } from "./OrderSlice";
+import { getAllUsers } from "~/components/User/UserSlice";
+import { getAllProducts } from "../Products/ProductSlice";
+import VndFormat from "~/components/VndFormat/VndFormat";
+import Images from "~/components/Images";
+import { getAllOrderDetail } from "./OrderDetailSlice";
 
 const cx = classnames.bind(styles);
 
